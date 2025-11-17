@@ -1,0 +1,83 @@
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torchvision
+from torchvision import datasets,transforms
+import torchinfo
+from torch.utils.data import DataLoader
+
+import ssl
+_create_unverified_https_context = ssl._create_unverified_context
+ssl._create_default_https_context = _create_unverified_https_context
+
+#locations of training and testing data
+train_data_path='imgs/train'
+test_data_path='imgs/test'
+
+#transformations for training data
+random_transform = transforms.Compose([
+    transforms.RandomResizedCrop(256),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomVerticalFlip(),
+    transforms.RandomRotation(30),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2),
+    transforms.ToTensor()
+])
+
+#transformations for testing data
+common_transform=transforms.Compose([
+    transforms.Resize((256,256)),
+    transforms.ToTensor()
+    ])
+
+#build datasets and dataloaders
+train_dataset=datasets.ImageFolder(root=train_data_path,transform=random_transform)
+test_dataset=datasets.ImageFolder(root=test_data_path,transform=common_transform)
+batch_size=32
+train_loader=DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+test_loader=DataLoader(test_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+
+#get the model and its weights
+model=torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
+#print out the summary of it. What's its final output size? Why?
+print(model)
+
+#Set the model parameters to be non-changeable
+for param in model.parameters():
+    param.requires_grad=False
+
+#Change model.fc to a single 512->2 layer - this could instead be a Sequential with multiple layers
+#This layer's trainable
+model.fc=torch.nn.Linear(in_features=512,out_features=2,bias=True)
+model=model.to('cuda')
+
+criterion=nn.CrossEntropyLoss()
+optimizer=optim.Adam(model.parameters(),lr=.001)
+
+for epoch in range(20):
+    for batch_idx, (data,target) in enumerate(train_loader):
+        data, target = data.to('cuda'), target.to('cuda')
+        optimizer.zero_grad()
+        output = model(data)
+        loss = criterion(output,target)
+        loss.backward()
+        optimizer.step()
+
+        if batch_idx%100==0:
+            print(f"Epoch {epoch}, Batch {batch_idx}, Loss: {loss.item()}")
+
+# Testing loop
+model.eval()
+correct = 0
+total = 0
+
+with torch.no_grad():
+    for data, target in test_loader:
+        data, target = data.to('cuda'), target.to('cuda')
+        output = model(data)
+        _, predicted = torch.max(output.data, 1)
+        total += target.size(0)
+        correct += (predicted == target).sum().item()
+
+accuracy = correct / total
+print(f"Test Accuracy: {accuracy * 100:.2f}%")

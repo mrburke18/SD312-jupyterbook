@@ -1,0 +1,87 @@
+# Linear Regression
+
+Again, these notes are a complement to your reading.  For the purposes of these notes, $X$ is the $n\times k$ data matrix of all your data points, including a column for the bias.  $x_i$ refers to a single row of that matrix, that is, one data point.  $y_i$ is a single data point's target value, and $y$ is the vector of all target values.  This means that when performing linear regression we are trying to find the $k\times 1$ vector $w$ such that $Xw\approx y$.
+
+First, why are we using $\approx$, and not =?  Why can we not find a $w$ which makes this exactly right?  Remember that *noise* can come from a variety of sources.  Measurement error, mislabelling, etc. can all result in an incorrect $y$.  So can the fact that world just isn't deterministic - there's randomness, and so $y_i$ can be different if measured twice for the same $x_i$.  Finally, it may be that you've chosen the wrong measurements to make for your vector $x_i$, and it just isn't fully predictive of the phenomenon you're measuring.
+
+In linear algebra, this means that the vector $y$ is not in the vector space spanned by $X$, which means that no $w$ exists which makes $Xw=y$ into an equality.  So, we're stuck with finding the $w$ which makes it as close as possible.
+
+In your reading, this was described as an attempt to find the $w$ which minimizes the sum of squares error $\sum_i (x_iw-y_i)^2$.  By taking the gradient of that term, setting it equal to zero (as with minimizing functions in calculus class), and solving for $w$, we arrived at $w=(X^TX)^{-1}X^Ty$.  There are a number of other ways of looking at this problem.  The first is...
+
+### Algebraically
+
+OK, so you have $Xw\approx y$, and you'd like to solve for $w$.  In regular algebra, this would be easy: you'd divide both sides by $X$, giving you $w$.  Unfortunately, you can't divide in linear algebra, you can only multiply by the inverse.  However, $X$ is probably not square, and so does not have an inverse.  So, what to do?  Well, the first step is to MAKE it square, by left-multiplying by its transpose: $X^TXw\approx X^Ty$.
+
+$X^TX$ is $k\times k$, and so is square.  Now, this doesn't necessarily mean
+that $X^TX$ is invertible, it has to be full rank for that.  Without diving too deep into linear algebra (too late?), if $X$ is full rank, then $X^TX$ is, too.  Let's assume that condition is met.
+
+So, we can now left-multiply by $(X^TX)^{-1}$, which we just decided probably exists, giving us $(X^TX)^{-1}X^TXw\approx (X^TX)^{-1}X^Ty$.  A matrix and its inverse cancel out, leaving us with $w\approx (X^TX)^{-1}X^Ty$.  And there we are.
+
+For this reason, $(X^TX)^{-1}X^T$ has a number of special names.  First, it's known as the *Moore-Penrose pseudo-inverse* of $X$, and it is often useful when you don't have an inverse, but need to "divide."  Second, it finds the point in the span of $X$ which is closest to $y$: it's the *projection* of $y$ onto $X$.  For this reason, it's also known as the *projection operator*.  
+
+Note that even if an inverse exists, it's often computationally more stable to compute the pseudoinverse instead.  The most common algorithm for calculating this pseudoinverse actually involves... the magical SVD.  You can use this algorithm most simply in numpy using the operation [`np.linalg.pinv`](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.linalg.pinv.html).
+
+### Probablistically
+
+Let's pretend that a linear combination of our features of $X$ *are* capable of fully explaining $y$, it's just that the world has thrown into the mix some random Gaussian error, so that $y_i=x_iw+\epsilon_i$, where $\epsilon_i$ is drawn from the normal distribution (aka the Gaussian, aka the bell curve) centered around 0.  This means $\epsilon_i$ is close to zero, but is probably not zero.  It also means that given a $x_i$ and a $w$, we can describe each $y_i$ as likely (because the associated $\epsilon_i$ is small, and so likely to come from the Gaussian), or unlikely (because $\epsilon_i$ is not close to zero).  In fact, we can write down $p(y|X,w)$, and then solve for the $w$ which makes that probability as large as possible.  This is known as the *maximum likelihood* solution.
+
+The result?  $w=(X^TX)^{-1}X^Ty$.
+
+# An Example
+
+Let's walk through an example of doing regression, which will look very similar to you, having made many lines of best fit.  Suppose we make sure measurements of a phenomenon, based on a single observed variable (ie, given the x-axis, we measure where it is on the y-axis).  We plot it, and get the following picture.
+
+![](images/linReg1.png)
+
+You'd like to make a prediction, for other values of $x$ as to what the $y$ will be.  So, you dutifully do linear regression.  You build yourself a data matrix (taking into account the bias):
+
+$$X=\left[\begin{array}{cc}
+x_1&1\\
+x_2&1\\
+\vdots&\\
+x_n&1
+\end{array}\right]$$
+
+and solve for the 2-element vector $w$, which gives you a line $y_{pred}=mx+b$, which looks like this:
+
+![](images/linReg2.png)
+
+That sucks!  In fact, you note that this doesn't seem to be linear at all, it seems to be quadratic.  So, you must be out of luck, since this is *linear* regression.
+
+Wrong.  You have an epiphany, and build a new data matrix:
+
+$$X=\left[\begin{array}{ccc}
+x_1^2&x_1&1\\
+x_2^2&x_2&1\\
+\vdots&\vdots&\vdots\\
+x_n^2&x_n&1
+\end{array}\right]$$
+
+Now, you have artificially created a third dimension, the $x^2$ dimension.  Here, your points look like this:
+
+![](images/linReg3.png)
+
+If you solve for $w$ (which now has three numbers), you've solved for a plane in this new space, or a line $y=w_0x^2+w_1x+b$.  Next to each other, they look like this:
+
+![](images/linReg4.png)
+![](images/linReg5.png)
+
+It's a linear solution (a plane) in the 3d space, but you can draw it as a quadratic line in 2d space.  It's much better!
+
+So, if one more feature is better, even more must be even better!  Let's add $x^3, x^4,$ etc.
+
+![](images/linReg6.png)
+
+Here, in each picture, left to right, top to bottom, I've added another additional feature.  The title of each subplot is that sum of squares error function.  You'll notice another feature always makes the error decrease - the learner has an additional knob to turn to try and make the line fit the data better and better.  Is it a better predictor, though?
+
+On the bottom row, where we have up to $x^9$ as a feature, the data is fit very well.  However, it goes really haywire outside the data points (and, actually, between the datapoints, it's just too zoomed out to tell).  This is overfitting.  We're fitting the dataset too well, and out-of-training-set error has become quite large.  Remember our Hoeffding inequality?  $P[|E_{in}(g)-E_{out}(g)|>\epsilon]\leq 2Me^{-2\epsilon^2N}$?  The complexity ($M$) has gotten larger, and so the gap between our training and testing error has increased.
+
+How can we fix it?  Well, we could decrease the complexity of the model, or we can make $N$ larger.  What if instead of 20 points, I use 100?
+
+![](images/linReg7.png)
+
+That's substantially less stupid.  What about 1000?
+
+![](images/linReg8.png)
+
+That's not stupid at all.  So, more data allows us to use a more complex model.  But, what if we don't HAVE more data?  Well, that's for next time...

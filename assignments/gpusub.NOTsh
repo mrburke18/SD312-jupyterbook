@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name=test_job
+#SBATCH --output=afile.txt
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=5
+#SBATCH --gpus=1
+#SBATCH --time=10:00
+#SBATCH --partition=gpu
+
+source ~/.bashrc
+conda activate si470
+python example.py

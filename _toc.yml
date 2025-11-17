@@ -1,0 +1,38 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts: 
+  - caption: Resources and Administration
+    chapters:
+      - file: resources/books
+      - file: resources/projGuide
+      - file: resources/resources
+      - file: resources/course_policy.pdf
+  - caption: Unsupervised Learning
+    chapters:
+    - file: notes/01dataMatrix
+    - file: notes/02foodCluster
+    - file: notes/03basis
+    - file: notes/04pca
+    - file: notes/05optimization
+    - file: notes/06knnRecommender
+  - caption: Linear Supervised Learning
+    chapters:
+    - file: notes/07supervisedIntro
+    - file: notes/08matrixCompletion
+    - file: notes/09perceptron
+    - file: notes/09featuremanipulation
+    - file: notes/11linearRegression
+    - file: notes/12regLinReg
+    - file: notes/13logReg
+    - file: notes/14basisFunctions
+  - caption: Neural Networks
+    chapters:
+    - file: notes/15NN
+    - file: notes/15outputs
+    - file: notes/15classificationDemo
+    - file: notes/16NNFeatGen
+    - file: notes/17contrastive
+    - file: notes/18reconstructive

@@ -1,0 +1,5 @@
+_build/
+*.tgz
+*.tar.gz
+*.zip
+*.pdf
