@@ -1,0 +1,40 @@
+Talk about generalization and neural nets.
+- They're way better at generalization than we would expect them to be. Why is still an open question.
+- But, they do very poorly at images that are at all unusual ("off-manifold").
+- We have trained this highly complex predictive function on a set of data which is well behaved - how hard do we have to work in order to create an image that performs poorly?
+
+Bring up adversarial.ipynb and introduce the question.  We have a model which is trained to detect goats from mules from unicorns, presumably for some army/navy security purposes.  We'd like to create an image of a goat which is misclassified by army's mule detector.  On one hand this is easy, we could just dress Bill up as a mule, and take a new picture. But, we'd like to be sneakier - we're going to add the constraint that we don't want the picture to look too different from how it did.
+
+We're assuming in this first iteration of the problem that we have access to Army's network (white box attack), but we cannot change it.
+
+Normally, the way this image is processed is we have the image, the neural net with its parameters, and a target [1,0,0].  We minimize the cross-entropy loss with respect to the network parameters.
+
+min_\theta L(x,\theta,t)
+
+
+
+
+What we're going to do instead is change the target to our desired misclassification [0,1,0], and minimize with respect to the image values, under the constraint that the image not change too much (so that nobody can visually notice).
+
+\min_{\delta x} L(x+\delta x, \theta, t)
+
+
+
+
+
+Without that constraint, we could just do gradient descent as usual.  One attack that works under that constraint is called the Fast Gradient Sign Attack (FGSM).  One iteration of FGSM involves the following:
+- Calculate the gradient of all the image values with respect to our loss function.
+- Convert all those gradients to +1/-1 depending on their sign
+- Apply epsilon*(gradient sign), where epsilon is some small value
+
+If we do k iterations, maximum change to any channel is epsilon*k.
+
+That should change the image to be a little more mule-like.
+
+Walk through demo.
+
+Talk about physical attacks like stop signs and invisibility cloak.
+
+Talk about ensemble approach to black box attacks.
+
+Show LowKey.

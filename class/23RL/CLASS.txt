@@ -1,0 +1,20 @@
+Briefly review MDPs and notation. Reinforce that reward is immediate, and that's not quite what we want.
+
+With the slides, show the chain example, define all the parts of the MDP.
+
+Policy of always going left.  Which states are the best?  Which are the worst?
+
+Define value, which is meant to capture that under the current policy.  Sum of discounted rewards.  Q(s,a) notation.  Show recursive definition of Q:
+
+Q_policy (s,a) = r_0 + \gamma r_1 + \gamma^2 r_2 + ...
+Q_policy (s,a) = r_0 + \gamma Q(s', policy(s'))
+
+Calculate actual values of Q_left(s,LEFT) for all states.
+
+Have them do the same for Q_right.
+
+Which policy is better?  Well, it depends upon the state.  Higher values are good.  Q_left is usually better, except for on s0.  So let's go left on all these states, except for right.  What's that sum of expected rewards look like?
+
+Knowing these values help us (a) understand if our policy is good compared to others, and (b) improve the policy.
+
+Knowing this is great, but we need to be able to say, at this exact state, without further calculation, what is the value of each action at my disposal, if I take the best possible action after that?  We need to fill in the whole table.  Do it for always left, always right, and optimal.

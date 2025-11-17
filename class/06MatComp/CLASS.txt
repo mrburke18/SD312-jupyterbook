@@ -1,0 +1,61 @@
+Talk through the Info Challenge.
+
+Talk about the lab. Make sure they understand the high level that many datasets have significant structure, and we can compress them significantly without losing information. We're going to use that same property for a recommendation system.
+
+Intuitively introduce why we might expect rankings to be linearly dependent.  The amount you like a movie might be identical to how you like a similar movie (Mission:Impossibles?).  Or, we could take the average of how much you like all Tom Hanks movies, and the average of how much you like war movies, and turn that into a pretty accurate prediction of how much you like Saving Private Ryan.  All of these would create linear dependencies.
+
+We can also equate this to our intuition into the SVD.  It is reasonable to expect that there's a finite number of inputs that roughly determine how much you would like any of the infinite number of possible movies.  So, regardless of how many users there are, or how many movies are made, that same finite number of inputs would determine how much you like any new movie, so the inputs don't change, even as the number of movies created does.
+
+Of course, none of these will be perfect predictions - there's always noise.
+
+Make the transition to math talk.  Remind them about what low-rank means, technically, and how "technically low rank" and "essentially low rank" are not the same.  Talk about why "essentially low rank" is likely for many datasets. Talk about sources of noise.  Noise/error is inevitable, and we want to ignore it when thinking about datasets.
+
+So, how could we tell if a matrix is low rank? Low rank means we can do USigmaV^T with skinny U and short V^T.  What if it was *effectively* low rank?  Ie, the signal is low rank, and the remainder is all noise?  Suppose we have an effectively low-rank matrix. We'd have some small singular values which we could eliminate with little error.  Show using lowrank.ipynb.
+
+
+
+Lay out the problem statement.  nxm matrix, where we have many of the entries, but not all.  We would like to fill in those missing entries with likely values. Call the matrix with holes A. Call the matrix we wish we had A'.
+
+We are assuming A' is low rank, because we have to. If it's not, there's no prediction we can do.  We cannot calculate that rank, because we can't call the SVD on A - it's not a real matrix. Filling in creates dependencies that aren't really there, so we can't do that, either.
+
+We're going to assume a rank for A'.  Call it k.  This means that we can create a U,Sigma, and V^T of a certain shape. (nxk, kxk, kxm)
+
+Throw away all the various rules, except for the shapes.  We know matrices of that shape exist which build A'.  We can multiply U by Sigma, or Sigma by V^T, or some combination of both, and get a tall skinny matrix P (nxk), and a short wide matrix Q (kxm).  Rows of P correspond to a person's desire for each of the properties making up how much people like movies.  Columns of Q correspond to how much that property applies to that movie.
+
+----GOT THIS FAR ON DAY 1----
+
+We would like to calculate a P and Q which reproduces all the values that we have in the matrix, under the assumption that means it will accurately reproduce all the values we _dont_ have in the matrix.  Let's write an optimization function.
+
+Leading questions:
+- What will the parameters be of the optimization function? What do we get to change? (write min_P,Q)
+- How will we know when P and Q are good? When they reproduce all the values we have.  Call the set of all those values T.
+- \Sum_{A_ij\in T}(A_ij-p_i q_j)^2
+
+OK!  If we can minimize this, we can maybe build a good model.  Unfortunately, (but commonly), it is nonconvex.  So how do we solve it?  We use SGD.
+
+OK, let's suppose we're only using one data point at a time.  So, at that update, we're trying to minimize (A_ij-p_iq_j)^2 for some specific i,j. (draw a picture highlighting the element of A and the corresponding row of p and q).  We can only decrease this by changing p_i or q_j.  Let's calculate some gradients.
+
+The gradient with respect to p_i is -2*q_j(Aij-p_iq_j).
+The gradient with respect to q_j is -2*p_i(Aij-p_iq_j).
+
+Gradient descent is param<-param-stepsize*grad_param^T
+
+So, updates are, for every Aij in training set,
+p_i<-p_i+stepsize*q_j(A_ij-p_iq_j)^T
+q_j<-q_j+stepsize*p_i(A_ij-p_iq_j)^T
+
+(where did the 2s go? became part of the stepsize)
+
+So, this becomes a very simple algorithm.  Randomly initialize P and Q. For every element of the training set, update p_i and q_j until you're happy with the results.
+
+When are you happiest with the results? When test error is smallest.
+
+What happens if we don't try to eliminate noise from our model?  Overfitting/high variance.  Talk about bias/variance vs underfitting/overfitting.
+
+Is this supervised or unsupervised learning? What is a good model in supervised learning?  One where the test error is low - we don't actually care about the training error, despite the fact that it's the only thing we have to minimize.  So, if more training error leads to lower testing error, that's an improvement.
+
+If they don't understand overfitting, then this needs some time.
+
+So, when do we stop training? When test error is smallest. What value of k do we keep? The one with smallest test error.
+
+Minor points - a good P and Q initialization are ones when the initial matrix multiplication is in the neighborhood of good.

@@ -1,0 +1,15 @@
+Talk through hard questions from the exam.
+
+Walk through online notes.
+
+Show Classification.ipynb, which walks through making a simple neural net for mnist, a multiclass classification problem.
+
+A couple different things:
+- one-hot labeling
+- The oopsie on not mentioning `to('cuda')` before now. Needs to happen to data and the model.
+- Adam (briefly just mention momentum in SGD)
+- step by step through softmax
+- using nn.Softmax
+- calculation of predLabels is non-obvious
+- confusion matrix is likely new
+- the train/test split with dataloaders

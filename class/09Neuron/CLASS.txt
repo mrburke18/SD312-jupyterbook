@@ -1,0 +1,7 @@
+Talk about what a neuron is.  Start with a biological analogy, but stress this is shitty biology, as told by computer scientists.  Walk through the concept of a single neuron with two inputs and with a sigmoid, and how we might train a simple classifier. Make an optimization problem out of it. Discuss how this could be solved via SGD. Discuss how important it is these features be high quality, and how that is hard to do.
+
+Walk through Neuron.ipynb, which is just a single neuron trying to do a 2d classification problem.  Show that if we add a more interesting feature (x^2), it does better.  But, we have to have a good idea for what that feature should be.  Then show we add an single hidden layer of two neurons, and learn those two features.
+
+There's a lot to talk about here.  Take your time.
+
+Then transition to UniversalApprox.ipynb

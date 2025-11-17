@@ -1,0 +1,6 @@
+Not too long. They did fine with the coding. Uncommon struggles with basic
+logistics like movign files and unzipping things.
+Difficulty seems right for a first lab - they're getting most of the way
+through it in lab.
+
+If a student's browser is interpreting the URL as a search, check to make sure their port number is not their whole alpha, but rather 2XXXX, where XXXX are the last FOUR digits of their alpha.

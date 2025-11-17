@@ -1,0 +1,17 @@
+- Talk through facial recognition. What did people try? What worked, what didn't work?
+- Talk through exam - make clear the expectations are probably closer to the 6wk, not the 12 week.
+- Talk about the essay. Explain all the stuff on the webpage.
+
+- They write
+
+- (25 minutes left), start an RL intro.
+- Explain the goal: we want to build a system that is good at performing some task (playing a game, landing a plane, walking a bipedal robot through a ship).  AUTONOMY, a system that makes smart immediate decisions in order to achieve a long-term goal.
+- We want to do this as children do - experiment with the task over and over again, learning better and better ways to do it, until you've got it.
+- Contrast this with autonomy from Robotics & Control. Suppose we're trying to build a system that can autonomously ride a bike.  We know a lot about gravity and other physics, and so can probably build a set of equations (a model) that describes the outcome of an action (turn the handlebars, pedal harder, etc). Given these equations, we can calculate what actions would give us the outcome we want.
+  - this is preferable if the problem is easily and accurately modeled, and the computation of the best action is fast enough to do it at the necessary rate. Why learn if you don't have to?
+  - this is not preferred if the problem is not well understood, or is not easily modeled, or is too slow to invert. Learning may not be efficient, but it may be able to perform despite our lack of understanding of how to model it.
+
+- We describe the problem as an MDP
+- define state/state space, action/action space, transitions, reward, and discount.
+- define policy
+- We want to build a good policy, without knowing the reward function or transitions in advance, by exploring the space and building (s,a,r,s') samples.

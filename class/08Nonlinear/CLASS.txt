@@ -1,0 +1,21 @@
+You've learned a lot about using linear models in machine learning, either to do regression (like linear regression), classification (like logistic regression), or, now, matrix completion.  We're going to make the transition to neural nets, which are a nonlinear method.  It's worth understanding the limits of linear methods, but also appreciating why by far most of the ML done in the world is one of these linear methods.
+
+The "linear" in "linear methods" means our math is limited to taking linear combinations of things.  This is probably most clear in linear regression, so let's start there.  If your data lies in one dimension, you're drawing a line of best fit (walk through linear regression in one D, presenting it as both mx+b and as a matrix X with an x feature and a 1 feature, relating both to the \betas of their books).  If your data lies in two dimensions, you're drawing a plane of best fit (again, show it in both forms).  In more, you're drawing a "hyperplane"... but it's a geometrically flat thing.  This can be a problem!
+
+For example, run quads.py, stopping at the first two pictures.  We can see that our constraint that our result be linear makes this suck.
+
+However, we can add more features.  For example, you learned about polynomial regression.  Add another feature, x^2.  Do it to the matrix and do the mx+b examples.  Show the result in the 3rd picture of quad.py. Show that these points now exist in more dimensions. What will the best fit look like?  Is there a plane that fits these points well?  Show the 4th picture.
+
+We can also turn this back into the resulting parabola (5th picture).
+
+We can add more and more polynomial features to this, and see what we get.  What will happen to training error?  Testing error?
+
+We can do something similar in classification.  Go through manip.py, where x and y are turned into x^2 and y^2, and data that is not classifiable becomes classifiable.
+
+OK, so we can add nonlinear features, fit them in a linear manner, and get arbitrarily nonlinear results.
+
+This is an important thing at our conclusion to linear models! Just because they are linear, does not mean they won't fit your function - they just don't fit your function without the right features.  Once you have the right features, you can very quickly do your ML, with very little data.
+
+So, let's suppose we're doing linear regression, and it does a bad job.  What do we do about it?  Well, if it's doing a bad job because it's overfitting, you can do PCA.  If it's underfitting, perhaps the information coming in is not predictive of what you're trying to predict; in this case, a conversation with a domain expert is best.  Otherwise, if it's underfitting, it may mean that your features are not the right "shape."  Another way to think about it is that the target vector is not within the span of the features.  So, we need to add some linearly independent features.  This is where your splines, etc. from your reading last semester come into play.
+
+Go through features.py, which shows some data, then does a linear fit (the dotted line is the feature, and the prediction is some number times the dotted line, plus an intercept), then polynomials, then RBFs.

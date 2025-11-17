@@ -1,0 +1,7 @@
+What ethical issues did people talk about?
+
+Talk through epsilon-greedy exploration, and the exploration/exploitation tradeoff.
+
+Lab! Not on AWS!
+
+Show frozenTrial.py

@@ -1,0 +1,4 @@
+Talk through facial recognition process again.
+
+Demonstrate s3fsDemo
+Demonstrate dimensionDemo, so they understand the dimensions that result when using keep_all=True versus keep_all=False, and how to fix them for imshow() and for feeding into the resnet

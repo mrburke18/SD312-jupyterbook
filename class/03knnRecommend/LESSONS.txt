@@ -1,0 +1,3 @@
+They did a bad job of handling the "movieIDs and column indices aren't the same thing" problem, which is not what should be hard.
+
+One idea is to use pandas .pivot() to create a dataframe where the userid is the row index, and the movieId is the column index.  Once you make that a matrix, and get back a column index from the nearest neighbors object, you use query that element of the .columns list from the dataframe to get the movieId.  I think they'd find that more accessible to how they're primed to code.

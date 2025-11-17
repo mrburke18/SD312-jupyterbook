@@ -1,0 +1,25 @@
+Limitations of Tabular RL.
+
+- Small state and action spaces.
+- Generalization inefficiency.
+- Each experience only used once, despite the fact that \hat Q(s',a') might have changed.
+
+Compare it to regression.  We need a function that goes from state to q-value, where when we learn about one s-a pair, we learn about other, similar s-a pairs.
+
+We could do this linearly!  Or with a NN!
+
+State space can now be continuous.  Action space still has to be discrete.
+
+Read the paper.  Be sure to explicitly define the MDP.
+
+Important things generalizable to all DQL:
+- Network takes in a datapoint, and has an output for each possible action.
+- Network trained to minimize Bellman error, using the network as source of \hatQ(s,a)
+- Rather than training only on the most recent transitions, use an experience relay. This balances:
+  - Don't want to only use most recent transitions, because they're heavily, heavily correlated, and we may overcorrect, forgetting about other things,
+  - Don't want to use transitions from too old of a policy, as that policy sucked (comparitively).
+
+Interesting things about this atari application in particular:
+- source was the actual image on the screen
+- needed 4 consecutive images to capture motion
+- image processed to make things easier

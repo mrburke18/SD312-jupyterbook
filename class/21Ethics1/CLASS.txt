@@ -1,0 +1,21 @@
+Tell me what you remember from ethics class. How is it you're supposed to consider ethical decisions?
+
+Let's talk about the China article. What struck you? Which aspects bothered you?
+Separate "intimidation" from "tracking." Could the tracking be done without the intimidation? Could the tracking be happening without most peoples' awareness?
+Is this bad? Is privacy important? Why?
+Whose job is it to prevent this? Who has responsibility?
+
+Connect it to the online trackers. Have someone summarize this.
+What are privacy advocates concerned about? Are they right to be concerned?
+Talk about police buying tracking data rather than getting warrants.
+Is it ethical for companies to collect such data?
+
+Before talking about the racist algorithm article, define racism for this class. In our class, if we use this term, we're going to use the definition that a policy is racist if it "has outcomes that treat different races with different levels of priority, respect, or severity." A person or organization might be racist if they support such a policy. We are not going to talk about racial animus, intent, or emotion, since it's difficult to know or have a scientific discussion about.
+
+Talk about difficulties in facial recognition with darker-skinned people. A disproportionate percentage of faces that appear online (and are thus scrapable) are light skinned due to celebrities, models, etc being disproprortionately light skinned. These pictures make up the training set, and the measure against which models are compared. So, statistically, it's inarguable that they are less accurate on dark-skinned people.
+
+What happened to Robert Williams was obviously bad. Who messed up? Where? How could it be prevented the next time?
+
+Facial recognition is very useful for solving crimes, which we usually believe to be good. How do we value "not arresting the wrong people" vs "arresting the right people"?
+
+What should facial recognition achieve prior to being used by law enforcement? What, if any, constraints should be on law enforcement when using facial recognition or other recognition technologies?

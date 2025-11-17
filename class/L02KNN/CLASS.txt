@@ -1,0 +1,13 @@
+Introduce dataset. Make sure they see where the small one is, and talk about
+how we always develop on a smaller version of the dataset to save time.
+
+Lean on the idea that they need to be able to go from column of their matrix
+to name of the movie.  So if I say column 2, that means the 3rd column, and
+produce the name of the movie with its ratings in that column.
+
+After a while, when they start getting to the nearestneighbors thing, walk
+through an example from the api, demonstrating how to read an api.  Run the
+simple example.  Talk about what .fit is doing vs .kneighbors.
+
+Hopefully they notice it's working on -rows- and we want it to work on
+-columns-.  If not, point it out to them.  Show it's just a transpose.

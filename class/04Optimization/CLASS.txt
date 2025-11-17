@@ -1,0 +1,29 @@
+These notes are intended for 2 days.
+
+Optimization!  Everything in ML boils down to an optimization function, which is what's solved during training.  While becoming an expert in optimization is a larger-than-1-week process, it's important we understand at least enough of it to understand why some methods are fast, others are slow, and neural nets can take weeks to train.  We frequently make choices in ML based around what is fast or slow to optimize.
+
+We know some optimization functions!  Put up KMeans, linear regression, and logistic regression on the board.  Run through all the parts of it. Terms like "objective/loss function," "parameters" and "constraints" need to be clear (even though none of our objective functions yet have constraints).
+
+It's important to note that some of the terms in the optimization problem are under our control (parameters) and others aren't (data).
+
+Show the pictures on the web page about finding a minimum.  Two dimensions are two different parameters.  We're trying to find the minimum value.  Which would you want to solve?
+
+Roughly four kinds of difficulty.  Closed form, convex, nonconvex, discrete.  We'll start with closed form.
+
+In calc 3, they did this.  Calculate gradient, set it equal to zero.  Walk through derivation of solution to linear regression (let them try?).  Keep track of matrix sizes so they believe it.
+
+How can we solve for a minimum when we can't do the closed form thing?  Guess and check...
+
+Talk through GD (one of hte most important algorithms ever!) and how it helps you find a minimum.  GD.ipynb helps, using gradient descent to solve linear regression.  Hold back on stocCompGrad.
+
+Talk about stepsize. Really important they can think about what the stepsize should be based on optimization performance.  Show on .ipynb too big and too small stepsizes.
+
+Define convexity.  Make it clear that a single global minimum doesn't mean convex, but convex means a single global minimum.  Talk about how for convex problems we have the ability to do things that are faster than GD, but GD also works and is probably enough to think about.
+
+What if dataset is really big?  Like millions of images?  Can't store them all in memory to compute gradient.  So, stochastic gradient descent.
+
+Talk about benefits to memory, as well as ability to shake out of local minima.  Downside is less-well-directed optimization.
+
+Discrete like K-Means is really slow and we don't usually encounter it, because the field active avoids it.
+
+If more time, do SVD review.

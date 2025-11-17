@@ -1,0 +1,4 @@
+Talk about due time, mechanism of turning in code
+Introduce the data set
+Remind them of generative AI policy, encourage them to use it where helpful
+Show them how to open up jupyter lab from the terminal, talk through remote vs local running

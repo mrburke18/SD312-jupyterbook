@@ -1,0 +1,1 @@
+This was not so effective, due to the hand waving over the KL divergence and distributional magic.  Maybe replace with diffusion models?

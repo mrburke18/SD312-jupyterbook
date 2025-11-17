@@ -1,0 +1,12 @@
+Disinformation:
+- What are some ways disinformation could be furthered with AI?
+- Who is responsible when an AI tool is used to create disinformation?
+- When someone is fooled, whose fault is it?
+- Should there be some regulations regarding disinformation? For example, the EU requires social media to take down disinformation. Is this good?
+
+Disability and Cultural bias:
+- Core idea - ML is built to perform well over a whole dataset, meaning it will tend to do well for the majority, but less well for the minority.
+- Should there be an ADA for AI access?
+- What do we lose when we lose minority engagement/representation?
+- One of the hotter political discussions now is how we talk about history. What do we lose if minority cultures are not represented in automated tools that label images/summarize articles/answer web search queries?
+- Should anyone be required to encourage minority representation?

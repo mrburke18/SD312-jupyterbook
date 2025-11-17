@@ -1,0 +1,6 @@
+the 3d visualizations require an annoying version of matplotlib. You can
+create an appropriate environment with:
+`mamba create -n somename python=3.9 matplotlib=3.5.2 pandas`
+
+Better would be updating this with plotly or something that works with newer
+versions

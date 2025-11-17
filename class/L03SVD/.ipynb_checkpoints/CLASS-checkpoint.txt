@@ -1,0 +1,7 @@
+Talk about SGD questions.
+
+Talk about last lab. What worked? Show solution.
+
+Talk SVD with demo.ipynb
+
+Once some people get there, talk about mnist dataset and how it's organized.

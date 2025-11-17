@@ -1,0 +1,21 @@
+Embeddings!
+
+Define it. Talk about how PCA is an embedding, but limited because it's linear.
+
+Useful in part because it's smaller - compression can be reason enough, for example with Youtube.
+
+Can also contain a large amount of useful information in a small package.  This is really important for a lot of generative AI things.  For example, suppose we are able to learn an embeddings that encodes what a sentence actually *means*, not just what the words are.  We could then find wordings in other languages that have similar embeddings, meaning they mean the same thing - and we just built a pretty capable translator.
+
+We could do something pretty similar with images and their captions - If we can embed an image description, and then produce an image that would create a similar embedding, then we can start to make the jump from text requests to images.
+
+Autoencoder is a first approach to doing this, and is a small, pretty understandable generative model.
+
+Condense down, then expand again, and train to reproduce the input.  Define latent space.  You can then split it into an encoder and decoder.  We could use this, for example, to minimize data usage, where we send the decoder to everybody who might be receiving our data, and then we can encode it, transfer the cheap, small version, and then they decode it.
+
+Interestingly, you can imagine also inventing a point in the latent space, decoding it, and creating a new example of your dataset.  However, in practice this doesn't work well with a vanilla autoencoder, because relevant points could lie anywhere in the latent space, and it's not always predictable where they might be, so we'd end up decoding a lot of nonsense.
+
+A Variational autoencoder is one solution to this.  We say that the latent space is a distribution.  When we encode/decode, we encode down to a Gaussian distribution, then create a random element from that distribution to be decoded. We lose some reconstruction error, but put the latent space into an easy-to-constrain form, where we say that we need our latent distribution to be close to the standard normal distribution.  So, our loss is (reconstruction error + distance between standard normal and the latent distribution).
+
+Once we've done this, we have a good understand of where in the latent space we can find encodings that are actually reflective of our data.
+
+Example notebook.

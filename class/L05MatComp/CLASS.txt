@@ -1,0 +1,9 @@
+Start by going through 04Soln.  Answer and demo the qualitative questions.  When should we stop training?
+
+Talk about how to choose hyperparameters.  Emphasize that hyperparameters are chosen to minimize test error - for each hyperparameter choice, do the very best you can to optimize test error (for example, maybe the best stepsize changes, etc.), then compare those best efforts.
+
+Mention that it's best to make sure it works for one setting of hyperparameters, then make it a function that you can call on a loop (or in parallel), and walk away and let it run.
+
+Talk about a validation set in reporting accuracy.
+
+Introduce the in-class exercise.

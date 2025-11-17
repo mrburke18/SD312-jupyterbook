@@ -1,0 +1,6 @@
+What is PCA?
+- subspace which minimizes total distance to projection in that subspace
+- subspace which maximizes variance in projections
+- "the best" projections
+
+Go through pca example.

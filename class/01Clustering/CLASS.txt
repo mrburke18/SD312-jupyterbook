@@ -1,0 +1,19 @@
+Go through policy.
+Show web page
+Talk about how to get EI, show calendar on web page
+Talk through general flow - weekly assignments
+Talk about environment, make sure they know how to do that. Demo remote jupyter lab.
+
+SM317 ended with unsupervised learning. CDR Matthews felt you-all didn't understand the significance of it.
+We're going to pick up there. Unsupervised is one of the most common things to do - most data is unlabeled.
+Most data science starts with "here's some data. Do something with it." Unsupervised learning is a useful place to start to understand the data.
+
+Review of what clustering is. Walk through what we want from clustering, and how what we want leads to a reasonable objective function for k-means. Write up objective function.
+
+Now we need to solve this.  How do we? Can't, actually. Np-hard. So we solve it approximately, many times, and keep the best version.
+
+Remind the algorithm for solving k-means.
+
+What assumptions did we make?  We assumed K.  Do we know if we're right?  Do we like our clusters? We don't really know, it's just exploratory.
+
+Go through clustering exploration notebook.  Gauge what they know about pandas/sklearn/plotly/jupyter notebooks

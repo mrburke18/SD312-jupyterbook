@@ -1,0 +1,10 @@
+Talk again about experiments.  Reinforce idea of Q graph - chose some random states, and queried their max value throughout training.  Should be smooth adjustments.
+
+Background
+Skip related work
+Deep RL
+- make the MDP explicit
+- replay memory
+- function \phi
+- Preprocessing
+- Algorithm 1

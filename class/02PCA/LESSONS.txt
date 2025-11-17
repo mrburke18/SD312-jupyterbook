@@ -1,0 +1,2 @@
+They don't remember SVD well enough to count on that for PCA.  Use the "noSVD"
+version.

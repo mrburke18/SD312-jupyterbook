@@ -1,0 +1,25 @@
+Often, we want to make embeddings that capture similarity/difference relationships between datapoints.  These two words mean similar things, while those two are different, this image and this caption are related, while those aren't.  These are really difficult concepts to quantify - what does it mean for an image and a caption to be similar, really?  How could you tell a computer?  The answer is, you probably can't, because it's a fuzzy concept.
+
+One of deep learning's most powerful applications is in uncovering and quantifying these relationships using embeddings.  We don't have to say _how_ or _why_ two things are similar/different, just that they _are_.  We tell the network to make embeddings that are similar for similar things, and different for different things, and let it figure out the how and why.
+
+This means that the learned embeddings have no inherent meaning in and of themselves - for a given datapoint, we have no sense of what a "right" embedding is.  Nor are they interpretable.  But, the relationships between embeddings have great meaning.  If two datapoints have similar embeddings, then the datapoints are similar.  If they have different embeddings, then they're different.
+
+So, let's suppose we have a network which takes in a datapoint and outputs an embedding, which is to say, some vector (length in the hundreds, probably).  Let's suppose that we have three data points.  One we'll call the *anchor*.  Another, which is similar to the anchor, we'll call a *positive* example.  Another, which is different from the anchor, we'll call a *negative* example.
+
+Call the embedding of the anchor E(a) ( and we'll have E(p) and E(n), as well).  What should be true about E(a) and E(p)?  E(a) and E(n)?  Help them design a loss function for this:
+
+min  || E(a)-E(p) || - || E(a)-E(n) ||
+
+Now, suppose we're applying this to our whole dataset.  We have one set, (a1,p1,n1) which is well distinguished.  We have another, (a2,p2,n2) which is not.  We'd like to focus our loss function's attention on the second one.  To do this, we add in a margin, which is a measure of the above loss function which is "good enough."
+
+min   max[ ||E(a)-E(p)||-||E(a)-E(n)|| + margin, 0]
+
+We call the problem statement "contrastive learning," and this specific loss function the "triplet margin loss."
+
+Facial recognition is a good case study for this.  Two pictures of the same person (or the same picture differently and heavily transformed) are the anchor and positive examples.  A picture of a different person is the negative example.  We train triplet loss until pictures of the same person get similar embeddings regardless of angle/shading/facial hair/covid mask/etc., and pictures of different people get different embeddings.
+
+Once you have this, you trust it for new faces.  You build a _gallery_ of people (for example, Maryland police have the Maryland Image Repository System of drivers' license photographs, mug shots, and photographs from nearby states), and calculate the embeddings in advance.  So now you have a matrix of embeddings.
+
+Now suppose you have a still picture from a security camera or doorbell camera of a crime in process (we call this a "probe image").  You crop out the face, and calculate its embedding.  You then ask which rows of the gallery are most similar to the embedding of the probe image.  This gives you a list of suspects.
+
+Go through the example, which works pretty well for a small, well-behaved dataset.  Show the pictures, and talk about its limitations.  We use transfer learning, because why not.  Talk through the Dataset and the loss function.  Demonstrate that the testing dataset has well-behaved embeddings.

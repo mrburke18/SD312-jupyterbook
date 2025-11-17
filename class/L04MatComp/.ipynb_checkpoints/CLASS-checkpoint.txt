@@ -1,0 +1,7 @@
+Start by talking about how this is the first of two related labs.  In the first, we'll implement the algorithm, in the second, we'll consider all the other things we need to think about related to hyperparameter choice and machine learning.
+
+Define the word "epoch."
+
+When they get to the "do sanity checks on the error function" part, remind them that m2=m1 does not actually copy the matrix for numpy arrays.
+
+When they get to the update rule, suggest they first step away and think about how they pull out a row from a numpy array, and how they pull out a column.

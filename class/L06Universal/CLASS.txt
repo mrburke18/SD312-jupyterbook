@@ -1,0 +1,7 @@
+Start them running the virtual environment creation thing.
+
+Talk matrix and elective requirements.
+
+Review how the neural net in 09Neuron was defined.
+
+Talk through initial blocks of 06UniversalApprox.

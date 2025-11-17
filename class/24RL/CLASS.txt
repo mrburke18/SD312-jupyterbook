@@ -1,0 +1,31 @@
+Start again from Q values.  Write Bellman equation of the optimal policy. Add the expectation term, discussing deterministic vs stochastic MDPs.  Discuss Bellman error.
+
+We're going to start by assuming a small state space and small action space.  We're going to build a table of approximate Q-values for every s,a pair (call them \hat Q)
+
+When we have a (s,a,r,s') sample, we can take a step toward minimizing Bellman error with the Q-learning update rule:
+
+
+
+Show chain.ipynb, which has a random exploration policy
+
+Target is:
+|    | Left | Right |
+| -- | ---- | ----- |
+| s0 | 4.26 | 4.74  |
+| s1 | 5.26 | 5.26  |
+| s2 | 4.74 | 3.84  |
+| s3 | 4.26 | 3.84  |
+
+
+How generate samples?  Exploration/exploitation.
+
+- Create an initial table of approximate Q-functions for every state-action pair. These can be random, or 0.
+- Start at starting state $s$
+- Lots of times:
+  - If a random number is less than $\epsilon$,
+    - $a\leftarrow$ a random action
+  - Else (most of the time)
+    - $a\leftarrow \argmax_{a'} Q(s,a')$
+  - Receive back the results of taking that action, so you now have a $(s,a,r,s')$ tuple.
+  - $\hat Q(s,a) \leftarrow\alpha\left(r+\gamma\max_{a'}Q(s',a')\right) + (1-\alpha)\hat Q(s,a)$
+  - $s \leftarrow s'$

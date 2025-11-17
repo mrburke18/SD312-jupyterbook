@@ -1,0 +1,28 @@
+Recommendation systems!  They're important!  They (as applied to advertising) are why so much on the internet is free!
+
+Recommender systems are tricky.  Tend to be a mixture of well-thought-out mathematical ideas, modified with some proprietary and ad-hoc tweaks that just seem to make things work better.
+
+Data design is hard.
+- Ratings from 1-5?  People tend to ignore the middle ones, or just not rate.  Heavily limits your data collection, but individual data points may be more nuanced.
+- Binary/counting "interacted with?"  Applies to more types of data (pauses on a tiktok feed, for example, or listens on Spotify).
+
+Two ways of thinking about it
+- Content-based filtering: hand designed or natural language features ("is for children," "contains 'for boys' in description," etc.). System can then learn which features are valuable (or are recently valuable) to a user.
+- Collaborative filtering: Throw away everything you know except for user interactions. Less work, less hand-designed, but also less meaningful.
+
+Most systems have both.  We're going to do two projects, both collaborative.
+
+K-Nearest Neighbor
+
+- How fill in blanks - interpret as "not interested?" - interpret as "just hasn't gotten to it?"
+- We're going to compare features - movies that have been watched and enjoyed by similar people are probably similar, and make good "you just watched A, maybe you want to watch B?" recommendations.
+- How measure distance?
+  - Euclidean - We can do this (walk through it).  Dimensions are usually very large, and so distances are also very large.
+  - Cosine distance - One minus the cosine of the angle between two vectors (two vectors in the same direction have a cos distance of 0).  Largely ignore the magnitude of the vectors: "what peopl ewatch is more important than how much they liked it."  Common to normalize data by subtracting the mean so vectors can point in opposite direction, rather than all being in the first hyper-quadrant.
+  - Jaccard distance: ONLY thing that matters is "watched or not." Jaccard distance between sets A and B is 1-(intersection over union). Nonbinary data can be made binary for Jaccard by thresholding (4-5 is a 1, every thing else is a 0).
+
+Tweaks:
+- Cluster first.  This discovers types of movies.  This can be used to make a playlist.
+- Perform PCA on the features, making it cheaper to compute.
+
+We just do whatever makes recommendations seem better.
