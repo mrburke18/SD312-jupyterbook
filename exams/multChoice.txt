@@ -1,0 +1,8 @@
+\question[1] Question
+
+\begin{choices}
+\CorrectChoice
+\choice
+\choice
+\choice
+\end{choices}

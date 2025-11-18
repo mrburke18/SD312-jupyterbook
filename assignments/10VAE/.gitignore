@@ -1,0 +1,5 @@
+olddata
+data*
+mnist_data
+lfw-deepfunneled*
+*.pt

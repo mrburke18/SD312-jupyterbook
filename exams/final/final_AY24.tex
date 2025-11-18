@@ -1,0 +1,457 @@
+\documentclass[letterpaper,noanswers,addpoints]{exam}
+%\printanswers
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amsmath}
+
+\newcounter{matchleft}
+\newcounter{matchright}
+
+\newenvironment{matchtabular}{%
+  \setcounter{matchleft}{0}%
+  \setcounter{matchright}{0}%
+  \tabularx{\textwidth}{%
+    >{\leavevmode\hbox to 1.5em{\stepcounter{matchleft}\arabic{matchleft}.}}X%
+    >{\leavevmode\hbox to 1.5em{\stepcounter{matchright}\alph{matchright})}}X%
+    }%
+}{\endtabularx}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\lstset{language=Java,
+numbers=left,
+tabsize=4,
+breaklines,
+basicstyle=\small\ttfamily,
+keywordstyle=\bfseries,
+stringstyle=\ttfamily,
+showstringspaces=false}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Solution: }}
+\renewcommand{\thepartno}{\Alph{partno}}
+\renewcommand{\thechoice}{\alph{choice}}
+\CorrectChoiceEmphasis{\color{red}\bfseries}
+\shadedsolutions
+
+\pagestyle{headandfoot}
+\runningheadrule
+\firstpageheader{SD312}{Final Exam}{May 6, 2024}
+\runningheader{SD312}{Final Exam}{May 6, 2024}
+\runningfooter{}{Page \thepage\ of \numpages}{\makebox[0.25in]{\hrulefill} of
+\pointsonpage{\thepage}}
+
+\begin{document}
+\makebox[4in]{Name:\enspace\hrulefill}
+%\hspace{0.1in}
+%\makebox[2in]{Section:\enspace\hrulefill}
+\vspace{1in}
+
+Write and sign the following: \emph{``The Naval Service I am a part of is bound by honor and integrity. I will not compromise our values by giving or receiving unauthorized help on this exam."}
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\vspace{.5in}
+\makebox[3in]{Signature:\enspace\hrulefill}
+
+\vfill
+
+\begin{center}
+  \gradetable[v][pages]
+\end{center}
+\vfill
+\newpage
+
+\begin{questions}
+  \bracketedpoints
+  \marginpointname{\ pts}
+  \pointsinrightmargin
+
+\subsection*{Unsupervised Learning}
+\question[5] Circle ALL of the following which typically are considered unsupervised learning.
+\begin{choices}
+\CorrectChoice Clustering
+\CorrectChoice Dimensionality Reduction
+\choice Regression
+\choice Classification
+\choice Reinforcement learning
+\end{choices}
+
+\question[1] Suppose we have a dataset of 300 datapoints, each of which is 15 dimensions.  You choose to cluster into 7 clusters using K-Means clustering.  Which of the following is a true statement about the centroids?
+\begin{choices}
+\CorrectChoice Each centroid will be 15 dimensional.
+\choice Each centroid will be 5 dimensional.
+\choice Each centroid will be 300 dimensional.
+\end{choices}
+
+\question[2] Which of the following is a consideration in choosing K for K-Means clustering. Circle ALL that apply.
+\begin{choices}
+\choice Testing error.
+\choice Where inertia begins to increase again.
+\choice Where the marginal benefit on the inertia of an additional cluster diminishes.
+\choice The number of leaves at the bottom of a dendrogram.
+\choice The number of branches that exist at a chosen height in a dendrogram.
+\end{choices}
+
+\newpage
+\question[3] Figure \ref{fig:pca} depicts the elements of the first principal component of a notional dataset. What information can be gleaned about relationships between Meals, Passive, Physical child care, etc?
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.0\textwidth]{newplot.png}
+\caption{Components of the first principal component of a dataset.}
+\label{fig:pca}
+\end{figure}
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\newpage
+\subsection*{Recommendation Systems}
+
+\question For each of the following distance metrics, circle the characteristics which best describe it when used in a nearest-neighbors recommender system.
+
+\begin{parts}
+    \part[1] Euclidean
+    \begin{choices}
+        \choice Good in low dimensions, most heavily uses the magnitude of the ratings.
+        \choice Quickly computed in high dimensions, moderate between the binary "rated-or-not" and the magnitude of those ratings.
+        \choice Quickly computed in high dimensions, depends solely on whether a rating exists or not.
+    \end{choices}
+
+    \part[1] Cosine
+    \begin{choices}
+        \choice Good in low dimensions, most heavily uses the magnitude of the ratings.
+        \choice Quickly computed in high dimensions, moderate between the binary "rated-or-not" and the magnitude of those ratings.
+        \choice Quickly computed in high dimensions, depends solely on whether a rating exists or not.
+    \end{choices}
+
+    \part[1] Jaccard
+    \begin{choices}
+        \choice Good in low dimensions, most heavily uses the magnitude of the ratings.
+        \choice Quickly computed in high dimensions, moderate between the binary "rated-or-not" and the magnitude of those ratings.
+        \choice Quickly computed in high dimensions, depends solely on whether a rating exists or not.
+    \end{choices}
+\end{parts}
+
+\question[2] Compute $\|x-y\|_2$, where
+$x=\begin{bmatrix}
+  2 \\
+  -1 \\
+  4
+\end{bmatrix}$, and 
+$y=\begin{bmatrix}
+  1 \\
+  0 \\
+  7
+\end{bmatrix}$.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[2] Suppose we have an incomplete ratings dataset of 500 users, and 200 movies.  We believe we can perform matrix completion using a rank-50 approximation.  Write the sizes of $P$ and $Q$ used to perform this optimization.
+
+\fbox{\parbox{6in}{\vspace{1in}\ }}
+
+\newpage
+\question[1] If doing matrix completion, a small rank is more likely to create
+\begin{choices}
+\choice small bias/large variance
+\choice large bias/small variance
+\choice The assumed rank is unrelated to bias and variance
+\end{choices}
+
+\question[2] When performing matrix completion, we consider one known value $A_{ij}$ at a time.  Write the loss function we minimize in reproducing this value.
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\subsection*{Optimization}
+
+\question[2] Rank the following classes of optimization problems from generally fastest to solve with large amounts of data (rank 1) to generally slowest to solve (rank 4).
+
+\begin{tabular}{l|c}
+    \textbf{Problem class} & \textbf{Rank} \\ \hline
+    Non-Convex & \hphantom{0} \\
+    \\
+    Convex & \hphantom{0} \\
+    \\
+    Discrete & \hphantom{0} \\
+    \\
+    Closed form & \hphantom{0} \\
+    \\
+  \end{tabular}
+
+\vspace{1cm}
+
+Equation \ref{eqn:opt} is a generic optimization problem to be referred to in problems \ref{q:opt_start}-\ref{q:opt_end}.  $D$ refers to the data of the problem, and $L$ is a function.
+
+\begin{equation}
+    \min_w L(D,w)
+    \label{eqn:opt}
+\end{equation}
+
+\question[1] \label{q:opt_start} Which of the following is referred to as the \textit{parameters} of the problem?
+\begin{choices}
+    \choice Minimization vs maximization
+    \choice $D$
+    \choice $w$
+    \choice $L(D,w)$
+\end{choices}
+
+%\question[1] Which of the following is referred to as the \textit{objective function} of the problem?
+%\begin{choices}
+    %\choice Minimization vs maximization
+    %\choice $D$
+    %\choice $w$
+    %\choice $L(D,w)$
+%\end{choices}
+
+\question[2] \label{q:opt_end} Write the stochastic gradient descent update rule for this problem.
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[1] Which of the following is randomized in \textit{stochastic} gradient descent?
+
+\begin{choices}
+    \choice On each iteration, the gradient is calculated on a random subset of the data.
+    \choice On each iteration, the magnitude of the gradient is adjusted via a randomized learning rate.
+    \choice The number of iterations is random in each optimization episode.
+    \choice The direction of the gradient is altered by summing it with a random, small vector.
+\end{choices}
+
+%\question[1] Which of the following is an expected result of using too-large of a learning rate in stochastic gradient descent?
+%
+%\begin{choices}
+    %\choice Continually rising loss values
+    %\choice Slow convergence
+    %\choice 
+    %\choice $L(D,w)$
+%\end{choices}
+
+\newpage
+\question[2] Suppose we plot the singular values of a matrix $A$ and see the plot in figure \ref{fig:svd}, where the line never quite reaches a y-value of 0.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.75\textwidth]{singVals.png}
+\caption{Singular values of a matrix $A$}
+\label{fig:svd}
+\end{figure}
+
+Which of the following can we conclude about $A$? Circle all which are correct.
+
+\begin{choices}
+    \choice $A$ is rank 6.
+    \choice $A$ is full-rank.
+    \choice No reasonably-accurate low-rank approximation of $A$ exists.
+    \choice $A$ is a good candidate for low-rank approximation.
+\end{choices}
+
+
+
+%\subsection*{Feature Manipulation}
+%
+\subsection*{Neural Networks}
+
+\question[1] Which loss function is commonly used to train a regression network?
+
+\begin{choices}
+    \choice Mean Squared Error
+    \choice Cross Entropy
+    \choice Triplet Margin
+    \choice Smoothed $L_1$
+\end{choices}
+
+\question[1] Which loss function is commonly used to train a classification network?
+
+\begin{choices}
+    \choice Mean Squared Error
+    \choice Cross Entropy
+    \choice Triplet Margin
+    \choice Smoothed $L_1$
+\end{choices}
+
+\newpage
+\question[2] \label{q:logits} Suppose a neural network intended to classify between three classes outputs the vector [3.24, 1.83, -.04].  From these values, calculate the class probabilities.  Show your work.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[1] What are the values output by the network in question \ref{q:logits} called?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[1] What is the function you used to answer question \ref{q:logits} called?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+Figure \ref{fig:conv} depicts a black-and-white image on the left, and a convolutional filter on the right.  These will be used for questions \ref{q:conv_start}-\ref{q:conv_end}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.25\textwidth]{convFilter.pdf}
+\caption{Back-and-white image (left) and convolutional filter (right)}
+\label{fig:conv}
+\end{figure}
+
+\question[1] \label{q:conv_start} Given a stride of 1 and padding of 1, what size output do you expect after applying this filter to this image?
+
+\begin{choices}
+    \choice 4x4
+    \choice 5x5
+    \choice 6x6
+    \choice 7x7
+\end{choices}
+
+\newpage
+\question[3] \label{q:conv_end} Assume the same scenario as question \ref{q:conv_start}, where the padding is made up of 0s.  Calculate the first three values on the left-hand side of the top row of the output.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[2] Suppose a 5x5 kernel is being applied to a RGB image.  How many tunable parameters are there in this kernel?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[2] In nearly all cases of doing machine learning on images or language, practictioners perform transfer learning, rather than training a model from scratch.  Give two reasons why this is a correction decision.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\subsection*{Embeddings}
+
+\question[1] Assume we have an autoencoder for datapoints which are 1500-dimensional. The \textit{decoder} must output a vector which is:
+
+\begin{choices}
+    \choice Larger than 1500 dimensions
+    \choice Smaller than 1500 dimensions
+    \choice Exactly 1500 dimensions
+\end{choices}
+
+\question[1] Similarly, the \textit{encoder} must output a vector which is:
+
+\begin{choices}
+    \choice Larger than 1500 dimensions
+    \choice Smaller than 1500 dimensions
+    \choice Exactly 1500 dimensions
+\end{choices}
+
+\question[2] What is meant by the \textit{latent space} of an autoencoder?
+
+\fbox{\parbox{6in}{\vspace{1in}\ }}
+
+\question[2] In contrastive learning, we often use a triplet of datapoints, denoted $a$, $p$, and $n$.  Assume the output of an embedding network is denoted $E(x)$, where $x$ is a datapoint. 
+ Given this notation, write the triplet-margin loss function for a triplet $(a,p,n)$.
+
+\fbox{\parbox{6in}{\vspace{1in}\ }}
+
+\question[2] Give an example of a \textit{probe image} used in facial recognition.
+
+\fbox{\parbox{6in}{\vspace{1in}\ }}
+
+\subsection*{Reinforcement Learning}
+
+A Markov Decision Process (MDP) is normally denoted by a tuple $(S,A,P,R,\gamma)$.  Questions \ref{q:mdp_start}-\ref{q:mdp_end} refer to this notation.
+
+\question[1] \label{q:mdp_start} What does $S$ refer to?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[1] \label{q:mdp_start} What does $A$ refer to?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[2] Suppose we are defining a task in which a robot is to learn to leave a classroom and enter the hallway.  Give an example of an appropriate reward function for this task.
+
+\fbox{\parbox{6in}{\vspace{1in}\ }}
+
+\question[1] \label{q:mdp_end} Which of the following denote the appropriate values of $\gamma$?
+
+\begin{choices}
+    \choice Anything between 0 and 1.
+    \choice Anything between -1 and 1.
+    \choice Any value can be assigned to $\gamma$.
+\end{choices}
+
+\question[1] Which of the following is output by a policy $\pi(s)$?
+
+\begin{choices}
+    \choice the next state
+    \choice an action
+    \choice a reward
+    \choice a value
+\end{choices}
+
+\vspace{1cm}
+Figure \ref{fig:mdp} depicts a MDP with four states ($s0-s3$) and two deterministic actions (left and right).  The reward for starting a transition in state $s1$ is 1, otherwise the reward is 0.  $\gamma=.85$.  This MDP is used for questions \ref{q:mdp_start}-\ref{q:mdp_end}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{mdp.pdf}
+\caption{4-state MDP}
+\label{fig:mdp}
+\end{figure}
+
+\question[3] \label{q:mdp_start} Assume a policy in which the agent always moves left. Calculate $Q(s2,left)$.  Show your work.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\newpage
+\question[3] Assuming the same policy in which the agent always moves left, calculate $Q(s0,right)$.  Show your work.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[3] \label{q:mdp_end} For each state, describe the optimal policy for this MDP.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[2] Assume we have some transition $(s,a,r,s')$ from an MDP, and are performing tabular Q-learning.  Write the update rule to improve $\hat Q(s,a)$.
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[2] It is often the case in all forms of Q-learning that during $\epsilon$-greedy exploration, the hyperparameter $\epsilon$ is steadily decreased during training.  Explain why this might make sense.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\newpage
+\question[1] What is a property of an MDP which would cause you to use Deep Q-Learning, rather than Tabular Q-Learning?
+
+\begin{choices}
+\choice An large or infinite action space
+\choice An large or infinite state space
+\choice Stochastic state transitions
+\choice An unknown reward function
+\end{choices}
+
+\vspace{1cm}
+For questions \ref{q:deepq_start}-\ref{q:deepq_end}, assume you are performing Deep Q-Learning on an MDP with 3 actions (denoted $a_0, a_1,$, and $a_2$)
+
+\question[1] \label{q:deepq_start} Your neural network would accept as input:
+\begin{choices}
+    \choice a state
+    \choice a state-action pair
+    \choice the transition
+\end{choices}
+
+\question[1] Your neural network would output:
+\begin{choices}
+    \choice the expected next state
+    \choice the expected reward
+    \choice the Q-values for each state-action pair
+    \choice the policy
+\end{choices}
+
+\question[3] \label{q:deepq_end} You experience the transition $(s,a_1, 2, s')$, where $s$ and $s'$ are valid states from the MDP.  Per your system's approximation $\hat Q(s,a)$,:
+\begin{itemize}
+    \item $\hat Q(s,a_0)=.23$
+    \item $\hat Q(s,a_1)=.57$
+    \item $\hat Q(s,a_2)=-2$
+    \item $\hat Q(s',a_0)=.7$
+    \item $\hat Q(s',a_1)=-.9$
+    \item $\hat Q(s',a_2)=32$
+\end{itemize}
+
+Calculate the loss (aka Bellman error) for this transition, from these Q-value approximations.  Show your work.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[2] On the front page of this exam, around the margins of all the important stuff, draw a picture of what you're most looking forward to this summer.
+
+
+\end{questions}
+\end{document}

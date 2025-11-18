@@ -1,0 +1,304 @@
+\documentclass[letterpaper,noanswers,addpoints]{exam}
+%\printanswers
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\lstset{language=Java,
+        numbers=left,
+        tabsize=4,
+        breaklines,
+        basicstyle=\small\ttfamily,
+        keywordstyle=\bfseries,
+        stringstyle=\ttfamily,
+        showstringspaces=false}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Solution: }}
+\renewcommand{\thepartno}{\Alph{partno}}
+\renewcommand{\thechoice}{\alph{choice}}
+\CorrectChoiceEmphasis{\color{red}\bfseries}
+\shadedsolutions
+
+\pagestyle{headandfoot}
+\runningheadrule
+\firstpageheader{SD312}{6-Week Exam}{February 14, 2024}
+\runningheader{SD312}{6-Week Exam}{February 14, 2024}
+\runningfooter{}{Page \thepage\ of \numpages}{\makebox[0.25in]{\hrulefill} of
+\pointsonpage{\thepage}}
+
+\begin{document}
+\makebox[4in]{Name:\enspace\hrulefill}
+%\hspace{0.1in}
+%\makebox[2in]{Section:\enspace\hrulefill}
+\vspace{1in}
+
+Write and sign the following: \emph{``The Naval Service I am a part of is bound by honor and integrity. I will not compromise our values by giving or receiving unauthorized help on this exam."}
+
+  \fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\vspace{.5in}
+\makebox[3in]{Signature:\enspace\hrulefill}
+
+\vfill
+
+\begin{center}
+\gradetable[v][pages]
+\end{center}
+\vfill
+\newpage
+
+\begin{questions}
+\bracketedpoints
+\marginpointname{\ pts}
+\pointsinrightmargin
+
+\section*{Unsupervised Learning}
+
+\question[1] Suppose you have a data set of 150 data points, each of which consists of 25 features.  You decide to cluster the data set into 5 clusters using K-Means.  Which of the following best describes a single cluster centroid?
+
+\begin{choices}
+\choice A vector of size 5
+\CorrectChoice A vector of size 25
+\choice A vector of size 150
+\end{choices}
+
+\vfill
+\question[2] Describe a technique for determining an appropriate number of clusters for a dataset.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\vfill
+  \question[1]  Which of the following is a {\it hyperparameter} of K-Means clustering?
+
+\begin{choices}
+\choice The centroid locations.
+\choice The assignment of points to clusters.
+\choice The colors used in cluster visualization.
+\CorrectChoice The number of clusters.
+\end{choices}
+
+  \newpage
+\question[3] Users have been polled about how much they like five different colors, from 1 to 5. From this dataset, the first principal component has been calculated. Below is a graph of the magnitude of this first principal component along each of the data dimensions (the bar for green is not missing, it's just essentially 0).  Interpret this graph, explaining what it tells us about this dataset. You should mention something learned about every color.
+
+  \begin{figure}[h!]
+    \centering
+  \includegraphics[width=0.8\textwidth]{pca.png}
+  \label{fig:label}
+\end{figure}
+
+\fbox{\parbox{6in}{\vspace{3in}\ }}
+
+\section*{Optimization}
+
+Questions \ref{opt:start} and \ref{opt:end} consider the following optimization problem:
+
+\begin{equation}
+\min_{w,b} \sum_i (x_iw+b-y_i)^2
+\label{eqn:opt}
+\end{equation}
+
+  \question[2] \label{opt:start} Circle {\it all} of the below variables which are parameters in optimization problem \ref{eqn:opt}.
+
+\begin{choices}
+\CorrectChoice $w$
+\CorrectChoice $b$
+\choice $x_i$
+\choice $y_i$
+\end{choices}
+
+  \question[1] \label{opt:end} On equation \ref{eqn:opt} itself, circle the entirety of the portion referred to as the {\it loss function} or {\it objective function}.
+
+\question[1] Which of the following machine learning approaches has an optimization problem which can be solved in closed form?
+
+\begin{choices}
+\choice K-Means
+\CorrectChoice Linear regression
+\choice Logistic regression
+\choice Low-rank matrix factorization
+\end{choices}
+
+\vfill
+\question[1] Which of the following machine learning approaches has an optimization problem which is best solved with a convex optimization solver?
+
+\begin{choices}
+\choice K-Means
+\choice Linear regression
+\CorrectChoice Logistic regression
+\choice Low-rank matrix factorization
+\end{choices}
+
+\vfill
+\question[1] Which of the following machine learning approaches has an optimization problem which is nonconvex?
+
+\begin{choices}
+\choice K-Means
+\choice Linear regression
+\choice Logistic regression
+\CorrectChoice Low-rank matrix factorization
+\end{choices}
+
+%\vfill
+%\question[1] Which of the following machine learning approaches has an optimization problem which is discrete?
+%
+%\begin{choices}
+%\CorrectChoice K-Means
+%\choice Linear regression
+%\choice Logistic regression
+%\choice Low-rank matrix factorization
+%\end{choices}
+
+\vfill
+\question[1] \label{q:sgd1} Assume we have a loss function $L(D,w)$ which we are minimizing with respect to $w$. The SGD update rule would update what variable?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[2] Given the optimization problem assumed in problem \ref{q:sgd1}, write the gradient descent update rule which would update that variable.
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\vfill
+\question[1] You are applying SGD to an optimization problem, and discover that your loss values increase dramatically each step.  You are confident your SGD algorithm is implemented correctly.  What should you try to fix this problem?
+
+\begin{choices}
+\choice Increase your stepsize
+\CorrectChoice Decrease your stepsize
+\choice Increase regularization
+\choice Decrease regularization
+\end{choices}
+
+\newpage
+\question[2] Circle {\it all} of the below which are good reasons to use stochastic gradient descent, rather than regular gradient descent.
+
+\begin{choices}
+\CorrectChoice Each training iteration is faster.
+\CorrectChoice Randomness can allow the solver to jitter out of shallow local minima.
+\choice SGD tends to solve problems in fewer iterations than regular GD.
+\CorrectChoice SGD allows for gradient computation without loading the full dataset into memory.
+\end{choices}
+
+\vfill
+\section*{Recommendation Systems}
+
+%\question[2] Here are two binary vectors: $x=[1, 0, 0, 1], y=[1, 1, 0, 0]$. Calculate the Jaccard distance between them. If you want partial credit, show your work.
+%
+%\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+%\question[1] Which of the following refers to recommendation systems based on the use of user-created engagement data, rather than features or descriptions?
+
+%\begin{choices}
+%\CorrectChoice Collaborative filtering
+%\choice Content-based filtering
+%\choice Guessing
+%\end{choices}
+
+\question[2] What is a situation where you would expect Euclidean distance to be more appropriate than the cosine distance for a nearest-neighbor-based recommendation system?
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\vfill
+\question[2] In a nearest-neighbor-based recommendation system for movies, we want to find the most similar movies. What, exactly, do we calculate the distances between to do this?
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\newpage
+\question[2] The below plot shows the singular values of a data matrix.  The horizontal axis is the index of the singular value (first singular value, second singular value, etc.), and the vertical axis is the magnitude of the singular value.
+  
+  \begin{figure}[h!]
+    \centering
+  \includegraphics[width=0.9\textwidth]{svs.png}
+  \label{fig:svs}
+\end{figure}
+
+Which of the following are reasonable conclusions about the data based on this plot?  Circle {\it all} correct answers.
+
+\begin{choices}
+\choice The matrix is rank 3.
+\CorrectChoice Several features of this matrix are heavily correlated.
+\CorrectChoice This matrix can be approximated closely with very few basis vectors.
+\CorrectChoice The data is heavily structured.
+\end{choices}
+
+%\question[2] In the below box, draw a plot of the singular values of a matrix which could inarguably be well represented with only a very few singular vectors.  The $x$-axis should be the index of the singular value (ie, first singular value, second singular value, etc.), and the $y$-axis should be the singular value.
+%
+%\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\question[1] \label{q:pqsize} A ratings matrix $A$ is $150\times50$. You decide to do low-rank matrix factorization to complete this matrix.  You decide to use a rank of $10$.  What is the size of $P$?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[1] Continuing question \ref{q:pqsize}, what is the size of $Q$?
+
+\fbox{\parbox{6in}{\vspace{.5in}\ }}
+
+\question[3] Which of the following are true about the update rules for low-rank matrix completion? Circle {\it all} that are true.
+
+\begin{choices}
+\CorrectChoice They are derived from stochastic gradient descent.
+  \CorrectChoice For each training point, they update an {\it entire} row of $P$ and an {\it entire} column of $Q$.
+\choice They will improve training error regardless of the stepsize used.
+\end{choices}
+
+\question[1] Which of the following is the best way to select a rank for low-rank matrix completion for movie recommendation?
+
+\begin{choices}
+\choice Replace blanks in the original matrix with 0s. Then calculate the singular values, and count the number of non-zero singular values.
+\choice The rank should be roughly 10\% of the number of users.
+\choice The rank should be the smaller of the number of users and number of movies.
+\CorrectChoice Try a variety of ranks, and keep the one with lowest testing error.
+\end{choices}
+
+\newpage
+\question[1] \label{q:lowrank} Below is the optimization problem for low-rank matrix completion.
+
+\begin{equation}
+  \argmin_{P,Q} \sum_{A_{ij}\in T} (A_{ij}-p_i\cdot q_j)^2
+  \label{eqn:lowrank}
+\end{equation}
+
+What is $T$?
+
+\begin{choices}
+\choice The testing set
+\choice The unknown values
+\CorrectChoice The training set
+\choice The locations of the predictions desired to be most accurate.
+\end{choices}
+
+\vfill
+\question[1] In the optimization problem \ref{eqn:lowrank} in question \ref{q:lowrank}, what is meant by $p_i$?
+
+\begin{choices}
+\choice The $i$-th column of $P$
+\CorrectChoice The $i$-th row of $P$
+\choice The $i$-th element of $P$
+\choice The target value of the $i$-th prediction
+\end{choices}
+
+\vfill
+\question[2] Assume you have implemented low-rank matrix completion well.  How do you extract recommendations for a user from the results?
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+
+\vfill
+\question[1] True or false: low-rank matrix completion is {\it supervised} learning.
+
+\begin{choices}
+\CorrectChoice True
+\choice False
+\end{choices}
+
+\newpage
+\section*{Feature Manipulation}
+
+\question Assume we have a dataset that we are trying to perform linear regression for which we have only collected one variable, which we'll call $x$. 
+\begin{parts}
+  \part[2] Draw a plot, where the horizontal axis is $x$, and the vertical axis is the target values for each data point, for which linear regression would work poorly without manipulating features, but very well with proper feature manipulation.
+  \part[2] Explain what features would result in excellent performance. The relationship between your proposed features and your plot should be specific and clear.
+\end{parts}
+
+\fbox{\parbox{6in}{\vspace{4in}\ }}
+
+\end{questions}
+\end{document}

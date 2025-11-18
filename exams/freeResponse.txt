@@ -1,0 +1,6 @@
+\question[2] Question?
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+\begin{solution}
+Answer.
+\end{solution}

@@ -1,0 +1,54 @@
+\documentclass[letterpaper,noanswers,addpoints]{exam}
+\printanswers
+\usepackage{listings}
+\usepackage{color}
+
+\lstset{language=Java,
+        numbers=left,
+        tabsize=4,
+        breaklines,
+        basicstyle=\small\ttfamily,
+        keywordstyle=\bfseries,
+        stringstyle=\ttfamily,
+        showstringspaces=false}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Solution: }}
+\renewcommand{\thepartno}{\Alph{partno}}
+\renewcommand{\thechoice}{\alph{choice}}
+\CorrectChoiceEmphasis{\color{red}\bfseries}
+\shadedsolutions
+
+\pagestyle{headandfoot}
+\runningheadrule
+\firstpageheader{IC211}{6-Week Exam}{14 Feb 12}
+\runningheader{IC211}{6-Week Exam}{14 Feb 12}
+\runningfooter{}{Page \thepage\ of \numpages}{\makebox[0.25in]{\hrulefill} of
+\pointsonpage{\thepage}}
+
+\begin{document}
+\makebox[4in]{Name:\enspace\hrulefill}
+\hspace{0.1in}
+\makebox[2in]{Section:\enspace\hrulefill}
+\vspace{3in}
+
+\begin{center}
+\gradetable[v][pages]
+\end{center}
+\newpage
+
+\begin{questions}
+\bracketedpoints
+\marginpointname{\ pts}
+\pointsinrightmargin
+
+\question[4] Describe the process that takes a java source file from a .java
+file to execution.
+
+\fbox{\parbox{6in}{\vspace{2in}\ }}
+\begin{solution}
+The source file is first compiled to bytecode.  During execution, an
+interpreter then turns this bytecode into machine code line by line.
+\end{solution}
+
+\end{questions}
+\end{document}
