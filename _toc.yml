@@ -3,36 +3,57 @@
 
 format: jb-book
 root: index
-parts: 
-  - caption: Resources and Administration
+
+parts:
+  - caption: Course Information
     chapters:
-      - file: resources/books
-      - file: resources/projGuide
-      - file: resources/resources
-      - file: resources/course_policy.pdf
-  - caption: Unsupervised Learning
+      - file: calendar
+      - file: policy/index
+
+  - caption: Lecture Notes
     chapters:
-    - file: notes/01dataMatrix
-    - file: notes/02foodCluster
-    - file: notes/03basis
-    - file: notes/04pca
-    - file: notes/05optimization
-    - file: notes/06knnRecommender
-  - caption: Linear Supervised Learning
+      - file: notes/01dataMatrix
+      - file: notes/02foodCluster
+      - file: notes/03basis
+      - file: notes/04pca
+      - file: notes/05optimization
+      - file: notes/06knnRecommender
+      - file: notes/07supervisedIntro
+      - file: notes/08matrixCompletion
+      - file: notes/09featuremanipulation
+      - file: notes/10feasibility
+      - file: notes/11linearRegression
+      - file: notes/12regLinReg
+      - file: notes/12regLinRegDemo
+      - file: notes/13logReg
+      - file: notes/13logRegDemo
+      - file: notes/14basisFunctions
+      - file: notes/15NN
+      - file: notes/15classificationDemo
+      - file: notes/15outputs
+      - file: notes/16NNFeatGen
+      - file: notes/17contrastive
+      - file: notes/18reconstructive
+      - file: notes/diffAndLLM
+      - file: notes/qlearning
+      - file: notes/unsupervisedwrapup
+      - file: notes/whyLinAlg
+
+  - caption: Assignments
     chapters:
-    - file: notes/07supervisedIntro
-    - file: notes/08matrixCompletion
-    - file: notes/09perceptron
-    - file: notes/09featuremanipulation
-    - file: notes/11linearRegression
-    - file: notes/12regLinReg
-    - file: notes/13logReg
-    - file: notes/14basisFunctions
-  - caption: Neural Networks
+      - file: assignments/01Unsupervised
+      - file: assignments/02RecommendKNN
+      - file: assignments/03SVD
+      - file: assignments/04MatComp
+      - file: assignments/05MatCompCont
+      - file: assignments/07Classification
+      - file: assignments/08ConvNet
+      - file: assignments/09Transfer
+      - file: assignments/10FacialRecognition
+      - file: assignments/10VAE
+      - file: assignments/11QLearn
+      - file: assignments/12DeepQLearn
+
+  - caption: Resources
     chapters:
-    - file: notes/15NN
-    - file: notes/15outputs
-    - file: notes/15classificationDemo
-    - file: notes/16NNFeatGen
-    - file: notes/17contrastive
-    - file: notes/18reconstructive
+      - file: resources

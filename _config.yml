@@ -1,27 +1,27 @@
 
 #Jupyter book configuration file
 
-title: "SI470: Machine Learning"
+title: "SD312: Machine Learning"
 author: "Gavin Taylor"
 logo: logo.png
-copyright: "2025"
+copyright: "2026"
 
 # HTML settings
 
 html:
-  favicon: logo.png
+  favicon: logo.svg
   use_repository_button: true
   use_issues_button: false
   home_page_in_navbar: true
   extra_footer: |
-    <p>© 2025 United States Naval Academy — Course Materials</p>
+    <p>© 2026 United States Naval Academy — Course Materials</p>
 
 
 execute:
-  execute_notebooks: force
-  exclude_patterns:
-    - "assignments/09transfer.ipynb"
-    - "assignments/10facial_recognition.ipynb"
+  execute_notebooks: off
+  #exclude_patterns:
+    #- "assignments/09transfer.ipynb"
+    #- "assignments/10facial_recognition.ipynb"
 
 # Sphinx Extensions and JS Dependencies
 sphinx:
