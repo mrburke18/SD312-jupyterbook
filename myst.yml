@@ -1,0 +1,74 @@
+version: 1
+project:
+  title: 'SD312: Machine Learning'
+  authors:
+    - name: Gavin Taylor
+  copyright: '2026'
+  github: mrburke18/SD312-jupyterbook
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/book.pdf
+  toc:
+    - file: index.md
+    - title: Course Information
+      children:
+        - file: calendar.md
+        - file: policy/index.md
+    - title: Lecture Notes
+      children:
+        - file: notes/01dataMatrix.md
+        - file: notes/02foodCluster.ipynb
+        - file: notes/03basis.md
+        - file: notes/04pca.md
+        - file: notes/05optimization.md
+        - file: notes/06knnRecommender.md
+        - file: notes/07supervisedIntro.md
+        - file: notes/08matrixCompletion.md
+        - file: notes/09featuremanipulation.md
+        - file: notes/10feasibility.md
+        - file: notes/11linearRegression.ipynb
+        - file: notes/12regLinReg.md
+        - file: notes/12regLinRegDemo.ipynb
+        - file: notes/13logReg.md
+        - file: notes/13logRegDemo.ipynb
+        - file: notes/14basisFunctions.md
+        - file: notes/15NN.ipynb
+        - file: notes/15classificationDemo.ipynb
+        - file: notes/15outputs.md
+        - file: notes/16NNFeatGen.md
+        - file: notes/17contrastive.md
+        - file: notes/18reconstructive.md
+        - file: notes/diffAndLLM.md
+        - file: notes/qlearning.md
+        - file: notes/unsupervisedwrapup
+        - file: notes/whyLinAlg.md
+    - title: Assignments
+      children:
+        - file: assignments/01Unsupervised
+        - file: assignments/02RecommendKNN
+        - file: assignments/03SVD
+        - file: assignments/04MatComp
+        - file: assignments/05MatCompCont
+        - file: assignments/07Classification
+        - file: assignments/08ConvNet
+        - file: assignments/09Transfer
+        - file: assignments/10FacialRecognition
+        - file: assignments/10VAE
+        - file: assignments/11QLearn
+        - file: assignments/12DeepQLearn
+    - title: Resources
+      children:
+        - file: resources
+  execute:
+    execute_notebooks: cache
+    cache: ".jupyter_cache"
+site:
+  base_url: /SD312
+  options:
+    logo: logo.png
+    favicon: logo.svg
+    folders: true
+  template: book-theme

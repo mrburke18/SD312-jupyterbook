@@ -3,3 +3,4 @@ _build/
 *.tar.gz
 *.zip
 *.pdf
+*.swp

@@ -1,0 +1,5 @@
+mamba create -n book_312 jupyter scipy numpy plotly matplotlib scikit-learn pandas
+mamba activate book_312
+mamba install -c conda-forge "jupyter-book"
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+pip install google-api-python-client
