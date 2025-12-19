@@ -58,7 +58,8 @@ def generate_schedule():
     """
     # 1. Load remaining course information and calendar data
     try:
-        with open('cal.tsv', 'r') as f:
+        calpath = os.path.join(script_dir,'cal.tsv')
+        with open(calpath, 'r') as f:
             reader = csv.reader(f, delimiter='\t')
             next(reader)  # Skip the header row
             cal_data = list(reader)
