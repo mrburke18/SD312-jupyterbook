@@ -10,6 +10,35 @@ def strip_links(text):
     """Remove markdown links, leaving only the visible text."""
     return re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
 
+def adjust_links_for_subdirectory(text):
+    """
+    Converts markdown links [Text](url) to HTML <a href="../url">Text</a>
+    if the URL is relative.
+
+    [Notes](files/a.pdf) -> <a href="../files/a.pdf">Notes</a>
+    """
+    def replace_match(match):
+        label = match.group(1)
+        url = match.group(2)
+        # Ignore absolute URLs, absolute paths, or anchors
+        if re.match(r'^(https?://|/|#)', url):
+            return match.group(0)
+
+        # Return adjusted HTML link with ../ prepended
+        return f'<a href="../{url}">{label}</a>'
+
+    # Regex matches standard markdown links: [label](url)
+    return re.sub(r'\[([^\]]+)\]\(([^)]+)\)', replace_match, text)
+
+def make_links_root_relative(text):
+    """
+    Prepends a '/' to relative link paths so they resolve from the project root.
+    Ignores existing absolute paths, external URLs, and anchors.
+    Example: [Notes](files/lec1.pdf) -> [Notes](/files/lec1.pdf)
+    """
+    # Matches "](" followed by text that is NOT http(s), /, or #
+    return re.sub(r'(\]\()(?!(?:https?://|/|#))', r'\1/', text)
+
 # Define global constants for time
 script_dir = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(script_dir,'courseInfo.json'), 'r') as f:
@@ -175,10 +204,15 @@ def generate_schedule():
             notes = strip_links(notes)
             assignment = strip_links(assignment)
         print(f"| {date_str} | {notes} | {assignment} |")
-        md_rows.append(f"| {date_str} | {event['notes']} | {event['assignment']} |")
+        # Create root-relative versions specifically for fullCal.md
+        fc_notes = adjust_links_for_subdirectory(event['notes'])
+        fc_assignment = adjust_links_for_subdirectory(event['assignment'])
+
+        md_rows.append(f"| {date_str} | {fc_notes} | {fc_assignment} |")
 
     # Write full schedule with links to a file
-    with open("../fullCal.md", "w") as f:
+    output_path = os.path.join(script_dir, "..", "fullCal.md")
+    with open(output_path, "w") as f:
         f.write("## Full Schedule\n")
         f.write("| Date | Notes | Assignment |\n")
         f.write("|:---|:---|:---|\n")

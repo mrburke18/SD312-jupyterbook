@@ -13,6 +13,8 @@ project:
       output: exports/book.pdf
   toc:
     - file: index.md
+    - file: fullCal.md
+      hidden: true
     - title: Course Information
       children:
         - file: calendar.md
