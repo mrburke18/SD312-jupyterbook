@@ -20,7 +20,9 @@ html:
 execute:
   execute_notebooks: cache
   cache: ""
-  #exclude_patterns:
+  exclude_patterns:
+    - "assignments/09Transfer/transferSoln.ipynb"
+    - "assignments/10FacialRecognition/*.ipynb"
     #- "assignments/09transfer.ipynb"
     #- "assignments/10facial_recognition.ipynb"
 
