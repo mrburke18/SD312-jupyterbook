@@ -1,41 +1,56 @@
-## Active Assignments
-
----
 ## Full Schedule
 | Date | Notes | Assignment |
 |:---|:---|:---|
-| Mon, Jan 5 | Statistical vs Machine Learning | Set up your environment (due Sat, Jan 10) |
-| Wed, Jan 7 | [Unsupervised Analysis](notes/01dataMatrix) |  |
-| Thu, Jan 8 | Lab | [Unsupervised Data Exploration](assignments/01Unsupervised) (due Thu, Jan 15) |
-| Mon, Jan 12 | **MLK Jr. Day** – No Class |  |
-| Wed, Jan 14 | [Recommendation Systems with Nearest Neighbors](notes/06knnRecommender) |  |
-| Thu, Jan 15 | Lab | [Nearest-Neighbor Movie Recommendations](assignments/02RecommendKNN) (due Thu, Jan 22) |
-| Mon, Jan 19 | [Optimization](notes/05optimization) |  |
-| Wed, Jan 21 | [Optimization](notes/05optimization) | Read: Remembering the SVD (due Sat, Jan 24) |
-| Thu, Jan 22 | Lab | [Exploring the SVD](assignments/03SVD) (due Thu, Jan 29) |
-| Mon, Jan 26 | [Recommendation Systems with Matrix Completion](notes/08matrixCompletion) |  |
-| Wed, Jan 28 | [Recommendation Systems with Matrix Completion](notes/08matrixCompletion) |  |
-| Thu, Jan 29 | Lab | [Personalized Recommendations](assignments/04MatComp) (due Thu, Feb 5) |
-| Mon, Feb 2 | [Feature Manipulation](notes/09featuremanipulation) |  |
-| Wed, Feb 4 | [Feature Manipulation](notes/09featuremanipulation) |  |
-| Thu, Feb 5 | Lab – Matrix Completion | [Matrix Completion Continued](assignments/05MatCompCont) (due Thu, Feb 12) |
-| Mon, Feb 9 | [Neural Networks](notes/15NN) |  |
-| Wed, Feb 11 | [Neural Networks](notes/15NN) |  |
-| Thu, Feb 12 | Lab | [Neural Network Regression](assignments/08ConvNet) (due Thu, Feb 19) |
-| Mon, Feb 16 | **Washington’s Birthday** – No Class |  |
-| Wed, Feb 18 | [Classification](notes/15classificationDemo) |  |
-| Thu, Feb 19 | Lab | [Classification Project](assignments/07Classification) (due Thu, Feb 26) |
-| Mon, Feb 23 | [Embeddings: Discriminative](notes/17contrastive) |  |
-| Wed, Feb 25 | [Embeddings: Reconstructive](notes/18reconstructive) |  |
-| Thu, Feb 26 | Lab | [Facial Recognition](assignments/10FacialRecognition) (due Thu, Mar 5) |
-| Mon, Mar 2 | Reinforcement Learning: Introduction |  |
-| Wed, Mar 4 | Reinforcement Learning: Q-Learning |  |
-| Thu, Mar 5 | Lab | [Q-Learning](assignments/11QLearn) (due Thu, Mar 12) |
-| Mon, Mar 9 | **Spring Break** – No Class |  |
-| Wed, Mar 11 | **Spring Break** – No Class |  |
-| Thu, Mar 12 | **Spring Break** – No Class |  |
-| Mon, Mar 16 | Deep Reinforcement Learning |  |
-| Wed, Mar 18 | Deep Q Learning |  |
-| Thu, Mar 19 | Lab | [Deep Q Learning](assignments/12DeepQLearn) (due Thu, Mar 26) |
-| Mon, Apr 27 | Review |  |
-| Thu, Apr 30 | **Last Day of Classes** |  |
+| Tue, Jan 06 | Statistical vs Machine Learning | Set up your environment (due Sun 01/11) |
+| Wed, Jan 07 | Unsupervised Analysis |  |
+| Thu, Jan 08 | Lab | Data Exploration with Unsupervised Learning |
+| Mon, Jan 12 | Recommendation Systems with Nearest Neighbors |  |
+| Wed, Jan 14 | Lab | Nearest-Neighbor Movie Recommendations |
+| Thu, Jan 15 | Optimization |  |
+| Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
+| Wed, Jan 21 | Optimization | Read: Remembering the SVD (due Sun 01/25) |
+| Thu, Jan 22 | Lab | Exploring the SVD |
+| Mon, Jan 26 | Recommendation Systems with Matrix Completion |  |
+| Wed, Jan 28 | Recommendation Systems with Matrix Completion |  |
+| Thu, Jan 29 | Lab | Personalized Recommendations |
+| Mon, Feb 02 | Feature Manipulation |  |
+| Wed, Feb 04 | Feature Manipulation |  |
+| Thu, Feb 05 | Lab - Matrix Completion |  |
+| Mon, Feb 09 | Neural Networks |  |
+| Wed, Feb 11 | Exam |  |
+| Thu, Feb 12 | Lab | Universal Approximator |
+| Mon, Feb 16 | **Washington's Birthday** - No Class |  |
+| Wed, Feb 18 | Neural Networks for Regression and Classification |  |
+| Thu, Feb 19 | Lab | Neural Net Classification (due Sat 03/07) |
+| Mon, Feb 23 | Info Challenge |  |
+| Wed, Feb 25 | Info Challenge |  |
+| Thu, Feb 26 | Lab - Info Challenge |  |
+| Mon, Mar 02 | Convolutional Networks |  |
+| Wed, Mar 04 | Convolutional Networks |  |
+| Thu, Mar 05 | Lab | Convolutional Networks (due Sat 03/21) |
+| Mon, Mar 09 | **Spring Break** - No Class |  |
+| Tue, Mar 10 | **Spring Break** - No Class |  |
+| Wed, Mar 11 | **Spring Break** - No Class |  |
+| Thu, Mar 12 | **Spring Break** - No Class |  |
+| Fri, Mar 13 | **Spring Break** - No Class |  |
+| Mon, Mar 16 | Comp Day for Guest Speaker |  |
+| Wed, Mar 18 | Transfer Learning |  |
+| Thu, Mar 19 | Lab | Transfer Learning |
+| Mon, Mar 23 | Encoder/Decoder Embeddings |  |
+| Wed, Mar 25 | Embeddings and Contrastive Loss |  |
+| Thu, Mar 26 | Lab | Facial Recongition (due Sat 04/11) |
+| Mon, Mar 30 | Adversarial Examples |  |
+| Wed, Apr 01 | Exam | READ: Surveillance in Kashgar<br>READ: Online trackers<br>READ: Bias in ML |
+| Thu, Apr 02 | Lab |  |
+| Mon, Apr 06 | Ethics | READ: ML and disability<br>READ: ML and disinformation<br>READ: Cultural bias |
+| Wed, Apr 08 | Ethics |  |
+| Thu, Apr 09 | Lab | Ethical Dilemma<br>Optional: Documentary about RL and Go |
+| Mon, Apr 13 | RL Intro |  |
+| Wed, Apr 15 | RL: Tabular Q-Learning |  |
+| Thu, Apr 16 | Lab | Tabular Q-Learning<br>READ: Deep Q-Learning Paper (due Wed 04/22) |
+| Mon, Apr 20 | RL: Deep Q-Learning |  |
+| Wed, Apr 22 | RL: Deep Q-Learning |  |
+| Thu, Apr 23 | Lab | Deep Q-Learning |
+| Mon, Apr 27 | RL: Policy networks |  |
+| Wed, Apr 29 | SOFs/Wrapup |  |
+| Fri, May 08 | **Last Day of Finals** |  |

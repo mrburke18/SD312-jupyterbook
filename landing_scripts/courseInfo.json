@@ -1,0 +1,67 @@
+{
+  "year": 2026,
+  "start": [
+    1,
+    6
+  ],
+  "end": [
+    5,
+    28
+  ],
+  "lectures": "MWR",
+  "holidays": [
+    [
+      1,
+      19,
+      "MLK Jr. Day"
+    ],
+    [
+      2,
+      16,
+      "Washington's Birthday"
+    ],
+    [
+      3,
+      9,
+      "Spring Break"
+    ],
+    [
+      3,
+      10,
+      "Spring Break"
+    ],
+    [
+      3,
+      11,
+      "Spring Break"
+    ],
+    [
+      3,
+      12,
+      "Spring Break"
+    ],
+    [
+      3,
+      13,
+      "Spring Break"
+    ]
+  ],
+  "weird": [
+    [
+      1,
+      6,
+      "M"
+    ]
+  ],
+  "other": [
+    [
+      5,
+      8,
+      "Last Day of Finals"
+    ]
+  ],
+  "time": [
+    10,
+    30
+  ]
+}

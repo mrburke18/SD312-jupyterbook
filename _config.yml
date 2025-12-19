@@ -18,7 +18,8 @@ html:
 
 
 execute:
-  execute_notebooks: off
+  execute_notebooks: cache
+  cache: ""
   #exclude_patterns:
     #- "assignments/09transfer.ipynb"
     #- "assignments/10facial_recognition.ipynb"

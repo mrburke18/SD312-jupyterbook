@@ -1,0 +1,52 @@
+new	Notes	NotesLink	Assignment	AssignmentLink	AssignmentDue
+x	Statistical vs Machine Learning	notes/01Unsupervised/	Set up your environment	resources/localsetup.html	1 11
+x	Unsupervised Analysis	notes/01Unsupervised/			
+x	Lab		Data Exploration with Unsupervised Learning	lab/01Unsupervised/index.html	
+x	Recommendation Systems with Nearest Neighbors	notes/03RecommendNN/			
+x	Lab		Nearest-Neighbor Movie Recommendations	lab/02RecommendKNN/index.html	
+x	Optimization	notes/04Optimization/			
+x	Optimization	notes/04Optimization/	Read: Remembering the SVD	lab/03SVD/reading.html	1 25
+x	Lab		Exploring the SVD	lab/03SVD/	
+x	Recommendation Systems with Matrix Completion	notes/06MatComp			
+x	Recommendation Systems with Matrix Completion	notes/06MatComp			
+x	Lab		Personalized Recommendations	lab/04MatComp	
+x	Feature Manipulation	notes/08NonLinear			
+x	Feature Manipulation	notes/08NonLinear			
+x	Lab - Matrix Completion	lab/05MatComp			
+x	Neural Networks	notes/10NNs			
+x	Exam				
+x	Lab		Universal Approximator	lab/06NN	
+x	Neural Networks for Regression and Classification	notes/12RegClas			
+x	Lab		Neural Net Classification	lab/07NNClassification	3 7
+x	Info Challenge				
+x	Info Challenge				
+x	Lab - Info Challenge				
+x	Convolutional Networks	notes/15ConvNet			
+x	Convolutional Networks	notes/15ConvNet			
+x	Lab		Convolutional Networks	lab/08ConvNet	3 21
+x	Comp Day for Guest Speaker				
+x	Transfer Learning	notes/17Transfer			
+x	Lab		Transfer Learning	lab/09Transfer	
+x	Encoder/Decoder Embeddings	notes/18VAE			
+x	Embeddings and Contrastive Loss	notes/19Contrastive			
+x	Lab		Facial Recongition	lab/10FacialRecognition	4 11
+x	Adversarial Examples	notes/20Adversarial			
+x	Exam		READ: Surveillance in Kashgar	https://www.nytimes.com/interactive/2019/04/04/world/asia/xinjiang-china-surveillance-prison.html?action=click&module=Top%20Stories&pgtype=Homepage	
+			READ: Online trackers	https://www.washingtonpost.com/technology/2023/10/24/google-privacy-police-geofence/	
+			READ: Bias in ML	https://www.nytimes.com/2020/06/24/technology/facial-recognition-arrest.html?unlocked_article_code=AAAAAAAAAAAAAAAACEIPuomT1JKd6J17Vw1cRCfTTMQmqxCdw_PIxftm3iWma3DLDmweiPgYCIiG_EPKarskadI43j2fAcVMO7ggQv1uz-hZekV3UQSzvt2EhJEBaW0TmL6EY1kXjdjLTKxqtnjjdHW4I-Nyg-zh4k6MajXvRKLb1Hc-IA4z8Y81Jgr9xXQMwK6RFbIk2IQvj-wzRcwvHUd2byaKt_XjCBh9KY_GOkmasl9qLrkfDTLDntec6KYCdRFRCT_FTnB95mU977BMKY9dffa_f1N7Jp2I0fhGAXdoLYypG5Q2W4DX8r1rurfJohaIo9GkKucfkiEcPZJrrAN0bPErzA&smid=url-share	
+x	Lab				
+x	Ethics		READ: ML and disability	https://twitter.com/TODAYshow/status/1230121198647959552	
+			READ: ML and disinformation	https://www.nytimes.com/2023/02/07/technology/artificial-intelligence-training-deepfake.html	
+			READ: Cultural bias	https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url	
+x	Ethics				
+x	Lab		Ethical Dilemma	lab/11Ethics	
+			Optional: Documentary about RL and Go	https://www.youtube.com/watch?v=WXuK6gekU1Y	
+x	RL Intro	notes/22RLintro			
+x	RL: Tabular Q-Learning	notes/22RLintro			
+x	Lab		Tabular Q-Learning	lab/12TabularQ	
+			READ: Deep Q-Learning Paper	https://arxiv.org/pdf/1312.5602.pdf	4 22
+x	RL: Deep Q-Learning	notes/24DeepQ			
+x	RL: Deep Q-Learning	notes/24DeepQ			
+x	Lab		Deep Q-Learning	lab/13DeepQ	
+x	RL: Policy networks				
+x	SOFs/Wrapup				
