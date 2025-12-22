@@ -4,3 +4,4 @@ _build/
 *.zip
 *.pdf
 *.swp
+*.ipynb_checkpoints*
