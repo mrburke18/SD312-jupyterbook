@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Adversarial Examples</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Adversarial Examples</h1>
+</header>
+<p>Our big neural nets have been designed and trained in a very
+empirical way - in other words, if they work, we have not thought very
+hard about them. One question we might ask is, are there inputs we could
+put into this network that behave very poorly? What do they look like?
+Can we <em>create</em> them?</p>
+<p>The answer is, it’s quite easy to create such <em>adversarial
+examples</em>. The idea is very simple. We have a loss function that
+declares what “right” is. Normally, we put a datapoint through,
+calculate the loss, and then perform gradient descent on the parameters
+of the network to make it smaller, thus training <em>the network</em>.
+What happens if we leave the parameters of the network alone and
+instead, after calculating the loss, we <em>calculate the gradient with
+respect to the pixels of the image</em> and <strong>update the pixels of
+the image</strong> with the goal of reducing the loss to a wrong
+classification for that image? With a few repeated tiny updates of the
+pixels, the result is a change to the <em>predicted label</em> of our
+example to a desired “wrong” classification.</p>
+<p><a href="adversarial.html">Here is but one example (among hundreds of
+attacks) of this kind of adversarial attack</a>. In this example, we
+train a network which classifies goats (class 0) from mules (class 1)
+from unicorns (class 2). We then have an image of a goat, meaning
+normally we optimize the network until it outputs [1, 0, 0]. In this
+case, we’re going to optimize the image until the network outputs [0, 1,
+0]. We’re going to try to do this without changing the image too much
+visually.</p>
+<p>Our attack here is called the Fast Gradient Sign Attack (FGSM). The
+algorithm works like this:</p>
+<ul>
+<li>Calculate the gradient with respect to the image of the loss
+function on the image and desired output. This gradient would have a
+component for every channel of every pixel.</li>
+<li>Replace each component with the sign of that component, losing all
+magnitude information, and replacing each with a +1 or -1.</li>
+<li>Multiply this by some small number epsilon.</li>
+<li>Subtract this from the image, making it slightly more likely to be
+(desirably) misclassified when pushed through again.</li>
+</ul>
+<p>This sign attack limits the amount of change on any channel on each
+iteration, allowing us to limit the total change on the image, making it
+harder to visually detect.</p>
+<p>In this example, we are able to manipulate the picture of our goat
+from being 95% likely to be a goat to 100% likely to be a mule in only
+five iterations, with no real visual affect.</p>
+<h3 id="variations">Variations</h3>
+<p>This idea opens the door to many variations of this attack.</p>
+<ul>
+<li><a
+href="https://medium.com/self-driving-cars/adversarial-traffic-signs-fd16b7171906">Stickers
+that make a stop sign be misclassified as a speed limit sign</a></li>
+<li><a href="https://www.cs.umd.edu/~tomg/projects/invisible/">A
+sweatshirt which makes it so you are not classified as human</a></li>
+<li><a href="https://arxiv.org/pdf/2101.07922.pdf">An attack that makes
+images misbehave under facial recognition</a></li>
+</ul>
+<p><a href="https://arxiv.org/pdf/2009.02276.pdf">There is also
+<em>poisoning</em>, in which training data is altered in order to cause
+misbehavior in future testing examples.</a></p>
+</body>
+</html>

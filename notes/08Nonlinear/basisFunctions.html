@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Basis Functions</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Basis Functions</h1>
+</header>
+<p>Your reading last night reintroduced you to a very simple, but
+<strong>very</strong> powerful idea: the features we build our linear
+models out of don’t have to be the same ones we actually first observed.
+As a reminder, here’s an example from earlier in the semester.</p>
+<p>Suppose we had the following dataset, and we wanted to do
+classification. For each datapoint, we’ve observed two numbers, <span
+class="math inline"><em>x</em></span> and <span
+class="math inline"><em>y</em></span>, and we’ve plotted those points
+here, with the colors indicating their class.</p>
+<p><img src="images/notSep.png" /></p>
+<p>None of our models would do a very good job on this dataset with the
+features as described. A perceptron would run forever, because it’s not
+linearly separable. A logistic regressor would finish, and would do its
+best, but its best would be some garbage, because the decision boundary
+is a line, and there’s no good line to draw here. So, we’re hosed,
+right? No.</p>
+<p>Suppose rather than making datapoint <span
+class="math inline"><em>d</em><sub><em>i</em></sub></span> defined as
+<span
+class="math inline"><em>d</em><sub><em>i</em></sub> = [<em>x</em>,<em>y</em>]</span>,
+I instead defined it as <span
+class="math inline"><em>d</em><sub><em>i</em></sub> = [<em>x</em><sup>2</sup>,<em>y</em><sup>2</sup>]</span>.
+Then, our data would look like this:</p>
+<p><img src="images/sep.png" /></p>
+<p>And that’s totally linearly separable! We could build an excellent
+classifier! This is what makes a seemingly limited linear model into a
+powerful predictor - if we can find a transformation to our observations
+that splits our data pretty well, then we can solve our problem with a
+very simple and easily understood linear model. This is really
+important!</p>
+<p>I’m going to talk about this in terms of regression, but the concepts
+apply to classification, as well.</p>
+<p>To formalize this a little bit, suppose each datapoint is denoted
+<span
+class="math inline">(<em>x</em><sub><em>i</em></sub>,<em>y</em><sub><em>i</em></sub>)</span>,
+and <span class="math inline"><em>x</em><sub><em>i</em></sub></span> is
+a point in <span class="math inline"><em>m</em></span> dimensions. In
+linear regression, we would stack all of our <span
+class="math inline"><em>x</em><sub><em>i</em></sub></span>s into a
+single <span class="math inline"><em>n</em> × <em>m</em></span> matrix
+<span class="math inline"><em>X</em></span>, and all of our <span
+class="math inline"><em>y</em><sub><em>i</em></sub></span>s into a
+matrix <span class="math inline"><em>y</em></span> and then solve for
+<span class="math inline"><em>w</em></span> such that <span
+class="math inline"><em>X</em><em>w</em> ≈ <em>y</em></span>. However,
+it may be that our original observations aren’t cutting it. What this
+means is that either (1) <span class="math inline"><em>y</em></span> is
+not close to the vector space defined by the columns of <span
+class="math inline"><em>X</em></span>, and so no sufficiently good <span
+class="math inline"><em>w</em></span> exists, or, (2) the vector space
+is <em>too big</em>, and even the noise in <span
+class="math inline"><em>y</em></span> can be captured, and so we have
+overfitting.</p>
+<p>Instead, we’re going to define a series of <span
+class="math inline"><em>k</em></span> basis functions <span
+class="math inline"><em>ϕ</em><sub>1</sub>…<em>ϕ</em><sub><em>k</em></sub></span>
+which each take in a whole point <span
+class="math inline"><em>x</em><sub><em>i</em></sub></span>, and output a
+single scalar. Then, we can construct a matrix</p>
+<p><span class="math display">$$
+\Phi=\left[\begin{array}{cccc}
+\phi_1(x_1)&amp;\phi_2(x_1)&amp;\dots&amp;\phi_k(x_1)\\
+\phi_1(x_2)&amp;\phi_2(x_2)&amp;\dots&amp;\phi_k(x_2)\\
+\vdots&amp;\vdots&amp;\dots&amp;\vdots\\
+\phi_1(x_n)&amp;\phi_2(x_n)&amp;\dots&amp;\phi_k(x_n)
+\end{array}\right],
+$$</span></p>
+<p>and solve for a <span class="math inline"><em>w</em></span> such that
+<span class="math inline"><em>Φ</em><em>w</em> ≈ <em>y</em></span>.
+Let’s denote a single row of this matrix, corresponding to datapoint
+<span class="math inline"><em>x</em><sub><em>i</em></sub></span> as
+<span
+class="math inline"><em>Φ</em>(<em>x</em><sub><em>i</em></sub>)</span>.
+The goal is to find features such that the span of <span
+class="math inline"><em>Φ</em></span> results in a better prediction
+than the span of <span class="math inline"><em>X</em></span>. Obviously,
+to apply the learned <span class="math inline"><em>w</em></span> to a
+new (testing) point <span
+class="math inline"><em>x</em><sub><em>n</em><em>e</em><em>w</em></sub></span>,
+you would first have to calculate <span
+class="math inline"><em>Φ</em>(<em>x</em><sub><em>n</em><em>e</em><em>w</em></sub>)</span>,
+then multiply by <span class="math inline"><em>w</em></span> to
+calculate your prediction.</p>
+<p>So what kinds of functions might people make?</p>
+<h3 id="domain-expertise">Domain Expertise</h3>
+<p>It may be that you know something about your dataset, and you can
+make up some features that can improve things. For example, maybe you’re
+trying to predict, from a dataset of information about people, how many
+hours per week they work. One of your features may be age. With a linear
+predictor, and age as a feature, you can learn things like, “as age
+increases, hours working also increase.” But, that’s probably not true.
+People’s hours working jump considerably when they leave school, and
+drop considerably when they retire. So, it may be that instead of using
+age as a feature, you instead want to use a binary feature of “are they
+between the ages of 18 and 65?”</p>
+<p>This is known as feature design, and is a main reason why a machine
+learning expert can’t do all this alone when confronted with a new
+problem (this is a reason why many BS AI startups fail). You need
+somebody in the room who understands this data and can tell you what
+kinds of things are likely important, so you can turn them into features
+your model can effectively learn on.</p>
+<p>Domain expertise is best. But, when you don’t have domain expertise,
+you’re not totally hosed. You can instead focus on changing the vector
+space of your model. If even after a regularization parameter search,
+your model sucks, you can focus on widening the span (vector space) of
+your features, to make it more likely your target vector is close to
+that span.</p>
+<h3 id="dimensionality-reduction">Dimensionality Reduction</h3>
+<p>Let’s first dispense with the problem of the span of <span
+class="math inline"><em>X</em></span> being <em>too</em> expressive. In
+this case, we can either add regularization, or we can decrease the
+expressiveness by using just a few features that capture most of the
+important information about the data - presumably what’s lost is just
+noise that we don’t want to fit anyway.</p>
+<p>This is exactly what PCA does for us. We calculate <span
+class="math inline"><em>Φ</em>(<em>x</em><sub><em>i</em></sub>)</span>
+by projecting <span
+class="math inline"><em>x</em><sub><em>i</em></sub></span> onto the
+first <span class="math inline"><em>k</em></span> principal components.
+We know these capture most of the important information, and discard the
+random noise.</p>
+<p>Also interesting and truly bananas: <a
+href="https://en.wikipedia.org/wiki/Random_projection">Random
+projections</a>. <a
+href="https://stats.stackexchange.com/questions/235632/pca-vs-random-projection">Random
+Projections vs PCA</a>.</p>
+<h3 id="polynomial-features">Polynomial Features</h3>
+<p>It may be that your target function isn’t linear on your
+observations. For example, if your target function looks like <span
+class="math inline"><em>y</em> = <em>x</em><sup>2</sup></span>, you’re
+not going to be able to match that very well with a linear function on
+<span class="math inline"><em>x</em></span>. As a result, it’s common to
+try features that consist of monomials constructed from your
+observations. For example, if you’ve observed <span
+class="math inline">[<em>x</em> <em>y</em>]</span>, then maybe you want
+to try <span
+class="math inline">[<em>x</em><sup>2</sup> <em>y</em><sup>2</sup> <em>x</em><em>y</em> <em>x</em> <em>y</em> 1]</span>.
+This can add a lot of useful expressiveness. As stated in your reading,
+you don’t want to take this to too high of a degree, or your function
+can get unplausibly weirdly shaped.</p>
+<h3 id="radial-basis-functions-rbfs">Radial Basis Functions (RBFs)</h3>
+<p>It may be that similarity to certain locations in the input space is
+a useful feature (over here, it’s high; over there, it’s low, etc.). The
+idea here is to choose <span class="math inline"><em>k</em></span>
+significant locations in the original observation space, and then <span
+class="math inline"><em>ϕ</em><sub><em>i</em></sub>(<em>x</em>)</span>
+is the distance between <span class="math inline"><em>x</em></span> and
+the <span class="math inline"><em>i</em></span>th significant location.
+“Distance,” as usual, can mean a lot of things - most common is
+Euclidean distance, or the Gaussian distance (<span
+class="math inline"><em>e</em><sup>−(<em>ϵ</em>||<em>x</em>−<em>x</em><sub><em>c</em></sub>||)<sup>2</sup></sup></span>,
+where <span class="math inline"><em>x</em><sub><em>c</em></sub></span>
+is the significant location, and <span
+class="math inline"><em>ϵ</em></span> is a chosen width parameter that
+determines how far away a point can be before its Gaussian similarity is
+essentially zero.</p>
+<p>These significant locations can be chosen either intentionally based
+on domain knowledge, or evenly spaced through the domain, or at sampled
+points.</p>
+<h1 id="code-from-todays-lecture"><a href="showFeatures.html">Code from
+today’s lecture</a></h1>
+</body>
+</html>

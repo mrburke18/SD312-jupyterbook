@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Intro to RL</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Intro to RL</h1>
+</header>
+<p>Another Machine Learning approach that has been and is continuing to
+be explored and leveraged is <em>Reinforcement Learning</em>. In this
+paradigm, researchers are investigating how to get a model to perform a
+particular task - for example, given its understanding of the world, how
+should an autonomous vehicle respond with its wheel and accelerator in
+this moment? There’s no “right” answer that we can query at any given
+timestep; we only know if it’s right later, when you either get into a
+car accident, or you’re safely delivered to Chipotle.</p>
+<p>Perhaps the most difficult part of RL is in mathematically defining
+what “good behavior” is from your autonomous system. What does it mean
+for one robot to “walk better” from point A to B? Certainly, it avoids
+collisions, but is faster better? Smoother, so as to not jostle
+payloads? Most energy efficient? Some combination of the above?</p>
+<h3 id="mdps-and-value">MDPs and Value</h3>
+<p>To help us do this, we create a mathematical structure called a
+<em>Markov decision process</em>, or MDP. An MDP is defined by the
+following things:</p>
+<ul>
+<li>A <em>state space</em> <span class="math inline"><em>S</em></span>.
+A state is a complete description of the agent’s current scenario (we
+call the autonomous thing the agent). The state space is the set of all
+possible states. This might be small and discrete, or large,
+multi-dimensional, and continuous.</li>
+<li>An <em>action space</em> <span
+class="math inline"><em>A</em></span>. At each timestep, the agent must
+choose an action to perform. The set of all possible actions is the
+action space. Again, this might be small and discrete (to play Pong, you
+can go up, down, or stay where you are), or multidimensional and
+continuous (to walk a robot, we have to set actuator values for every
+joint in the robot’s leg, each of which is a continuous value).</li>
+<li><em>Transition probabilities</em> <span
+class="math inline"><em>P</em>(<em>s</em>′|<em>s</em>,<em>a</em>)</span>.
+This is physics, or the rules of the game, which expresses how agents
+move through the space. <span
+class="math inline"><em>P</em>(<em>s</em>′|<em>s</em>,<em>a</em>)</span>
+is the probability of ending up at state <span
+class="math inline"><em>s</em>′</span> given that the agent was in state
+<span class="math inline"><em>s</em></span> and took action <span
+class="math inline"><em>a</em></span>.</li>
+<li>The <em>reward function</em> <span
+class="math inline"><em>R</em>(<em>s</em>)</span>. In order to
+communicate success to the model, we give every state a reward. For
+example, a state where the agent has achieved its task might get a
+reward of 10, while a state where the agent has fallen off a cliff might
+get a reward of -100.</li>
+<li>The <em>discount value</em> <span
+class="math inline"><em>γ</em></span> (that’s the Greek letter gamma).
+In general, we prefer to get reward sooner than later. The discount
+value is a number between 0 and 1 which quantifies this - values close
+to 0 express more impatience, and values close to 1 indicate more
+patience.</li>
+</ul>
+<p>Our agent interacts with this MDP by observing its state, then
+choosing an action, and observing the next state and the reward of that
+next step. It performs this loop over and over again until the
+interaction ends.</p>
+<p>Our goal is to develop a <em>policy</em> <span
+class="math inline"><em>π</em></span>, which is a function that takes in
+a state and returns an action. A good policy is one that chooses actions
+for each state, and ultimately achieves the task. We quantify this as
+wanting to maximize experienced, discounted rewards; that is, if we call
+<span
+class="math inline"><em>R</em>(<em>s</em><sub><em>t</em></sub>)</span>
+the reward of the state experienced at state <span
+class="math inline"><em>t</em></span>, we want to maximize <span
+class="math inline">∑<sub><em>t</em></sub><em>γ</em><sup><em>t</em></sup><em>R</em>(<em>s</em><sub><em>t</em></sub>)</span>.
+This sum is known as the <em>value</em> of state <span
+class="math inline"><em>s</em><sub>0</sub></span>, which depends upon
+the state, and the policy which determines which following states are
+visited.</p>
+<p>Consider, for example, this simple MDP. There are 4 states (denoted
+<span class="math inline"><em>s</em>0</span>, <span
+class="math inline"><em>s</em>1</span>, etc.), each represented by a
+circle. The reward of that state is represented by the value in the
+circle. The action space at each state is to go either left or right. We
+would like to identify a policy that results in a high value. Suppose
+<span class="math inline"><em>γ</em> = .9</span>.</p>
+<p><img src="mdp.png" /></p>
+<p>We can start by calculating the value, for each state, of always
+going left. If we start at <span class="math inline"><em>s</em>0</span>,
+we receive a reward of 0, and then continually, forever, ending our
+transition at state <span class="math inline"><em>s</em>0</span>,
+continually receiving a reward of 0, which is scaled by being multiplied
+by 0: <span
+class="math inline">0 + <em>γ</em>0 + <em>γ</em><sup>2</sup>0 + <em>γ</em><sup>3</sup>0 + ⋯</span>.
+So, our value for state <span class="math inline"><em>s</em>0</span>,
+with a policy of always going left, is 0.</p>
+<p>From <span class="math inline"><em>s</em>1</span>, we receive a
+reward of 1, followed by an infinite sum of 0s. The value of state <span
+class="math inline"><em>s</em>1</span>, under a policy of always going
+left, is 1. It makes sense that <span
+class="math inline"><em>s</em>1</span>’s value under this policy is
+higher than that of state <span class="math inline"><em>s</em>0</span>.
+Were this our policy, we would definitely prefer to get one reward than
+none at all, so the value is higher.</p>
+<p>From <span class="math inline"><em>s</em>2</span>, we receive a
+reward of 0, followed by a 1, followed by an infinite sum of 0s. The
+value of state <span class="math inline"><em>s</em>2</span> is <span
+class="math inline">0 + <em>γ</em>1 + <em>γ</em><sup>2</sup>0 + <em>γ</em><sup>3</sup>0 + ⋯ = .9</span>
+(because <span class="math inline"><em>γ</em> = .9</span>). Again, this
+makes sense. State <span class="math inline"><em>s</em>2</span> is
+preferable to state <span class="math inline"><em>s</em>0</span>, but
+less preferred than state <span class="math inline"><em>s</em>1</span>
+(because in state <span class="math inline"><em>s</em>1</span> we get
+the reward faster). So, it’s value is higher than that of state <span
+class="math inline"><em>s</em>0</span> and lower than that of state
+<span class="math inline"><em>s</em>1</span>.</p>
+<p>The value of state <span class="math inline"><em>s</em>3</span> is
+.81 (see why?). So, the values of all four are [0, 1, .9, .81].</p>
+<p><img src="leftValue.png" width="1000"/></p>
+<p>Now suppose our policy is to always go right. We again calculate our
+values, and get [.9, 1, 0, 0]. We can plot these against each other.</p>
+<p><img src="leftRightValue.png" width="1000"/></p>
+<p>So which policy is better? Well, our evidence so far is that it seems
+that going right is better in state <span
+class="math inline"><em>s</em>0</span>, that left is better in states
+<span class="math inline"><em>s</em>2</span> and <span
+class="math inline"><em>s</em>3</span>, and that it doesn’t matter in
+state <span class="math inline"><em>s</em>1</span>. So, we can use
+<em>value</em> to compare the performance of two different policies, and
+possibly even update them: let’s use this evidence and design a policy
+where we go right at state <span class="math inline"><em>s</em>0</span>
+and <span class="math inline"><em>s</em>1</span>, and left at states
+<span class="math inline"><em>s</em>2</span> and <span
+class="math inline"><em>s</em>3</span>.</p>
+<p>This makes the infinite sum in the value a little more complex, in
+that rather than ending on this mathematically convenient infinite sum
+of 0s, we’re going to infinitely end up bouncing back and forth between
+states <span class="math inline"><em>s</em>1</span> and <span
+class="math inline"><em>s</em>2</span>. We can turn to our study of
+infinite sums from Calculus class to calculate these. It turns out these
+values are about [4.7, 5.3, 4.7, and 4.3].</p>
+<p>It turns out for this MDP, this is the best possible policy, which
+makes the values as high as possible for every state. We call this the
+<em>optimal</em> policy.</p>
+<p><img src="optimalValue.png" width="1000"/></p>
+<p>So, once we calculated value of a policy, we could use this in two
+ways. One, it gives us an idea of which states are better to be in than
+others. For example, <span class="math inline"><em>s</em>2</span> and
+<span class="math inline"><em>s</em>3</span> both have a reward of 0.
+However, the value under our optimal policy of being in state <span
+class="math inline"><em>s</em>2</span> is higher than in <span
+class="math inline"><em>s</em>3</span>. So, we know that
+<em>something</em> is advantageous about being in state <span
+class="math inline"><em>s</em>2</span> than in <span
+class="math inline"><em>s</em>3</span>. You can see how this can help us
+build better and better policies (get to <span
+class="math inline"><em>s</em>2</span>, rather than <span
+class="math inline"><em>s</em>3</span>).</p>
+<p>Second, it gave us the ability to compare policies, decide which were
+better for which states, and then modify those policies to improve
+them.</p>
+<p>This is great! However, in a more complex environment, we may not
+know the reward function or understand the effects of taking our actions
+(we have action 1 and action 2, they’re not labeled “left” or “right,”
+and in fact, may do something different at each state). So, we need to
+do some learning of this system’s behavior by exploring it - this is
+where the data and ML comes into play. To get us there, we need to
+expand our definition of “value” a bit further.</p>
+<h3 id="q-functions">Q-Functions</h3>
+<p>Given only these inputs, our goal at the end of this is to have a way
+of knowing what is a good action to take in each state. One way of doing
+this is to expand the idea of value (where each state has a single value
+for a single policy) to <em>Q-functions</em>, where each state-action
+pair has a value calculated (under the current policy, if you go
+<em>left</em> here, you expect <em>this</em> value; however, if you go
+<em>right</em> here, you expect <em>that</em> value). We usually denote
+this in function format as <span
+class="math inline"><em>Q</em>(<em>s</em>,<em>a</em>)</span>. Note: It
+is important to remember here that this is the Q value under a
+particular policy.</p>
+<p>For example, let’s again consider our simple chain MDP, with a policy
+of “always go left.” Let’s temporarily assume we have access to <span
+class="math inline"><em>R</em></span> and the effects of our actions,
+and compute the <em>correct</em> values of these Q-functions, before
+discussing what this gives us, and then how we can approximate these
+Q-functions from our agent’s samples.</p>
+<p>In state <span class="math inline"><em>s</em>0</span>, we need to
+compute two Q-functions - <span
+class="math inline"><em>Q</em>(<em>s</em>0,<em>l</em><em>e</em><em>f</em><em>t</em>)</span>
+and <span
+class="math inline"><em>Q</em>(<em>s</em>0,<em>r</em><em>i</em><em>g</em><em>h</em><em>t</em>)</span>.
+If we go left, and then follow the policy “always go left,” then we’ll
+only receive a reward of 0 forever, so <span
+class="math inline"><em>Q</em>(<em>s</em>0,<em>l</em><em>e</em><em>f</em><em>t</em>) = 0</span>.
+If we go right, and then follow the policy, then we’ll receive a reward
+of 0 from being in state <span class="math inline"><em>s</em>0</span>,
+followed by <span class="math inline"><em>γ</em>1</span> from state
+<span class="math inline"><em>s</em>1</span>, followed by a reward of 0
+forever as we go left forevermore. So, <span
+class="math inline"><em>Q</em>(<em>s</em>0,<em>r</em><em>i</em><em>g</em><em>h</em><em>t</em>)</span>
+is .9.</p>
+<p>In state <span class="math inline"><em>s</em>1</span>, we need to
+compute <span
+class="math inline"><em>Q</em>(<em>s</em>1,<em>l</em><em>e</em><em>f</em><em>t</em>)</span>
+and <span
+class="math inline"><em>Q</em>(<em>s</em>1,<em>r</em><em>i</em><em>g</em><em>h</em><em>t</em>)</span>.
+<span
+class="math inline"><em>Q</em>(<em>s</em>1,<em>l</em><em>e</em><em>f</em><em>t</em>) = 1</span>,
+and <span
+class="math inline"><em>Q</em>(<em>s</em>1,<em>r</em><em>i</em><em>g</em><em>h</em><em>t</em>) = 1 + <em>γ</em>0 + <em>γ</em><sup>2</sup>1 + 0 + ⋯ = 1.81</span>.</p>
+<p>The full table for the <strong>always left policy</strong> looks like
+this:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Left</th>
+<th>Right</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>s0</td>
+<td>0</td>
+<td>0.9</td>
+</tr>
+<tr class="even">
+<td>s1</td>
+<td>1</td>
+<td>1.81</td>
+</tr>
+<tr class="odd">
+<td>s2</td>
+<td>.9</td>
+<td>.73</td>
+</tr>
+<tr class="even">
+<td>s3</td>
+<td>.81</td>
+<td>.73</td>
+</tr>
+</tbody>
+</table>
+<p>The table for the optimal policy is:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Left</th>
+<th>Right</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>s0</td>
+<td>4.26</td>
+<td>4.74</td>
+</tr>
+<tr class="even">
+<td>s1</td>
+<td>5.26</td>
+<td>5.26</td>
+</tr>
+<tr class="odd">
+<td>s2</td>
+<td>4.74</td>
+<td>3.84</td>
+</tr>
+<tr class="even">
+<td>s3</td>
+<td>4.26</td>
+<td>3.84</td>
+</tr>
+</tbody>
+</table>
+<p>If we have this, it’s super easy to know our policy - clearly at
+state <span class="math inline"><em>s</em>0</span>, we should go right -
+we expect more value! In fact, always, we should choose the action that
+has the largest value at our current state: <span
+class="math inline">$\pi(s) = \argmax_a Q(s,a)$</span>. Making that
+change would result in increasing values elsewhere in the table due to
+smarter decisions later down the line, but (if the MDP is small enough,
+and we know <span class="math inline"><em>R</em></span>, and we know
+<span class="math inline"><em>P</em></span>) we could recompute this
+whole table every time we decide to change our policy at any state.</p>
+<h3 id="bellman-equation-and-bellman-error">Bellman equation and Bellman
+error</h3>
+<p>First, an observation. For the optimal policy <span
+class="math inline"><em>π</em><sup>*</sup></span>,</p>
+<p><span
+class="math display"><em>Q</em><sub><em>π</em><sup>*</sup></sub>(<em>s</em>,<em>a</em>) = 𝔼<sub><em>P</em>(<em>s</em>′|<em>s</em>,<em>a</em>)</sub>[<em>r</em>+<em>γ</em>max<sub><em>a</em>′</sub><em>Q</em><sub><em>π</em><sup>*</sup></sub>(<em>s</em>′,<em>a</em>′)].</span></p>
+<p>That equation is known as the <em>Bellman equation</em>, and is not
+so ugly as it looks. First, the <span
+class="math inline">𝔼<sub><em>P</em>(<em>s</em>′|<em>s</em>,<em>a</em>)</sub></span>
+refers to the expectation. That is, if our MDP is not deterministic,
+then taking action <span class="math inline"><em>a</em></span> from
+action <span class="math inline"><em>s</em></span> does not always have
+the same effect - there’s a little bit of randomness in the world, so we
+can’t predict exactly what will happen. That expectation notation just
+says, “on average, where state <span
+class="math inline"><em>s</em>′</span> is drawn from the probability
+distribution of places that we might end up in after taking <span
+class="math inline"><em>a</em></span> from <span
+class="math inline"><em>s</em></span>.</p>
+<p>Second, in an optimal policy <span
+class="math inline"><em>π</em><sup>*</sup></span>, we naturally assume
+we are going to take the action at state <span
+class="math inline"><em>s</em>′</span> which gives us the highest value.
+So, that’s the only part we care about, giving us the max term over all
+actions available in state <span
+class="math inline"><em>s</em>′</span>.</p>
+<p>All this is to say, that when we collect a sample <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>,
+and refer to our table for our approximations of <span
+class="math inline"><em>Q</em>(<em>s</em>,<em>a</em>)</span> and <span
+class="math inline"><em>Q</em>(<em>s</em>′,<em>a</em>′)</span>, if those
+approximations are good, then the entry for <span
+class="math inline"><em>Q</em>(<em>s</em>,<em>a</em>)</span> should be
+close to <span
+class="math inline"><em>r</em> + <em>γ</em>max<sub><em>a</em>′</sub><em>Q</em>(<em>s</em>′,<em>a</em>′)</span>.
+The difference between those two elements is called the <em>Bellman
+error</em>, and is the only way we know if we’re doing well or poorly in
+approximating these values.</p>
+<h3 id="tabular-q-learning">Tabular Q-Learning</h3>
+<p>For the purposes of this section, we’ll assume a small, discrete
+number of states, and a small, discrete number of actions. We’ll also
+assume that <span class="math inline"><em>R</em></span> and <span
+class="math inline"><em>P</em></span> exist, but we don’t know what they
+are. So, we cannot calculate value directly, and our only way of
+learning anything about this MDP is by exploring it - collecting samples
+where we start in some state <span
+class="math inline"><em>s</em></span>, receive reward <span
+class="math inline"><em>r</em></span>, take action <span
+class="math inline"><em>a</em></span>, and as a result of taking that
+action, end up in state <span class="math inline"><em>s</em>′</span>.
+Given those <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>
+samples, we would like to approximate that optimal Q function table, so
+we could decide which action was best at each step to achieve our
+goal.</p>
+<p>We are going to build a table of Q-values like the ones above, which
+is <span class="math inline">|<em>S</em>|</span> rows tall and <span
+class="math inline">|<em>A</em>|</span> actions wide, and each element
+is our approximation to <span
+class="math inline"><em>Q</em>(<em>s</em>,<em>a</em>)</span> for some
+<span class="math inline"><em>s</em></span> and some <span
+class="math inline"><em>a</em></span> (call this approximation <span
+class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>)</span>. We’re
+going to start with random values for the Q-functions (or zeros) in this
+table, and gradually make them better, as the agent explores the space
+and we learn about the consequences of its actions.</p>
+<p>As we explore, we are going to improve these values of <span
+class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>)</span> in order to
+minimize Bellman error.</p>
+<p>So, suppose you just were in state <span
+class="math inline"><em>s</em></span>, took action <span
+class="math inline"><em>a</em></span>, received reward <span
+class="math inline"><em>r</em></span>, and ended up in state <span
+class="math inline"><em>s</em>′</span>. We can refer to our table as it
+is, and retrieve our approximation of <span
+class="math inline"><em>Q</em>(<em>s</em>,<em>a</em>)</span> (call it
+<span class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>)</span>), as
+well as <span
+class="math inline"><em>Q̂</em>(<em>s</em>′,<em>a</em>′)</span>, for all
+<span class="math inline"><em>a</em>′</span>. So, if all those
+approximations are good, <span
+class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>)</span> and <span
+class="math inline"><em>r</em> + <em>γ</em>max<sub><em>a</em>′</sub><em>Q</em>(<em>s</em>′,<em>a</em>′)</span>
+should be close.</p>
+<p>We can therefore do an update, where we replace <span
+class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>)</span> with a
+weighted average of the old approximation and <span
+class="math inline"><em>r</em> + <em>γ</em>max<sub><em>a</em>′</sub><em>Q</em>(<em>s</em>′,<em>a</em>′)</span>.
+We define a learning rate <span class="math inline"><em>α</em></span>,
+and for some sample <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>,
+we use the following update rule:</p>
+<p><span
+class="math display"><em>Q̂</em>(<em>s</em>,<em>a</em>) ← <em>α</em>(<em>r</em>+<em>γ</em>max<sub><em>a</em>′</sub><em>Q</em>(<em>s</em>′,<em>a</em>′)) + (1−<em>α</em>)<em>Q̂</em>(<em>s</em>,<em>a</em>)</span></p>
+<p>So the only thing that’s left is to decide how we’re going to
+generate these samples. We need to balance two things: (1) We primarily
+care about the Q-values of good actions, as we’re not going to take bad
+actions anyway, and (2) we don’t really know what a good action is, for
+a while, until our table updates quite a bit. This is known as balancing
+<em>exploitation</em> and <em>exploration</em>.</p>
+<p>One approach to this is <span
+class="math inline"><em>ϵ</em></span>-greedy exploration, where we
+define some small value <span class="math inline"><em>ϵ</em></span>
+(like in the range of .1-.4, or so), and most of the time take what you
+believe to be the best action based on your current Q-function
+approximations, but <span class="math inline"><em>ϵ</em></span>% of the
+time take a random action. So, our algorithm (known as “tabular
+Q-learning”) becomes this:</p>
+<ul>
+<li>Create an initial table of approximate Q-functions for every
+state-action pair. These can be random, or 0.</li>
+<li>Start at starting state <span
+class="math inline"><em>s</em></span></li>
+<li>Lots of times:
+<ul>
+<li>If a random number is less than <span
+class="math inline"><em>ϵ</em></span>,
+<ul>
+<li><span class="math inline"><em>a</em>←</span> a random action</li>
+</ul></li>
+<li>Else (most of the time)
+<ul>
+<li><span class="math inline">$a\leftarrow \argmax_{a'}
+Q(s,a')$</span></li>
+</ul></li>
+<li>Receive back the results of taking that action, so you now have a
+<span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>
+tuple.</li>
+<li><span
+class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>) ← <em>α</em>(<em>r</em>+<em>γ</em>max<sub><em>a</em>′</sub><em>Q</em>(<em>s</em>′,<em>a</em>′)) + (1−<em>α</em>)<em>Q̂</em>(<em>s</em>,<em>a</em>)</span></li>
+<li><span class="math inline"><em>s</em> ← <em>s</em>′</span></li>
+</ul></li>
+</ul>
+<p>After enough training, our Q-function approximations will be accurate
+enough to define an effective policy for this relatively simple RL
+problem.</p>
+</body>
+</html>

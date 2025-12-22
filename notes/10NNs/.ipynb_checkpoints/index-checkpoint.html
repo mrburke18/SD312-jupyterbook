@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Neurons and neural nets</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="https://www.usna.edu/Users/cs/sd312">SD312: ML</a></b>
+  <a href="https://www.usna.edu/Users/cs/taylor/">Dr. Taylor</a>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="course_policy.pdf">Policy</a>
+  <a
+    href="resources/resources.html">Resources</a>
+  <a
+    href="datasets/datasets.html">Datasets</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Neurons and neural nets</h1>
+</header>
+<p>Prime takeaways:</p>
+<ul>
+<li>A <em>neuron</em> takes in a number of features, performs a linear combination of them, then applies a nonlinear “activation function” to the result. The weights of the linear combination are learnable to make the final output of the neuron more accurate.</li>
+<li>A single neuron is not particularly useful, and can be better replaced with a more standard linear model, which can usually be trained faster.</li>
+<li>However, if the output of one neuron is used as an input to a second neuron, then the first one can be said to have produced a <em>feature</em> for the second neuron.</li>
+<li>By training all neurons at the same time, we can learn useful features to then be linearly combined by the final output neuron.</li>
+</ul>
+<p><a href="NeuronWeb.html">A demonstration of this idea using the Pytorch library can be found here</a>.</p>
+</body>
+</html>

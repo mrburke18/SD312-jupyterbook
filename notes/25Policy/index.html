@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Policy Networks</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="navbar">
+  <b><a href="https://www.usna.edu/Users/cs/sd312">SD312: ML</a></b>
+  <a href="https://www.usna.edu/Users/cs/taylor/">Dr. Taylor</a>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="course_policy.pdf">Policy</a>
+  <a
+    href="resources/resources.html">Resources</a>
+  <a
+    href="datasets/datasets.html">Datasets</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Policy Networks</h1>
+</header>
+<p>So far, we’ve gone from small numbers of states and small numbers of
+actions (Tabular Q-learning), to large numbers of states, and small
+numbers of actions (Deep Q-Learning). Today, in the brief time we have
+left, we’ll have a very quick introduction to how we can fix some of the
+problems that come from Deep Q-Learning, while handling large numbers of
+states <em>and</em> large numbers of actions.</p>
+<p>In Q-functions, the “max” operator that comes into play in choosing
+an action causes a lot of problems. If we have two almost-equally-good
+actions, always choosing one can cause problems. For example, suppose
+we’re in a cartpole state where the stick is nearly upright. We don’t
+care much if we take our cart left or right - but we probably would do
+better randomly switching between the two, rather than having a bias
+toward letting it fall in a certain direction. The max operator can
+cause this type of long-term problem, and also causes policies to be
+erratic during training.</p>
+<p>We’re instead going to build a system that allows for
+<em>stochastic</em> policies - that is, we’ll take each action with some
+probability. In cases where the choice is clear-cut, we can still push
+that probability strongly towards the favored action. Where it’s not, we
+can allow for some probability density on each of the
+about-as-good-as-each-other choices.</p>
+<p>The networks we’ve build for Deep Q-Learning are often called
+<em>value networks</em> - it’s a good name, because their output is an
+approximation to the value. To handle large numbers of actions, we’re
+instead going to build a <em>policy network</em> - this is also a good
+name, because the network will directly output a policy.</p>
+<p>Let’s first think about a policy network for small numbers of
+actions, and then we’ll tweak it to allow large numbers of actions.</p>
+<p>Suppose we have an MDP with three actions. Our policy network would
+take in a state, and have four output nodes. Three of those nodes output
+logits for the three actions, allowing you to compute with what
+probability the policy believes you should take that action; denote the
+probability of taking action <span class="math inline"><em>a</em></span>
+<span class="math inline"><em>π</em>(<em>a</em>|<em>s</em>)</span>. The
+fourth outputs a value for that input state - that is, what it believes
+the expected return will be if you follow the policy it’s laying out for
+you. Call the output from that node <span
+class="math inline"><em>V̂</em>(<em>s</em>)</span>.</p>
+<p>When exploring, we choose an action randomly from the distribution
+prescribed by the network. This gives us an <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>
+sample. We can use the output of the value node after doing a forward
+pass with <span class="math inline"><em>s</em>′</span> to compute <span
+class="math inline"><em>r</em> + <em>γ</em><em>V̂</em>(<em>s</em>′)</span>.
+Naturally, we can now train our value node to be a bit more accurate
+with the Bellman error: <span
+class="math inline"><em>B</em><em>E</em>(<em>s</em>,<em>a</em>) = (<em>V̂</em>(<em>s</em>)−(<em>r</em>+<em>γ</em><em>V̂</em>(<em>s</em>′)))<sup>2</sup></span>.</p>
+<p>Now, suppose we have two actions that are currently equally weighted
+by our policy for some state. One action tends to overperform
+expectations - that is, the actual received value tends to be higher
+than <span class="math inline"><em>V̂</em>(<em>s</em>)</span>. The other
+underperforms expectations. Naturally, we’d like to adjust our
+distribution so that the first action happens more often, and the second
+happens less often. We can quantify this over- or under-performance with
+something called <em>advantage</em>. We compare what actually happened
+<span
+class="math inline">(<em>r</em>+<em>γ</em><em>V̂</em>(<em>s</em>′))</span>
+to what we expected to have happen (<span
+class="math inline"><em>V̂</em>(<em>s</em>)</span>), and see if we were
+pleasantly or unpleasantly surprised: <span
+class="math inline"><em>A</em>(<em>s</em>,<em>a</em>) = <em>r</em> + <em>γ</em><em>V̂</em>(<em>s</em>′) − <em>V̂</em>(<em>s</em>)</span>.
+Note unlike Bellman error, this is signed - that is, we prefer the
+advantage to be as large as possible, not that the two elements be
+close.</p>
+<p>Now, if <span
+class="math inline"><em>A</em>(<em>s</em>,<em>a</em>)</span> is large,
+we’d like to increase <span
+class="math inline"><em>π</em>(<em>a</em>|<em>s</em>)</span> (similarly,
+if <span class="math inline"><em>A</em>(<em>s</em>,<em>a</em>)</span> is
+negative, we’d like to decrease <span
+class="math inline"><em>π</em>(<em>a</em>|<em>s</em>)</span>). So, we
+can think of this as maximizing <span
+class="math inline"><em>A</em>(<em>s</em>,<em>a</em>)<em>π</em>(<em>a</em>|<em>s</em>)</span>,
+or, because maximizing <span class="math inline"><em>x</em></span> and
+maximizing <span class="math inline">log (<em>x</em>)</span> is the same
+thing, we can maximize <span
+class="math inline"><em>A</em>(<em>s</em>,<em>a</em>)log (<em>p</em><em>i</em>(<em>a</em>|<em>s</em>))</span>,
+or minimize <span
+class="math inline"> − <em>A</em>(<em>s</em>,<em>a</em>)log (<em>p</em><em>i</em>(<em>a</em>|<em>s</em>))</span>.
+This latter choice is preferred for a few reasons, one of which is that
+the log of the probability is just the logit, which is the actual value
+we’re outputting anyway.</p>
+<p>This makes our total loss function for a given <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>
+to have two portions: <span
+class="math inline">(<em>r</em>+<em>γ</em><em>V̂</em>(<em>s</em>′)−<em>V̂</em>(<em>s</em>))<sup>2</sup> − <em>A</em>(<em>s</em>,<em>a</em>)log (<em>π</em>(<em>a</em>|<em>s</em>))</span>.
+Minimize that, and you’re simultaneously making your prediction of <span
+class="math inline"><em>V̂</em>(<em>s</em>)</span> more accurate, and
+changing the output probability distribution to prefer actions that
+perform well.</p>
+<p>This procedure already greatly outperformed Deep Q Learning, even as
+it still only works on finite action spaces.</p>
+<p>To make this work on infinite action spaces, (here’s where Taylor
+stopped, because we’re not going to teach it anyway)</p>
+</body>
+</html>

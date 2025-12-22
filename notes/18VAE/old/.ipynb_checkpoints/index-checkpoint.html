@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Embeddings and Autoencoders</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="navbar">
+  <b><a href="https://www.usna.edu/Users/cs/sd312">SD312: ML</a></b>
+  <a href="https://www.usna.edu/Users/cs/taylor/">Dr. Taylor</a>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="course_policy.pdf">Policy</a>
+  <a
+    href="resources/resources.html">Resources</a>
+  <a
+    href="datasets/datasets.html">Datasets</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Embeddings and Autoencoders</h1>
+</header>
+<p>An application of neural nets that has been growing in importance is
+in learning useful <em>embeddings</em>. An embedding is a
+low-dimensional representation of a data point, which encodes some
+useful information. One example of an embedding is PCA, where we can
+condense each point down to a point in some lower-dimensional space,
+without losing much variance.</p>
+<p>For another example, suppose we’d like to do something neural-netty
+on text. Well, you can’t do math on words, so each word needs to map to
+a numerical value before it can be used as an input. You could do this
+naively, for example, by making <code>aardvark</code> map to 1, and
+<code>abacus</code> map to 2, and so on through the dictionary. Each
+word now has a number, but those numbers are meaningless; it would be
+better for ML purposes if words that were synonyms had similar mappings,
+so that the network they were input into viewed them similarly.</p>
+<p>For example, there is a famous result from a technique called
+Word2Vec, which creates embeddings for words, where each word is
+represented as a point in 200-(or so)-dimensional space. They showed
+that the learned embedding for “king” (a point in 200-dimensional space)
+minus the embedding for “man” (another point in 200-dimensional space,
+so subtraction just works), plus the embedding for “woman,” got you a
+new point in 200-dimensional space which was very close to the embedding
+for “queen.” So, <code>king - man + woman = queen</code>. So, these
+embeddings seemed to encode actual meaning, not just being a
+computationally-necessary translation from words to numbers. If two
+words had similar embeddings, that meant those words meant about the
+same thing.</p>
+<p>As another example into why these might be so useful, consider if we
+could create an embedding for text and an embedding for an image such
+that the textual description of an image (like “<a
+href="https://gemini.google.com/share/9562e18969de">an inspiring
+watercolor painting of a majestic goat at sunset, standing over a
+defeated, mangy mule</a>”) and the embedding of the image itself would
+be very similar. Training embeddings like this is an important step in
+Image Search and in AI that generates images from descriptions.</p>
+<p>This week we’re going to learn about two (of many) ways to train
+embeddings. Today is…</p>
+<h3 id="autoencoders">Autoencoders</h3>
+<p>Autoencoders are a form of unsupervised learning and are best thought
+of as learned compression and decompression algorithms. Imagine we have
+some datapoint (it’s easy to imagine it as an image, but it doesn’t have
+to be) that is high-dimensional. We then create a network where each
+layer of the network contains fewer and fewer nodes, ultimately
+condensing down to a much smaller number. This small vector is known as
+the <em>latent space</em>, and this first half of the network is known
+as the <em>encoder</em>.</p>
+<p>We then widen the network again, taking the small sized vector and
+widening it until it once again reproduces a data point the same size as
+the original datapoint. This is called the decoder.</p>
+<p>We can then train it based on reconstruction error, attempting to
+minimize the difference between what is input and what is output. If
+successful, you’ve created a compression system; you divorce the encoder
+from the decoder, and then data can be encoded, then cheaply transfered
+in the small latent space, then decoded, with little loss.</p>
+<p>Now, we can get a little weird. Suppose we have only the decoder.
+Every point in the latent space can be rendered by a decoder into an
+image. So, if we could plug in the right point in latent space, we could
+create an entirely new image that way. However, constraints as they are
+currently defined give no guarantees that any randomly selected point in
+latent space will necessarily decode into a meaningful output, or in
+other words an output that would sensibly belong to the dataset or
+represent a natural transition within it. For example, given our 28x28
+MNIST digits dataset, consider a 28x28 image of a unicorn or Abe
+Lincoln… these are possible images in that 28x28x1 framework, but do not
+belong to the manifold representing the MNIST dataset in its input
+space. A randomly selected latent encoding could, just as likely,
+instead produce such an off-manifold output when decoded. Likewise,
+nothing about this architecture enforces continuity, i.e., the idea that
+two points which are close in proximity in the latent space should
+produce outputs which are close or similar to one another.</p>
+<p>To produce continuous and meaningful (or <em>on-manifold</em>)
+outputs, we have to add an extra requirement to the autoencoder - the
+space needs to not only be small-dimensional, but the compressed
+versions of “real” inputs need to lie somewhere predictable in that
+latent space, so we can create new points in that place where real
+images lie and decode them into something sensible for the trained
+dataset.</p>
+<p>Now we’ve arrived at the need for a <em>Variational Autoencoder
+(VAE)</em>. VAEs encode inputs as distributions instead of a fixed
+m-dimensional point in latent space. Additionally, the latent space in
+properly tuned VAEs is structured such that it is regularized by
+constraining the constituent latent-space distributions (in each
+latent-space dimension) to be well-behaved Gaussians which have a mean
+close to zero and a standard deviation close to 1. With these
+constraints, the resulting model will encode data close together and
+encourage some overlapping of distributions. Together these properties
+combine to result in a latent space structure with the desired
+continuity and on-manifold dataset representation. These properties can
+come at the price of a higher decoding error, however, a tradeoff which
+can be managed by hyper-parameter tuning.</p>
+<p>Continuity and completeness in manifold representation tend to result
+in smooth transitions over the properties or information encoded in the
+latent space. Thus a point in latent space which is equidistant between
+the means of two encoded (latent space) distributions should result in a
+decoded datapoint which is intermediate between the two source inputs
+for those encoded distributions.</p>
+<p>And so, with the above, we have provided some motivation for and
+intuition about our first <em>generative</em> ML model. <a
+href="mnist.html">See an example of a VAE for MNIST here</a>.</p>
+</body>
+</html>

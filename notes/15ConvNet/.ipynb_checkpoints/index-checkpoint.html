@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Convolutional Neural Networks</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Convolutional Neural Networks</h1>
+</header>
+<p>We have learned about how to structure the <em>back</em> of our
+neural networks to be capable of regression or classification. In
+addition, we’ve become comfortable with what we call <em>dense
+layers</em>, where a layer of linear nodes with nonlinear activation
+functions all connect to every node on the next layer.</p>
+<p>It turns out there are other kinds of layers which are more suitable
+for specific kinds of data. This is particularly the case when dealing
+with <em>images</em> and <em>language</em>. In this class, we’re going
+to look at images, and save language for those of you who will take
+Natural Language Processing.</p>
+<p>You may recall that we earlier did an in-class demonstration of the
+classification of MNIST digits. In doing this, we took this nice 28x28
+image, and flattened it into a single row of length 784. This was kind
+of crazy! What matters for image recognition is the relationship of
+different pixels to each other, and when we just flatten them, we
+destroy that relationship (ie, the network has to learn which pixels are
+adjacent to other pixels, and that that is relevant to its task).</p>
+<p>A Convolutional layer is meant to extract meaningful information from
+2D blocks of images, rather than looking at the picture as a single row
+of pixel values.</p>
+<p>To understand a convolutional layer, you have to understand a
+convolution.</p>
+<p>Suppose we have this 5x5 black-and-white picture, with these pixel
+values, and this <em>filter</em> (sometimes aka a <em>kernel</em>) which
+is a 2x2 block of numbers.</p>
+<p><img src="conv1.png" /></p>
+<p>When we apply this filter to a spot in the image, we do a dot product
+between the corresponding values of the image and the filter.</p>
+<p><img src="conv2.png" /></p>
+<p>In this case, there are sixteen possible 2x2 portions of the image
+where we could put this filter. A <em>convolution</em> is when we
+calculate all sixteen of these values, therefore sliding the filter
+across all possible locations on the image, and calculating this dot
+product.</p>
+<p><img src="conv3.png" /></p>
+<p><img src="conv4.png" /></p>
+<p><img src="conv5.png" /></p>
+<p>Recall that if a dot product between two vectors is high, this means
+the cosine of the angle between the two vectors is high, meaning the
+angle is small. So, a large dot product implies the filter and portion
+of the image are similar. Convolving a filter across an image is a way
+of comparing the filter to every part of the image.</p>
+<p>A convolutional layer convolves one or more filters across the image,
+outputting a grid of dot product values for every filter. This allows
+the network to see that the image looks like this filter where the
+values are high, and not where the dot products are small.</p>
+<p>Often, a convolutional layer is paired with a nonlinear activation
+function (like a ReLU), and then fed into a Pooling layer. The idea
+behind a pooling layer is that images don’t change too much from pixel
+to pixel, and so we can downsample by taking (for example) 2x2 blocks
+and only keeping the largest value (this is called a MaxPool). This
+shrinks your output grid by half, keeping all this a little more
+manageable. Here’s the result of applying a MaxPool to the output of the
+filter above (for the sake of the example, we’re skipping the activation
+function).</p>
+<p><img src="conv6.png" /></p>
+<p>So what in here is <em>learnable</em>? It’s the values of the
+filters. We learn what filters give us the best information about the
+image to allow for effective regressions/classification/whatever.</p>
+<p>A couple terms to know about CNNs:</p>
+<ul>
+<li>The <em>kernel size</em> is the size of the filter or kernel. 2x2?
+3x3? 5x5?</li>
+<li>A <em>feature map</em> is a matrix (or tensor) that captures
+specific characteristics of the input data, such as patterns, edges,
+textures, or other relevant features. It is the output of applying a
+convolutional filter (or kernel) to the input data, like an image (or
+output of a previous layer). Each filter is trained such that it
+captures a specific feature (e.g., edges, colors, shapes) in the input
+data. Applying multiple filters results in and equivalent number of
+feature maps, each representing different aspects of the input.</li>
+<li>The <em>stride</em> is how many pixels to advance before applying
+the filter again. In the above example, the stride was 1, because we
+applied it at every possible place - if we had just applied it to every
+other location, the stride would be 2.</li>
+<li>In order to not cheat the edges and corners, often some
+<em>padding</em> is applied, which is extra rows and columns around the
+edges to allow the filter to be centered even at locations around the
+edges. There are various padding techniques, including just throwing 0s
+in there, or setting them to the value of the nearest actual pixel.</li>
+<li>The <em>max pooling</em> layer is a downsampling function which
+reduces the spatial dimensions of feature maps, thereby reducing the
+number of necessary learned parameters of a layer. This reduction in
+complexity helps both with computational cost and helps the model
+generalize better by making the feature maps less sensitive to small
+translations in the input.</li>
+<li>CNN’s still typically at least end with a fully connected or dense
+layer in which the final most complex feature maps learned are combined
+either for regression, classification, or another purpose.</li>
+<li><em>Dropout</em> is a regularization technique used to prevent
+overfitting by randomly dropping (i.e., setting to zero) a fraction of
+the neurons in designated layers during the trainaing process(a
+predetermined fraction).</li>
+<li>The final layer often has an activation function like Softmax (for
+multi-class classification) or Sigmoid (for binary classification). ###
+Code Demo</li>
+</ul>
+<p><a href="MnistConv.html">Here is a notebook where we demonstrate the
+creation of a CNN</a>.</p>
+<h3 id="deep-convnet">Deep ConvNet</h3>
+<p>As an example of a larger network, here’s the summary of AlexNet, one
+of the most influential and famous models in ML, and one of the first to
+be trained on GPUs, allowing for many more parameters. The ImageNet
+competition is an annual competition to build the classifier that could
+best classify several million images into 1000 categories. In 2012,
+AlexNet defeated the next-best entry by over 10% accuracy; everybody
+noticed, and the deep network boom began. AlexNet has over 62 million
+learnable parameters.</p>
+<pre><code>AlexNet(
+  (features): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(11, 11), stride=(4, 4), padding=(2, 2))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (3): Conv2d(64, 192, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (4): ReLU(inplace=True)
+    (5): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (6): Conv2d(192, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(384, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU(inplace=True)
+    (10): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): ReLU(inplace=True)
+    (12): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(6, 6))
+  (classifier): Sequential(
+    (0): Dropout(p=0.5, inplace=False)
+    (1): Linear(in_features=9216, out_features=4096, bias=True)
+    (2): ReLU(inplace=True)
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=4096, out_features=4096, bias=True)
+    (5): ReLU(inplace=True)
+    (6): Linear(in_features=4096, out_features=1000, bias=True)
+  )
+)</code></pre>
+</body>
+</html>

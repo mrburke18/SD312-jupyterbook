@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Feature Manipulation</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Feature Manipulation</h1>
+</header>
+<p>Last semester, you primarily worked with linear models, where the
+question of “what can we do with linear combinations of our features” is
+the core idea. Of course, if the vector space defined by your features
+isn’t useful, the answer is, “not very much.” This can seem extremely
+limiting. For example, consider the following classification
+problem:</p>
+<p><img src="percepFeat1.png" /></p>
+<p>In this example, our features are the x-coordinate, and the
+y-coordinate. If we want to do our classification with logistic
+regression, for example, using the notation from your book last
+semester, we would need to find the values <span
+class="math inline"><em>β</em><sub><em>i</em></sub></span> such that the
+logit <span
+class="math inline"><em>β</em><sub>0</sub> + <em>β</em><sub>1</sub><em>x</em> + <em>β</em><sub>2</sub><em>y</em></span>
+allows us to calculate the probability that a point is red. Because the
+logit is a linear function on the features given, the point where the
+probability is .5, or the “decision boundary,” will be a line; our
+linear classifier says everything on one side of that line is probably a
+red dot, and everything on the other side of that line is a blue dot.
+(If this doesn’t sound familiar, you can read about it again in chapter
+4.3 of <a
+href="https://www.usna.edu/Users/cs/SD312/resources/ISL.pdf">the ISL
+book</a>).</p>
+<p><strong>As a minor parenthetical notation note</strong> -
+statisticians tend to like the notation from your ISL book. I, and many
+ML people, tend to prefer a more linear algebraic notation. Here, I can
+organize the linear combination like so:</p>
+<p><span class="math display">$$
+\begin{bmatrix} x &amp; y &amp; 1 \end{bmatrix} \begin{bmatrix} \beta_1
+\\ \beta_2 \\ \beta_0 \end{bmatrix},
+$$</span></p>
+<p>then allowing us to organize all datapoints into a single matrix,
+giving us a single multiplication that gives us the logits of all
+datapoints:</p>
+<p><span class="math display">$$
+\begin{bmatrix} x_1 &amp; y_1 &amp; 1 \\ x_2 &amp; y_2 &amp; 1 \\ \vdots
+&amp; \vdots &amp; \vdots \end{bmatrix} \begin{bmatrix} \beta_1 \\
+\beta_2 \\ \beta_0 \end{bmatrix}.
+$$</span> Also, I tend to use <span
+class="math inline"><em>w</em></span>, not <span
+class="math inline"><em>β</em></span>, to refer to that vector of
+weights. <strong>End of parenthetical aside</strong></p>
+<p>There is no line that remotely classifies these points. Logistic
+Regression will give you one, but it won’t be useful or accurate.</p>
+<p>However, a very, very, very important idea is that in linear models,
+you are limited to linear combinations of features, but you can use
+literally any features you want! This basic idea makes linear models
+very powerful. For example, for this data, suppose rather than using the
+features <span class="math inline">[<em>x</em>,<em>y</em>]</span>, we
+instead used the features <span
+class="math inline">[<em>x</em><sup>2</sup>,<em>y</em><sup>2</sup>]</span>?
+That is, suppose we had a dot at <span
+class="math inline">[−1,.5]</span>. Well, rather than having its row in
+the matrix represented with those two numbers, I’ll instead use <span
+class="math inline">[−1<sup>2</sup>,.5<sup>2</sup>]</span>, or <span
+class="math inline">[1,0.25]</span>. If I do this for all points in this
+set, and plot it on this new <span
+class="math inline"><em>x</em><sup>2</sup>, <em>y</em><sup>2</sup></span>
+axes, this is what I get:</p>
+<p><img src="percepFeat2.png" /></p>
+<p>That data is entirely separable, and we can build a dependable
+classifier, as shown here.</p>
+<p><img src="percepFeat3.png" /></p>
+<p>The line in this image is the <em>decision boundary</em>, such that
+things on one side are in the black set, and things on the other are in
+the yellow set. Of course, it’s linear. If we were to move every point
+on that line back to the original data set, though, it wouldn’t be. By
+that, I mean that every point on that line in <span
+class="math inline">(<em>x</em><sup>2</sup>,<em>y</em><sup>2</sup>)</span>
+space, maps to (actually 4) points in the original space: <span
+class="math inline">$(\sqrt{x^2},\sqrt{y^2}),(-\sqrt{x^2},\sqrt{y^2}),(\sqrt{x^2},-\sqrt{y^2}),(-\sqrt{x^2},-\sqrt{y^2})$</span>.
+That looks like this:</p>
+<p><img src="percepFeat4.png" /></p>
+<p>Again, everything on one side of this decision boundary is black, and
+everything on the other is yellow. And it’s still a linear classifier -
+but not in the original space! We’ve used a linear classifier to make a
+non-linear decision boundary. And that’s OK! And normal! And super,
+super powerful!</p>
+<p>So, we can see that the features chosen heavily impact the behavior
+of our linear models; they are, in fact, nearly the whole game. So what
+kinds of funcations might people use to transform their features?</p>
+<h3 id="domain-expertise">Domain Expertise</h3>
+<p>It may be that you know something about your dataset, and you can
+make up some features that can improve things. For example, maybe you’re
+trying to predict, from a dataset of information about people, how many
+hours per week they work. One of your features may be age. With a linear
+predictor, and age as a feature, you can learn things like, “as age
+increases, hours working also increase.” But, that’s probably not true.
+People’s hours working jump considerably when they leave school, and
+drop considerably when they retire. So, it may be that instead of using
+age as a feature, you instead want to use a binary feature of “are they
+between the ages of 18 and 65?”</p>
+<p>This is known as feature design, and is a main reason why a machine
+learning expert can’t do all this alone when confronted with a new
+problem (this is a reason why many AI startups fail). You need somebody
+in the room who understands this data and can tell you what kinds of
+things are likely important, so you can turn them into features your
+model can effectively learn on.</p>
+<p>Domain expertise is best. But, when you don’t have domain expertise,
+you’re not totally hosed. You can instead focus on changing the vector
+space of your model. If even after a regularization parameter search,
+your model sucks, you can focus on widening the span (vector space) of
+your features, to make it more likely your target vector is close to
+that span.</p>
+<h3 id="dimensionality-reduction">Dimensionality Reduction</h3>
+<p>Let’s first dispense with the problem of the span of <span
+class="math inline"><em>X</em></span> being <em>too</em> expressive. In
+this case, we can either add regularization, or we can decrease the
+expressiveness by using just a few features that capture most of the
+important information about the data - presumably what’s lost is just
+noise that we don’t want to fit anyway.</p>
+<p>This is exactly what PCA does for us. We calculate <span
+class="math inline"><em>Φ</em>(<em>x</em><sub><em>i</em></sub>)</span>
+by projecting <span
+class="math inline"><em>x</em><sub><em>i</em></sub></span> onto the
+first <span class="math inline"><em>k</em></span> principal components.
+We know these capture most of the important information, and discard the
+random noise.</p>
+<p>Also interesting and truly bananas: <a
+href="https://en.wikipedia.org/wiki/Random_projection">Random
+projections</a>. <a
+href="https://stats.stackexchange.com/questions/235632/pca-vs-random-projection">Random
+Projections vs PCA</a>.</p>
+<h3 id="polynomial-features">Polynomial Features</h3>
+<p>It may be that your target function isn’t linear on your
+observations. For example, if your target function looks like <span
+class="math inline"><em>y</em> = <em>x</em><sup>2</sup></span>, you’re
+not going to be able to match that very well with a linear function on
+<span class="math inline"><em>x</em></span>. As a result, it’s common to
+try features that consist of monomials constructed from your
+observations. For example, if you’ve observed <span
+class="math inline">[<em>x</em> <em>y</em>]</span>, then maybe you want
+to try <span
+class="math inline">[<em>x</em><sup>2</sup> <em>y</em><sup>2</sup> <em>x</em><em>y</em> <em>x</em> <em>y</em> 1]</span>.
+This can add a lot of useful expressiveness. As stated in your reading,
+you don’t want to take this to too high of a degree, or your function
+can get unplausibly weirdly shaped.</p>
+<h3 id="radial-basis-functions-rbfs">Radial Basis Functions (RBFs)</h3>
+<p>It may be that similarity to certain locations in the input space is
+a useful feature (over here, it’s high; over there, it’s low, etc.). The
+idea here is to choose <span class="math inline"><em>k</em></span>
+significant locations in the original observation space, and then <span
+class="math inline"><em>ϕ</em><sub><em>i</em></sub>(<em>x</em>)</span>
+is the distance between <span class="math inline"><em>x</em></span> and
+the <span class="math inline"><em>i</em></span>th significant location.
+“Distance,” as usual, can mean a lot of things - most common is
+Euclidean distance, or the Gaussian distance (<span
+class="math inline"><em>e</em><sup>−(<em>ϵ</em>||<em>x</em>−<em>x</em><sub><em>c</em></sub>||)<sup>2</sup></sup></span>,
+where <span class="math inline"><em>x</em><sub><em>c</em></sub></span>
+is the significant location, and <span
+class="math inline"><em>ϵ</em></span> is a chosen width parameter that
+determines how far away a point can be before its Gaussian similarity is
+essentially zero.</p>
+<p>These significant locations can be chosen either intentionally based
+on domain knowledge, or evenly spaced through the domain, or at sampled
+points.</p>
+<h1 id="code-from-todays-lecture"><a href="showFeatures.html">Code from
+today’s lecture</a></h1>
+</body>
+</html>

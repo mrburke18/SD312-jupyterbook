@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Deep Q-Learning</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Deep Q-Learning</h1>
+</header>
+<p>Tabular Q-Learning is a great algorithm for understanding Bellman
+error and how Q-values can adjust themselves until accurate given
+sufficient experience. However, it’s not realistic for real problems. It
+has a few issues:</p>
+<ul>
+<li>The state space and action space both have to be discrete and small
+in order to actually list and store an approximation for every
+state-action pair. This itself is disqualifying for most problems.</li>
+<li>It’s extremely inefficient. Every state-action pair has to have
+sufficient experience in order to become accurate. Given an experience
+at one state, we have no ability to update our expectations in
+<em>similar</em> states - they have to have independent experiences.
+There’s no generalization in what we learn.</li>
+<li>Each <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>
+sample is only used once to update. This seems sensible until you
+realize that <span
+class="math inline"><em>Q̂</em>(<em>s</em>′,<em>a</em>′)</span> might
+change, therefore introducing new meaning into the <span
+class="math inline">(<em>s</em>,<em>a</em>,<em>r</em>,<em>s</em>′)</span>
+sample that transitions into that state - why not learn from it
+again?</li>
+</ul>
+<p>In many ways, this is similar to performing regression under a
+scenario where we keep an explicit table of the predicted values for
+every possible input. We have never done this. It would be stupid. In
+some ways, that’s notetaking, not machine learning.</p>
+<p>Instead in regression, what we did was write a generalizing function
+that could take in any of our possible datapoints, perform some math on
+its elements, and then output a prediction. This might be linear, for
+example: we take in a datapoint, calculate some interesting features,
+and then calculate weights which, when applied to the features, result
+in an accurate prediction. When we adjust the weights to make a
+datapoint more accurate, we’re adjusting the predictions of <em>all</em>
+datapoints, allowing us to learn generalizable things. Alternatively, we
+might learn a neural network instead, which learns features for us -
+again, however, we can put in datapoints we’ve never experienced, and
+hope to get out an accurate prediction.</p>
+<p>In RL, we can do similar things, where we write a function that takes
+in a state and an action, and spits out a predicted value. Again, this
+could be linear, where the state-action pair are converted into some
+interesting features, then a linear combination is computed which
+results in accurate value predictions. <a
+href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=21d38a3f57821e4343301d8cee1d81d660145806">Our
+own Professor Taylor focused some of his dissertation on this kind of
+work, thinking about what such features should be</a>. Updating the
+common weights to make the Bellman error more accurate on our samples
+may result in accurate value predictions even for state-action pairs
+that have never been experienced.</p>
+<p>Alternatively, we could create a neural network, where a state is fed
+in, and the network has a output layer with a node for each action,
+producing the expected value of taking each action from that state.
+Again, if adequately trained, any state could be fed in, and reasonable
+Q values produced.</p>
+<p>These approaches solve both of the problems described for Tabular
+Q-Learning. Our state space can now be continuous, or as large as we
+want, and we’re learning generalizable facts about states, since every
+state is processed with the same function. Noteably, the action space
+must still be small and discrete, as we have a finite number of nodes in
+the output layer.</p>
+<p>We’re going to learn about the neural net approach, called Deep
+Q-Learning, which is very well described <a
+href="https://arxiv.org/pdf/1312.5602.pdf">in this significant and
+well-written paper from 2013</a>. We are going to use this paper as a
+text - it is expected that you will understand elements of this.</p>
+<p>Important elements of this paper that are applicable to all deep
+q-learning implementations:</p>
+<ul>
+<li>The network takes in a datapoint, and has an output node for each
+possible action.</li>
+<li>The network is trained to minimize Bellman error, using the network
+as the source of <span
+class="math inline"><em>Q̂</em>(<em>s</em>,<em>a</em>)</span> for both
+sides of the Bellman equation.</li>
+<li>Rather than training only on the most recent transitions, which are
+heavily correlated and may cause overtraining on that weird thing that
+happened recently, transitions are stored in an <em>experience
+replay</em>, which is a queue of the <span
+class="math inline"><em>N</em></span> most recent transitions, where
+<span class="math inline"><em>N</em></span> is fairly large. Samples for
+training are then randomly chosen from those <span
+class="math inline"><em>N</em></span> transitions. This keeps training
+batches varied and uncorrelated, but still recent enough to be relevant
+(choosing <span class="math inline"><em>N</em></span> is a
+hyperparameter that trades off between these concerns).</li>
+</ul>
+<p>There are several more interesting elements that had to be engineered
+to make this work on Atari games in particular.</p>
+<ul>
+<li>The source of all inputs was the actual image on the screen.</li>
+<li>An image on the screen doesn’t reflect motion (we can see the
+ball/character/sprite, but we can’t tell which way it’s going), so a
+“state” is actually a set of four consecutive images resulting from
+taking an action four timesteps in a row.</li>
+<li>The image was processed in various ways that made it easier to learn
+on.</li>
+</ul>
+</body>
+</html>

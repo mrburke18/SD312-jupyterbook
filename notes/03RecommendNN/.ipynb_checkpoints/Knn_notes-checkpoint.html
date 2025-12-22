@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Knn_notes-checkpoint</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="navbar">
+  <b><a href="https://www.usna.edu/Users/cs/sd312">SD312: ML</a></b>
+  <a href="https://www.usna.edu/Users/cs/taylor/">Dr. Taylor</a>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="course_policy.pdf">Policy</a>
+  <a
+    href="resources/resources.html">Resources</a>
+  <a
+    href="datasets/datasets.html">Datasets</a>
+</div>
+<div class="main">
+<h1 id="recommender-systems">Recommender Systems</h1>
+<p>You’re familiar with recommender systems already. In no small part,
+this is because recommender systems are what drive the free internet -
+based on your interests and activities, advertising companies would like
+to produce ads for products that are interesting to you, specifically.
+The more interested you likely are, the higher chance you click on the
+ad, and the advertising company can get paid.</p>
+<p>These systems exist much more transparently in contexts like Amazon
+and Netflix, where your product ratings and purchase history allow them
+to suggest other products you might want (for example, at the moment, my
+Amazon recommendations are full of Pokemon things, because my 9 and
+10-year-olds just are having a resurgence of interest as they made new
+friends at school who are into Pokemon, and that’s what they’ve used my
+profile to shop for recently).</p>
+<p>Recommender systems are a fairly rough field of Machine Learning -
+techniques tend to be tightly bound to the particular kinds of data
+available in a particular problem (for example, website visits collected
+by Google Chrome might be used very differently from purchase history on
+Amazon, might be used very differently from 1-5 star movie rankings on
+Netflix). Except for on very large scales, measuring success can also be
+pretty difficult, and tends to look like, “eh, sure, these make sense as
+recommendations.”</p>
+<p>Roughly, recommender approaches fit into two main types. The first is
+<em>content-based filtering</em>. In these, each item which might be
+recommended is given a description (“is a book”, “is targeted at
+children”, “is about Pokemon”). Each user then is given a fingerprint,
+or a list of which features he/she has demonstrated an interest in. The
+system can then find other items with the same set of features. The main
+challenge is in building the correct sort of features, so that items
+with the same features are actually liked by the same people (for
+example, there’s a lot of pokemon-based stuff that I really don’t want
+to see).</p>
+<p>A great example of content-based filtering is online radio, where you
+give it a seed song or artist, and it provides other songs that feature
+the same properties as the seed song you fed it.</p>
+<p>The other approach is <em>collaborative filtering</em>. In
+collaborative filtering, we work off of purchase counts, or ratings, or
+some other information from the user, rather than from features of the
+object itself. The main point of leverage is that people can be similar,
+and products can be similar, and if similar people like similar
+products, well, you might like those products, too.</p>
+<p>The main benefit of collaborative filtering is that you don’t need a
+description of the item itself, which can be difficult to keep up with
+if you have a large set of often-changing elements. The main benefit of
+content-based filtering is that you often need much less data to produce
+a useful recommendation, because you can start with meaningful,
+human-designed features.</p>
+<p>Of course, we could also imagine deploying systems that use both
+content-based and collaborative approaches, which is what many are.</p>
+<p>We’re going to focus on two pretty straightforward collaborative
+filtering techniques, because they build nicely off our knowledge of
+clustering and lower-dimensional subspaces. Content-based approaches
+will fit in better once we learn about some other predictive
+techniques.</p>
+<h2 id="k-nearest-neighbor">K-Nearest Neighbor</h2>
+<p>Suppose we have a bunch of ratings for movies, organized in a matrix
+which is “number of users” x “number of movies”. Given that somebody
+just watched some given movie, and presumably enjoyed it, what can we
+recommend for them to watch next that would be similar? This might be
+difficult to answer, given that we only have ratings, and don’t know
+anything about the movie itself. However, we can suggest that two
+similar movies will be liked the same way by the same people, and so the
+vectors formed by the columns of the ratings matrix should be
+similar.</p>
+<p>One problem is that ratings matrices tend to be highly sparse,
+because most people have not interacted with (much less taken the time
+to rate) most products. Our next approach will explicitly attempt to
+fill these blank spaces in with expected ratings; for now, though, we’ll
+have to decide what to do with those blank spaces. Here’s the choices:
+one choice is to only keep the dimensions that are non-zero in both.
+Another is to keep the dimensions that are non-zero in at least one of
+the vectors, and leave the information that this movie wasn’t watched by
+one of the users by leaving it as a 0, and treating it like any other
+rating. This is a little bit uncomfortable, perhaps, because a 0 seems
+like it’s “even worse” than a 1-star rating, and that may be a bad way
+to think of it. However, at least it allows us to consider whether a
+movie was watched or not as itself useful information. Really, this
+boils down to your data, and what you discover works better.</p>
+<p>So, if we take the column vector of the movie the viewer just
+watched, and compare its distance from all other column vectors, we can
+recommend the movies that are closest.</p>
+<p>Your choice of “distance” is an important consideration. Here, I list
+three common ways to measure distance, and the differences between
+them.</p>
+<ul>
+<li><strong>Euclidean distance</strong>: You know this one. Each of our
+vectors is a point in <span
+class="math inline"><em>n</em></span>-dimensional space, and we can find
+the length of the line between two of those points. The trouble is that
+<span class="math inline"><em>n</em></span> is usually quite large (lots
+of users!), and even with small differences, Euclidean distance gets
+really big really fast for large numbers of dimensions. Maybe doing PCA
+and projecting into fewer dimensions first makes sense.</li>
+<li><strong>Cosine distance</strong>: One minus the cosine of the angle
+between two vectors (so two vectors pointing in the same direction have
+a cosine distance of 0). This is interesting because it is invariant to
+the magnitude of the vectors. This can be good if you think that
+<em>what</em> people choose to watch is more important than <em>how much
+they liked it</em>. Naturally, the rating still matters, but just having
+non-zeros in the same places goes a long way towards making vectors
+similar in this way. When using cosine distance, it is common to
+<em>normalize</em> data by subtracting from each ranking the average
+ranking of that movie, so vectors can point in opposite direction of
+each other, if two users disagree.</li>
+<li><strong>Jaccard distance</strong>: If the ONLY thing that matters to
+you is “watched or not”, you can use the Jaccard distance to measure the
+distance between the sets of people who watched a movie. To calculate
+the Jaccard distance between two sets A and B, you calculate <span
+class="math inline">$1-\frac{|A\cap B|}{|A\cup B|}$</span>. If you like
+the idea of Jaccard distance, but you have non-binary data, you might
+round it, by saying, for example, 1s and 2s are rounded down to 0, and
+3,4,5s are rounded up to 1.</li>
+</ul>
+<h2 id="other-tweaks">Other tweaks</h2>
+<p>If you have really sparse data, you might choose to <strong>cluster
+first</strong>. By clustering movies, you might be able to discover
+different types of movies. Suppose you discover <span
+class="math inline"><em>k</em></span> clusters. You can take your <span
+class="math inline"><em>n</em> × <em>m</em></span> matrix and replace it
+with an <span class="math inline"><em>n</em> × <em>k</em></span> matrix,
+where each entry is that user’s average rating of movies in that
+cluster. This is likely much less sparse. You can then recommend whole
+genres (like, for example, an online radio playlists), rather than a
+single song or movie.</p>
+<p>Also, you might first choose to <strong>perform PCA</strong>. (We
+will cover this next.) If your data actually lies in a lower dimension,
+you might as well do your measures of distance in that lower dimension,
+making it cheaper to compute.</p>
+<p>So which is best? It’s not really like that. You can find lots of
+arguing online about that. Try them all! Which one seems to work better
+for your dataset? Why?</p>
+<p><img
+src="https://www.smbc-comics.com/comics/1549556091-20190207.png" /></p>
+</body>
+</html>

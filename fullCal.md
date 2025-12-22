@@ -1,8 +1,8 @@
 ## Full Schedule
 | Date | Notes | Assignment |
 |:---|:---|:---|
-| Tue, Jan 06 | <a href="../notes/01Unsupervised/">Statistical vs Machine Learning</a> | <a href="../resources/localsetup.html">Set up your environment</a> (due Sun 01/11) |
-| Wed, Jan 07 | <a href="../notes/01Unsupervised/">Unsupervised Analysis</a> |  |
+| Tue, Jan 06 | <a href="../notes/01Unsupervised/index">Statistical vs Machine Learning</a> | <a href="../resources/localsetup.html">Set up your environment</a> (due Sun 01/11) |
+| Wed, Jan 07 | <a href="../notes/01Unsupervised/index">Unsupervised Analysis</a> |  |
 | Thu, Jan 08 | Lab | <a href="../lab/01Unsupervised/index.html">Data Exploration with Unsupervised Learning</a> |
 | Mon, Jan 12 | <a href="../notes/03RecommendNN/">Recommendation Systems with Nearest Neighbors</a> |  |
 | Wed, Jan 14 | Lab | <a href="../lab/02RecommendKNN/index.html">Nearest-Neighbor Movie Recommendations</a> |

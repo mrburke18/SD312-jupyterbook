@@ -21,7 +21,7 @@ project:
         - file: policy/index.md
     - title: Lecture Notes
       children:
-        - file: notes/01dataMatrix.md
+        - file: notes/01Unsupervised/index
         - file: notes/02foodCluster.ipynb
         - file: notes/03basis.md
         - file: notes/04pca.md

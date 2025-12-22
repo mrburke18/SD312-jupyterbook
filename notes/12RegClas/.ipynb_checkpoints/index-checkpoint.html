@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>NNs for Regression and Classification</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">NNs for Regression and Classification</h1>
+</header>
+<p>This lecture is about the common <em>output layers</em> of neural
+networks built for regression and classification, and the loss functions
+used to optimize them.</p>
+<p><strong>Main Points</strong></p>
+<ul>
+<li>For <strong>regression</strong>, output layers are typically just a
+linear combination, with no activation function. They are performing
+linear regression on the features designed by the earlier layers.</li>
+<li>These networks are then typically trained using squared error.
+<ul>
+<li>Even if the function is called “MSE”, it is not uncommon for the
+implementation to by default skip dividing by the size of the set. This
+makes calculating somewhat faster (as it skips the division, which is
+unnecessary for minimization), but makes comparing training/testing
+error more difficult as the datasets may be different sizes.</li>
+</ul></li>
+<li>You can have multiple output nodes if regressing on multiple
+functions with the same data simultaneously. They will share features,
+but combine them differently to fit their separate functions.</li>
+<li>For <strong>classification</strong>, normally there is an output
+node for each possible class. These output nodes have no activation
+functions and so output a <em>logit</em>, like for logistic
+regression.</li>
+<li>These outputs are then put through a <em>softmax</em> function. If
+<span class="math inline"><em>z</em><sub><em>i</em></sub></span> is the
+output logit of the <span class="math inline"><em>i</em></span>th class,
+then the softmax function is <span
+class="math inline">$\frac{e^{z_i}}{\sum_j e^{z_j}}$</span>.</li>
+<li>This number is between 0 and 1, and the sum of all the results of
+all classes sums to 1, so the outputs, after applying softmax, can be
+interpreted as a vector of probabilities.
+<ul>
+<li>For example, suppose we are classifying an image as one of dog, cat,
+or bird. Our output layer would have three nodes outputting logits.
+Suppose the “dog” neuron outputs a logit of 1.2, the “cat” outputs a
+logit of 1.7, and the “bird” outputs a logit of -.5.</li>
+<li>We then call exp() on each of these, and get 3.32, 5.47, and .61. We
+then calculate <span
+class="math inline">$\frac{3.32}{3.32+5.47+.61}=.35$</span> for dog,
+<span class="math inline">$\frac{5.47}{3.32+5.47+.61}=.58$</span> for
+cat, and <span
+class="math inline">$\frac{.61}{3.32+5.47+.61}=.06$</span> for bird. So,
+according to our neural net, there’s a 35% chance it’s a dog, a 58%
+chance it’s a cat, and a 6% chance it’s a bird, resulting in a final
+output of the vector [.35,.58,.06].</li>
+<li>To train this, we then compare this to the label. Suppose the human
+labeling the dataset has decided this is a picture of a dog. The “right”
+answer therefore, would be [1,0,0]. We can compare this desired vector
+to our actual output using <em>“cross entropy loss.”</em></li>
+</ul></li>
+<li>If you remember your logistic regression, cross-entropy loss will
+look very similar (this is perhaps not a surprise - after all, both are
+performing classification by outputting probabilities).</li>
+<li>Define <span class="math inline"><em>p</em>(<em>x</em>)</span> to be
+the “true” probability for a data point and class (for example, <span
+class="math inline"><em>p</em>(<em>d</em><em>o</em><em>g</em>)</span> in
+the above example would be 1, and <span
+class="math inline"><em>p</em>(<em>c</em><em>a</em><em>t</em>)</span>
+and <span
+class="math inline"><em>p</em>(<em>b</em><em>i</em><em>r</em><em>d</em>)</span>
+would be 0). Define <span
+class="math inline"><em>q</em>(<em>x</em>)</span> to be the output
+probability (in our example, this would be pulled from the vector
+[.35,.58,.06]).</li>
+<li>The cross entropy loss for a single datapoint is calculated as:</li>
+</ul>
+<p><span class="math display">$$
+\begin{align*}
+-\sum_x p(x) \log_2 q(x).
+\end{align*}
+$$</span></p>
+<ul>
+<li>So, for our example, the cross entropy loss would be:</li>
+</ul>
+<p><span class="math display">$$
+\begin{align*}
+-\sum_x p(x) \log_2 q(x) =&amp;
+-((1)\log_2(.35)+(0)\log_2(.58)+(0)\log_2(.06))\\
+=&amp; 1.515
+\end{align*}
+$$</span></p>
+<ul>
+<li>Over a dataset, we sum up the cross entropy loss of each datapoint
+to arrive at an overall loss.</li>
+<li>Like with logistic regression, minimizing the cross entropy is
+equivalent to maximizing the likelihood. You can think of likelihood in
+the following way. Suppose the neural net were correct about all its
+probabilities, meaning that if you asked a huge number of human
+labelers, that picture really is labeled a dog 35% of the time, and a
+cat 58% of the time, and a bird 6% (perhaps there’s a cat in the
+foreground, a dog in the background, and a shadow that looks like a
+bird). The fact that the picture is labeled as a dog is somewhat
+unlikely, but not impossible (35% likely!). We could compile all these
+likelihoods for the whole dataset, and quantify how likely the dataset
+as a whole is, assuming the model is correct. Changing the model would
+then change this cumulative likelihood. In some sense, the “best” model
+is the one that maximizes this likelihood - and minimizes cross-entropy
+loss.</li>
+</ul>
+<p>Multi-Class Classification: <a href="Classification.html">You can see
+a notebook demonstrating a classification problem here</a>.</p>
+<p>Binary Classification: The ships demo of a Fully Connected Binary
+Classifier example with L2 regularization. <a
+href="ships_example.html">Binary Ships Classifier Here!</a>.</p>
+</body>
+</html>

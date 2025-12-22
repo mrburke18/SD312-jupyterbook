@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Hoeffding Inequality</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="navbar">
+  <b><a href="https://www.usna.edu/Users/cs/sd312">SD312: ML</a></b>
+  <a href="https://www.usna.edu/Users/cs/taylor/">Dr. Taylor</a>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="course_policy.pdf">Policy</a>
+  <a
+    href="resources/resources.html">Resources</a>
+  <a
+    href="datasets/datasets.html">Datasets</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Hoeffding Inequality</h1>
+</header>
+<p>A core assumption in machine learning is “if it works on the data
+I’ve seen, it will probably work on data I haven’t seen.” This is a BIG
+assumption! And, of course, machine learning gets things wrong all the
+time, so it’s obviously not ironclad. Is there a reason we can believe
+this might be true sometimes? Or at least enough to believe we’re not
+all wasting our time?</p>
+<p>To understand one approach to this assumption, we turn to
+probability. Suppose we have a large urn full of many, many red and blue
+balls. We would like to understand what proportion of the balls are red
+(call this unknown proportion <span
+class="math inline"><em>μ</em></span>), but the urn is far too large to
+count them all. (<em>Note: you can replace this scenario with one of
+many real-world scenarios. What proportion of midshipmen at the Academy
+have covid? How many Iowans favor a specific political candidate?</em>)
+All we can do is look at a sampling of the balls, and then make general
+conclusions from our sampling.</p>
+<p>Suppose, for instance, we drew ten balls from the urn, and observed
+that seven of them were red, and three of them were blue. So, the
+percentage red in the sampling (which we’ll call <span
+class="math inline"><em>ν</em></span>) is 70%. You would likely feel
+comfortable saying that evidence suggests ~70% of the balls are
+therefore red, or that <span class="math inline"><em>ν</em></span> is
+close to <span class="math inline"><em>μ</em></span>. But, isn’t it
+possible that you pulled the only seven red balls from the urn, and so
+<span class="math inline"><em>ν</em></span> is not representative at
+all? It absolutely is. It’s possible our conclusions are very wrong.
+But, it’s unlikely. We are going to hang our machine learning
+generalization assumption on that probability.</p>
+<hr />
+<h3 id="probability-exercise">Probability exercise</h3>
+<p>Let’s pause here to consider the unlikelihood of <span
+class="math inline"><em>μ</em></span> and <span
+class="math inline"><em>ν</em></span> being very different with an
+example. Suppose <span class="math inline"><em>μ</em></span> (the true
+percentage of red balls) was .7. What is the likelihood of pulling ten
+balls and getting a <span class="math inline"><em>ν</em></span> of .1 or
+less?</p>
+<p>We can do this with the binomial distribution, which I’m sure you’ve
+seen from your probability and statistics course. Define <span
+class="math inline"><em>N</em></span> to be the number of balls drawn
+and <span class="math inline"><em>x</em></span> to be the number of red
+balls drawn. The binomial distribution is:</p>
+<p><span class="math display">$$
+p(x)={n \choose x}\mu^x(1-\mu)^{n-x}
+$$</span></p>
+<p>In this case, the probability of drawing 1 or 0 red balls is</p>
+<p><span class="math display">$$
+\begin{aligned}
+p(\nu\leq.1)=&amp;p(0)+p(1)\\
+=&amp;{10 \choose 0}.7^0(1-.7)^{10-0}+{10 \choose 1}.7^1(1-.7)^{10-1}\\
+=&amp;5.9\times10^{-6}+1.3\times10^{-4}.
+\end{aligned}
+$$</span></p>
+<p>This is a nonzero (ie, technically possible) but very very small
+probability! We can feel comortable that if we draw 1 or 0 red balls out
+of ten, there are almost certainly not 70% red balls.</p>
+<hr />
+<p>We can quantify this relationship between <span
+class="math inline"><em>μ</em></span> and <span
+class="math inline"><em>ν</em></span> with the Hoeffding inequality. The
+Hoeffding inequality states that for a random sample of size <span
+class="math inline"><em>N</em></span>, we can give an upper bound on the
+probability of drawing a proportion <span
+class="math inline"><em>ν</em></span> which differs from the true
+proportion <span class="math inline"><em>μ</em></span> by more than some
+number <span class="math inline"><em>ϵ</em></span>: <span
+class="math inline"><em>P</em>[|<em>ν</em>−<em>μ</em>|&gt;<em>ϵ</em>] ≤ 2<em>e</em><sup>−2<em>ϵ</em><sup>2</sup><em>N</em></sup></span>.</p>
+<p>An important takeaway from this is that as your sample size <span
+class="math inline"><em>N</em></span> increases, the likelihood of <span
+class="math inline"><em>μ</em></span> and <span
+class="math inline"><em>ν</em></span> being meaningfully different
+shrinks. That makes sense! And, the smaller you want <span
+class="math inline"><em>ϵ</em></span> to be (ie, the more accurate you
+want your sample to be), the larger <span
+class="math inline"><em>N</em></span> needs to be in order to obtain
+that accuracy.</p>
+<p>This bound is used to justify all sorts of conclusions from sampling.
+As mentioned above, political polling is a good example. Of course,
+sometimes polls are wrong! It’s worth noting that the assumption
+underlying the Hoeffding inequality is that the <span
+class="math inline"><em>N</em></span> samples are truly random, which in
+practice can be hard to achieve. Perhaps, for instance, you’re polling
+by phone, and certain kinds of people are more likely to answer the
+phone (<a
+href="https://www.pbs.org/publiceditor/blogs/pbs-public-editor/the-problem-with-polls/">this,
+by the way, is true</a>). In that case, the Hoeffding inequality does
+not apply, and you can be wrong in all sorts of meaningful and deceptive
+ways.</p>
+<p>Fine! What does this have to do with machine learning? Well, suppose
+each ball in the urn represents a data point for your ML classification
+agent, where red balls are examples your model gets correct, and blue
+balls are examples your model gets incorrect. Now, perhaps you see the
+analogy! In our random samples (the training set), we’re getting some
+percentage <span class="math inline"><em>ν</em></span> correct. It
+seems, the Hoeffding inequality assures us that there will be a similar
+percentage of red balls in the rest of the urn (ie, <span
+class="math inline"><em>μ</em></span>, or the test set). We can expect
+similar performance!</p>
+<p>…only it’s not that easy. This would be true for an arbitrary, random
+ML model with random parameters. But, we don’t have an arbitrary, random
+ML model with random parameters, we have a model that has been chosen
+specifically because it does well on the training set - that is, it is
+chosen specifically because it makes training set balls red. Obviously,
+that skews the underlying assumptions that make the Hoeffding inequality
+valid.</p>
+<p>So the question is no longer what is the probability a random model
+behaves differently on the training and testing sets, but instead, what
+is the likelihood that we can find a version of an ML model that
+performs differently on the training set than on the testing set (for
+example, if we’ve decided to use a logistic regressor, we can consider
+each possible setting of the parameters to be a different “version” that
+we are selecting from a set of all possible logistic regressors)? This
+probability is much higher.</p>
+<p>We can add this to our inequality by considering a case where we have
+<span class="math inline"><em>M</em></span> possible versions of our
+model, and ask what is the probability that at least one of them
+violates our “<span class="math inline"><em>ν</em></span> and <span
+class="math inline"><em>μ</em></span> may not differ by more than <span
+class="math inline"><em>ϵ</em></span>” restriction. Well, it’s the
+probability that the first one does, plus the probability that the
+second one does, plus the probability that the third one does, and so
+on, until we get to:</p>
+<p><span class="math display"><em>p</em>(|training error−testing
+error|&gt;<em>ϵ</em>) ≤ 2<em>M</em><em>ϵ</em><sup>−2<em>ϵ</em><sup>2</sup><em>N</em></sup>.</span></p>
+<p>This bound is a very loose bound, and using it to create actual
+numbers is silly, since <span class="math inline"><em>M</em></span> is
+nearly always large enough to get a right hand side larger than 1
+(which, there are easier ways to show that a probability is less than
+1). And, in fact, <span class="math inline"><em>M</em></span> is nearly
+always infinite, making it truly silly.</p>
+<p>However, it does provide useful and true intuition. As <span
+class="math inline"><em>N</em></span> increases, the probability of
+overfitting drops. As <span class="math inline"><em>M</em></span>, the
+complexity of the model, increases, the probability of overfitting
+increases. In other words, no, the assumption that training and testing
+sets will behave similarly is a bad one, unless <span
+class="math inline"><em>N</em></span> is large enough, or the model is
+not very complex. These are useful guidelines and intuitions! If our
+model is overfitting, we need either more data, or a more simple model
+(by either removing parameters or increasing regularization).</p>
+<p><em>Aside</em>: There are bounds on the amount of overfitting that
+are tighter and more usable than the Hoeffding inequality. The concept
+of <span class="math inline"><em>M</em></span> is replaced with a
+measure of the complexity of the model called the model’s VC dimension.
+We have chosen not to dive into these complexities because after
+considerably more work, the intuition comes out the same.</p>
+</body>
+</html>

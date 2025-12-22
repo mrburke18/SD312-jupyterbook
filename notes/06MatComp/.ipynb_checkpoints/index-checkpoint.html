@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Matrix Completion</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Matrix Completion</h1>
+</header>
+<p>The next thing we’re going to learn about is <em>matrix
+completion</em>, or an approach where we try to predict each individual
+user’s rankings of each individual movie. To do this, we’re going to
+switch from <em>unsupervised</em> learning to <em>supervised</em>
+learning, where you know what the right answers are for some of your
+data (in this case, the nonempty elements of the matrix). However, it’s
+a little different problem setup than the classification or regression
+you’ve seen before.</p>
+<p>Suppose rather than coming up with some hacky way of ignoring or
+justifying the empty spaces in our data matrix, we wanted to fill it in
+with how that person would likely rate the movie. Because our data
+matrix is likely low rank (due to movie-liking not being independent
+from movie to movie), we can do this with some concepts we already
+have.</p>
+<p>We know that every <span
+class="math inline"><em>n</em> × <em>m</em></span> matrix <span
+class="math inline"><em>A</em></span> has an SVD decomposition, such
+that <span
+class="math inline"><em>A</em> = <em>U</em><em>Σ</em><em>V</em><sup><em>T</em></sup></span>,
+where <span class="math inline"><em>U</em></span> is <span
+class="math inline"><em>n</em> × <em>n</em></span>, <span
+class="math inline"><em>Σ</em></span> is a diagonal <span
+class="math inline"><em>n</em> × <em>m</em></span>, and <span
+class="math inline"><em>V</em></span> is <span
+class="math inline"><em>m</em> × <em>m</em></span> (and there are also
+lots of other constraints, like orthonormality and whatnot). We also
+know that we can remove the smallest elements of <span
+class="math inline"><em>Σ</em></span> without losing much accuracy when
+we remultiply and reconstruct <span
+class="math inline"><em>A</em></span>.</p>
+<p>Think about what happens when we remove these small values, keeping,
+say <span class="math inline"><em>k</em></span> singular values. This
+means all columns after the <span
+class="math inline"><em>k</em></span>-th column and all rows after the
+<span class="math inline"><em>k</em></span>th row of <span
+class="math inline"><em>Σ</em></span> are now entirely zeros. So, let’s
+imagine multiplying this <span
+class="math inline"><em>U</em><em>Σ</em></span>. Because of all the
+zero-value rows of <span class="math inline"><em>Σ</em></span>, do you
+see how all columns after the <span
+class="math inline"><em>k</em></span>th column of <span
+class="math inline"><em>U</em></span> contribute nothing at all? They
+might as well not be there!</p>
+<p>Similarly, if we multiply <span
+class="math inline"><em>Σ</em><em>V</em><sup><em>T</em></sup></span>,
+because all the final columns of <span
+class="math inline"><em>Σ</em></span> are zeros, we don’t need any rows
+of <span class="math inline"><em>V</em><sup><em>T</em></sup></span>
+after the <span class="math inline"><em>k</em></span>th one! So, we
+could discard all those rows and columns that contribute nothing, and
+rewrite the whole reconstruction as: <span
+class="math inline"><em>A</em> ≈ <em>U</em><sub><em>k</em></sub><em>Σ</em><sub><em>k</em></sub><em>V</em><sub><em>k</em></sub><sup><em>T</em></sup></span>,
+where <span class="math inline"><em>U</em><sub><em>k</em></sub></span>
+is <span class="math inline"><em>n</em> × <em>k</em></span>, <span
+class="math inline"><em>Σ</em><sub><em>k</em></sub></span> is <span
+class="math inline"><em>k</em> × <em>k</em></span>, and <span
+class="math inline"><em>V</em><sup><em>T</em></sup></span> is <span
+class="math inline"><em>k</em> × <em>m</em></span>. If <span
+class="math inline"><em>k</em></span> is small, those matrices are a
+whole lot smaller, and our reconstruction is still very close to <span
+class="math inline"><em>A</em></span>.</p>
+<p>Now, we could make a matrix <span
+class="math inline"><em>P</em></span> such that <span
+class="math inline"><em>P</em> = <em>U</em><sub><em>k</em></sub><em>Σ</em><sub><em>k</em></sub></span>.
+<span class="math inline"><em>P</em></span> wouldn’t have any of the
+nice orthonormal properties of <span
+class="math inline"><em>U</em></span>, but we can see that if there is
+an acceptable <span class="math inline"><em>k</em></span>-rank SVD
+reconstruction of <span class="math inline"><em>A</em></span>, we can
+say <span
+class="math inline"><em>A</em> ≈ <em>P</em><em>V</em><sub><em>k</em></sub><sup><em>T</em></sup></span>.
+Alternatively, we could start all this by creating a <span
+class="math inline"><em>Q</em> = <em>Σ</em><sub><em>P</em></sub><em>V</em><sub><em>k</em></sub><sup><em>T</em></sup></span>,
+and saying <span
+class="math inline"><em>A</em> ≈ <em>U</em><sub><em>k</em></sub><em>Q</em></span>.</p>
+<p>OR, we could just say that by melding <span
+class="math inline"><em>Σ</em><sub><em>k</em></sub></span> into one or
+the other, two matrices <span class="math inline"><em>P</em></span> and
+<span class="math inline"><em>Q</em></span> exist such that <span
+class="math inline"><em>A</em> ≈ <em>P</em><em>Q</em></span>, where
+<span class="math inline"><em>P</em></span> is <span
+class="math inline"><em>n</em> × <em>k</em></span>, and <span
+class="math inline"><em>Q</em></span> is <span
+class="math inline"><em>k</em> × <em>m</em></span>. Now, the vectors of
+<span class="math inline"><em>P</em></span> and <span
+class="math inline"><em>Q</em></span> would no longer be of unit lengths
+like in the SVD, but the decomposition nonetheless exists. Again, all
+this depends upon our data being able to be represented with just a few
+principal components.</p>
+<h3 id="well-that-was-a-lot.-who-cares">Well, that was a lot. Who
+cares?</h3>
+<p>Well, now we just need to say that we need to find versions of <span
+class="math inline"><em>P</em></span> and <span
+class="math inline"><em>Q</em></span> such that when we multiply them
+together, the elements that we DO have in our matrix <span
+class="math inline"><em>A</em></span> are correct (or close to correct).
+These elements are our training set. If they get all the elements we
+<em>do</em> have right, we can maybe trust that they’re getting all the
+other ones right, too, and so we can use those approximate rankings to
+recommend some movies.</p>
+<p>We need to define an optimization problem. Let <span
+class="math inline"><em>p</em><sub><em>i</em></sub></span> represent the
+<span class="math inline"><em>i</em></span>th row of <span
+class="math inline"><em>P</em></span>, and <span
+class="math inline"><em>q</em><sub><em>j</em></sub></span> represent the
+<span class="math inline"><em>j</em></span>th column of <span
+class="math inline"><em>Q</em></span>. Naturally, for some ranking that
+we do have <span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub></span>, we
+can feel comfortable with <span class="math inline"><em>P</em></span>
+and <span class="math inline"><em>Q</em></span> if <span
+class="math inline"><em>p</em><sub><em>i</em></sub> ⋅ <em>q</em><sub><em>j</em></sub> = <em>A</em><sub><em>i</em><em>j</em></sub></span>.
+Let <span class="math inline"><em>T</em></span> be the set of all
+rankings for which we have a ranking in <span
+class="math inline"><em>A</em></span>. What we want is:</p>
+<p><span class="math display">$$
+\argmin_{P,Q} \sum_{A_{ij}\in T}\left(A_{ij}-p_i\cdot q_j\right)^2
+$$</span></p>
+<p>Once we have the solution to that, we can say that <span
+class="math inline"><em>Â</em> = <em>P</em><em>Q</em></span>, and read
+off everybody’s estimated rankings! So, OK, but how do we solve that?
+Stochastic Gradient Descent!</p>
+<h3 id="applying-sgd-to-low-rank-matrix-completion">Applying SGD to
+low-rank matrix completion</h3>
+<p>So, again:</p>
+<p><span class="math display">$$
+\argmin_{P,Q} \sum_{A_{ij}\in T}\left(A_{ij}-p_i\cdot q_j\right)^2
+$$</span></p>
+<p>Here, <span class="math inline"><em>T</em></span> is the data that we
+have. <span class="math inline"><em>P</em></span> and <span
+class="math inline"><em>Q</em></span> are the <span
+class="math inline"><em>w</em></span> in the general purpose algorithm.
+That whole function is <span class="math inline">ℒ</span>. So, we have
+<span class="math inline">ℒ(<em>T</em>,<em>P</em>,<em>Q</em>)</span>,
+and we’d like to find the <span class="math inline"><em>P</em></span>
+and <span class="math inline"><em>Q</em></span> that minimize <span
+class="math inline">ℒ</span> given our data <span
+class="math inline"><em>T</em></span>.</p>
+<p>We’re going to get our stochasticity by only considering one data
+point <span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub></span> at
+a time. So, for some <span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub></span>,
+let’s solve for the gradient with respect to <span
+class="math inline"><em>p</em><sub><em>i</em></sub></span> and with
+respect to <span
+class="math inline"><em>q</em><sub><em>j</em></sub></span>.</p>
+<p><span class="math display">$$
+\frac{\partial}{\partial p_i}\left(A_{ij}-p_i\cdot q_j\right)^2
+=-2q_j(A_{ij}-p_i\cdot q_j)
+$$</span></p>
+<p>and</p>
+<p><span class="math display">$$
+\frac{\partial}{\partial q_j}\left(A_{ij}-p_i\cdot q_j\right)^2
+=-2p_i(A_{ij}-p_i\cdot q_j)
+$$</span></p>
+<p>Right? Basic calculus. So, SGD for this problem just becomes:</p>
+<ol type="1">
+<li>Randomly initialize <span class="math inline"><em>P</em></span> and
+<span class="math inline"><em>Q</em></span>.</li>
+<li>Until convergence, for all known rankings <span
+class="math inline"><em>A</em><sub><em>i</em><em>j</em></sub></span>:</li>
+</ol>
+<p><span
+class="math display"><em>p</em><sub><em>i</em></sub> ← <em>p</em><sub><em>i</em></sub> + <em>α</em><em>q</em><sub><em>j</em></sub><sup><em>T</em></sup>(<em>A</em><sub><em>i</em><em>j</em></sub>−<em>p</em><sub><em>i</em></sub>⋅<em>q</em><sub><em>j</em></sub>)</span></p>
+<p><span
+class="math display"><em>q</em><sub><em>j</em></sub> ← <em>q</em><sub><em>j</em></sub> + <em>α</em><em>p</em><sub><em>i</em></sub><sup><em>T</em></sup>(<em>A</em><sub><em>i</em><em>j</em></sub>−<em>p</em><sub><em>i</em></sub>⋅<em>q</em><sub><em>j</em></sub>)</span></p>
+<p><strong><em>NOTE:</em></strong> You’ll notice here that the
+<em>2</em>’s in the partial derivatives disappear. This is not a
+mistake, we just allow that two to get absorbed up into the learning
+rate <span class="math inline"><em>α</em></span>.</p>
+<p>And that’s it! Once (if) that converges, you have a <span
+class="math inline"><em>P</em></span> and <span
+class="math inline"><em>Q</em></span> such that <span
+class="math inline"><em>Â</em> = <em>P</em><em>Q</em></span> correctly
+approximates all your known rankings, so presumably the rest of them are
+correct, as well! You have a speculative full set of rankings from which
+to make recommendations!</p>
+</body>
+</html>

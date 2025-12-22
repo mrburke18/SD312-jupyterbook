@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Optimization</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Optimization</h1>
+</header>
+<p>Nearly everything we do in this class is some form of an optimization
+problem. These optimization problems primarily consist of a <em>loss
+function</em> or <em>objective function</em> <span
+class="math inline">ℒ(𝒟,<em>w</em>)</span>. This loss function is a
+mathematical combination of our <em>data</em> <span
+class="math inline">𝒟</span> and our <em>parameters</em> <span
+class="math inline"><em>w</em></span>. For a given application, we
+design a loss function which communicates how well our solution is
+doing. For example, in K-Means clustering, our loss function was the
+total within-cluster variance, the data was the data points, and the
+<span class="math inline"><em>w</em></span> was our assignments of
+points to clusters.</p>
+<p>In ML, we design these loss functions, and then count on mathematical
+and computational tools to find the <span
+class="math inline"><em>w</em></span> which result in the best possible
+version we can put together for our problem. Again revisiting K-Means,
+the K-Means algorithm resulted in the better and better cluster
+assignments until the loss function couldn’t seem to decrease any more;
+these assignments were our solution.</p>
+<p>When we write optimization problems, we have to state a couple things
+aside from the loss function. First, we state whether we want our loss
+function to be big or small, by stating whether the goal is to minimize
+or maximize it. Second, we state the loss function. Third, we explicitly
+state which variables in the loss function we can control to perform
+this optimization. Finally, there may be some additional constraints on
+the solution.</p>
+<p>It can be useful to visualize a loss function as a surface in space.
+For example, perhaps your loss function has two parameters. As you
+change those parameters, the loss function increases, or decreases,
+meaning the surface rises or falls. If minimizing the loss function, the
+goal is to find the spot on the surface with the smallest value. The
+properties of the optimization problem determine if this minimum point
+is easy or hard to find.</p>
+<p><img src="lossSurface.png" width="500"/> <a
+href="https://arxiv.org/pdf/1712.09913.pdf"><em>Which would you rather
+optimize?</em></a></p>
+<p>Fully understanding how we can solve these optimization problems is
+deeper than we can reasonably go in an undergraduate ML class. But, some
+context is important in understanding what your solutions might look
+like, and how long we can expect solutions to take.</p>
+<p>From easiest to hardest, we can break these down into:</p>
+<ul>
+<li>Problems we can solve in <em>closed form</em>.</li>
+<li>Problems which are <em>convex</em>.</li>
+<li>Problems which are <em>nonconvex</em>.</li>
+<li>Problems which are <em>discrete</em>.</li>
+</ul>
+<h3 id="closed-form">Closed Form</h3>
+<p>You have actually seen this before, repeatedly, in Calculus class,
+where you were asked to minimize or maximize a function. What did you
+do? You symbolically calculated the gradient of the function, set it
+equal to zero, then algebraically solved for your variables. This gave
+you a <em>closed-form solution</em> of the form <span
+class="math inline"><em>w</em> = <em>s</em><em>o</em><em>m</em><em>e</em><em>t</em><em>h</em><em>i</em><em>n</em><em>g</em></span>,
+where you could calculate the minimum exactly, without having to do any
+iterative algorithm. This is generally very fast! We like it! It doesn’t
+happen very often, either because the gradient is not possible to write
+symbolically, or you cannot algebraically isolate the parameters. In all
+the remainder, we have to do some kind of iterative guess-check-improve
+algorithm instead.</p>
+<p>An example of a closed form problem you have encountered before is
+Linear Regression. In (unregularized) linear regression, with a <span
+class="math inline"><em>n</em> × <em>k</em></span> data matrix <span
+class="math inline"><em>X</em></span> with rows <span
+class="math inline"><em>x</em><sub><em>i</em></sub></span> and a <span
+class="math inline"><em>n</em> × 1</span> target vector <span
+class="math inline"><em>y</em></span>, we are trying to solve the
+following optimization problem:</p>
+<p><span class="math display">$$
+\begin{aligned}
+&amp; \min_w \sum_{i}(x_iw-y_i)^2\\
+=&amp; \min_w \|Xw-y\|^2\\
+=&amp; \min_w (w^TX^TXw-2w^TX^Ty+y^Ty)
+\end{aligned}
+$$</span></p>
+<p>To solve this, we need to set the gradient with respect to w equal to
+zero. For this, we’ll use some identities you may not remember:</p>
+<p><span class="math display">$$
+\nabla_w(w^TAw)=(A+A^T)w \\
+$$</span> <span class="math display">$$
+\nabla_w(w^Tb)=b \\
+$$</span> <span class="math display">$$
+(A^T * B)^T = B^T * A \\
+$$</span></p>
+<p>When we apply those, set it equal to zero, then solve for <span
+class="math inline"><em>w</em></span>…</p>
+<p><span class="math display">$$
+\begin{aligned}
+\nabla_w(w^TX^TXw-2w^TX^Ty+y^Ty)=&amp;2(X^TXw-X^Ty)\\
+0=&amp;2(X^TXw-X^Ty)\\
+X^TXw=&amp;X^Ty\\
+w=&amp;(X^TX)^{-1}X^Ty
+\end{aligned}
+$$</span></p>
+<p>So, to perform linear regression, we need only calculate <span
+class="math inline">(<em>X</em><sup><em>T</em></sup><em>X</em>)<sup>−1</sup><em>X</em><sup><em>T</em></sup><em>y</em></span>,
+and that’s our desired <span class="math inline"><em>w</em></span>. The
+slowest part of this is calculating that inverse of a <span
+class="math inline"><em>k</em> × <em>k</em></span> matrix, which is
+about <span
+class="math inline"><em>O</em>(<em>k</em><sup>3</sup>)</span>. For small
+<span class="math inline"><em>k</em></span>, that’s very, very fast!
+This is one reason why linear regression is always a good thing to
+try.</p>
+<p>Note that this doesn’t change if we do ridge regression, it’s just
+that after going through a similar derivation, we calculate <span
+class="math inline">(<em>X</em><sup><em>T</em></sup><em>X</em>−<em>λ</em><em>I</em>)<sup>−1</sup><em>X</em><sup><em>T</em></sup><em>y</em></span>
+instead.</p>
+<h3 id="convex-optimization-problems">Convex Optimization Problems</h3>
+<p>If you cannot solve directly for your solution, you hope your problem
+is <em>convex</em>. First, a definition of the word <a
+href="https://en.wikipedia.org/wiki/Convex_function"><em>convex</em></a>:
+a surface is convex if for every pair of points on the surface, you can
+draw a straight line between them without crossing the surface. An
+optimization problem is convex if: (1) The loss function is convex, and
+(2) the constraints (if there are any) define a convex surface.
+Convexity implies a very large number of other properties that we can
+count on when doing our optimization. For example, it is impossible for
+a convex problem to have more than one minimum; if you find a local
+minimum, you’ve found the global minimum.</p>
+<p>As another example, imagine a one-dimensional convex optimization
+problem, like finding the bottom of a parabola. If you were to choose
+two random points on the parabola, and discover the derivative is
+negative for one, and positive for the other, the minimum must lie
+between them (immediately, perhaps you could imagine some fast
+binary-search-type algorithm to find the minimum).</p>
+<p>These nice properties allow us to write optimization algorithms which
+are not as fast as closed-form, but are still very fast. Most run in
+polynomial time, and the rest are technically NP-hard, but run very
+quickly in practice. We like them! They generally look like a
+“guess-and-check,” where you propose a random solution, then see in what
+way it’s wrong, and iteratively improve it. That iterative improvement
+is much faster in convex problems than in the nonconvex problems
+discussed next.</p>
+<p>Examples of these convex problems include Logistic Regression and
+Linear Regression with the LASSO.</p>
+<h3 id="nonconvex-optimization-problems">Nonconvex Optimization
+Problems</h3>
+<p>These are hairier. If your problem is not convex, then you do not
+have any of those nice properties to use as a toehold in building a fast
+algorithm, and your problem is NP-Hard. Generally, we have few ideas
+aside from some variation of stochastic gradient descent, which is our
+workhorse that will always find you some minimum, eventually. When we
+find a minimum, we don’t even know for sure that it’s a global minimum,
+rather than some worse local minimum.</p>
+<p>The time this iteration takes depends heavily on how well behaved the
+optimization problem is. For example, in the pictured example above,
+both surfaces are nonconvex. However, optimization will run much quicker
+on the one on the right.</p>
+<p>Our neural nets lie here.</p>
+<h3 id="discrete-optimization-problems">Discrete Optimization
+Problems</h3>
+<p>If your parameters are discrete, we can’t even calculate a gradient,
+because the problem is <em>nondifferentiable</em>. Here, we’re really up
+a creek, and have to do some approximate algorithm like our KMeans
+algorithm to find some local minimum. Discrete optimization is generally
+NP-Hard.</p>
+<h1 id="stochastic-gradient-descent">Stochastic Gradient Descent</h1>
+<p>Most of the algorithms used to perform optimization are not necessary
+to understand to begin studying ML. But, you can’t get far without
+understanding one of the most useful algorithms in all of Computer
+Science: <strong>Stochastic Gradient Descent (SGD)</strong>.</p>
+<p>Suppose we have a function we’d like to minimize, <span
+class="math inline">ℒ(𝒟,<em>w</em>)</span>, where <span
+class="math inline">𝒟</span> is your data, and <span
+class="math inline"><em>w</em></span> is some multi-dimensional vector.
+You can’t change <span class="math inline">𝒟</span>, because your data’s
+your data, but you can change <span
+class="math inline"><em>w</em></span>. We’d like to do the closed form
+thing above, and it would be great to take the gradient of <span
+class="math inline">ℒ</span> with respect to <span
+class="math inline"><em>w</em></span> (<span
+class="math inline">∇<sub><em>w</em></sub>ℒ</span>), set it equal to 0,
+and solve for <span class="math inline"><em>w</em></span>, to find all
+minima, maxima, and saddle points. This can be difficult, either because
+there’s a whole lot of such flat points, or because solving for <span
+class="math inline"><em>w</em></span> is not possible.</p>
+<p>What we <em>can</em> do is find some optimum iteratively. The idea
+here is to start with a random <span
+class="math inline"><em>w</em></span>. Now, changing the values of <span
+class="math inline"><em>w</em></span> would result in <span
+class="math inline">ℒ</span> either increasing or decreasing. If you
+want to know the direction in which <span class="math inline">ℒ</span>
+increases the quickest, well, that’s the gradient. So, since we’re
+minimizing, we take the gradient of <span class="math inline">ℒ</span>,
+and change <span class="math inline"><em>w</em></span> just a little bit
+in the opposite direction, so that we’re taking a step downhill. In
+notation, that looks like this:</p>
+<p><span
+class="math display"><em>w</em> ← <em>w</em> − <em>α</em>(∇<sub><em>w</em></sub>ℒ(𝒟,<em>w</em>))<sup><em>T</em></sup></span></p>
+<p>That algorithm is gradient descent. <span
+class="math inline"><em>α</em></span> here is called the <em>learning
+rate</em>, and is just a scalar that says how big of a step are we
+taking in the downhill direction. We do this, over and over again, until
+convergence or we’ve had enough.</p>
+<p>Now, how big should our learning rate be? Too big, and we’ll step
+right over our minimum, or start oscillating. Too small, and it’ll take
+a really long time. /shrugemoji. Try some different values for your
+problem, and see how they do.</p>
+<p>Now, the danger with this algorithm is that we by strictly walking
+downhill, we might end up in some local minimum. What we’d like is to
+avoid the presumably-smaller wells of the local minima, and end up in
+the presumably-bigger well of the global minimum. So, we’d like to
+generally walk downhill, but introduce some randomness (or
+<em>stochasticity</em>) to the procedure.</p>
+<p>We usually do this by calculating the gradient on only a random
+subset of the data. This way the calculated gradient is probably close
+to the gradient of all the data, but is wrong in some random way,
+meaning we’re walking in some direction that isn’t quite downhill,
+allowing us to hopefully jitter our way out of local minima. This is
+known as <em>stochastic gradient descent</em>.</p>
+<p>With SGD, we have very few guarantees about the result. If <span
+class="math inline"><em>α</em></span> is too large, you could oscillate,
+and not converge at all. You could converge, but to a local minimum. It
+might take a lot of iterations. It might take just a few. But, when you
+have a difficult-to-optimize function, sometimes it’s all you have, and
+it tends to work pretty well.</p>
+</body>
+</html>
