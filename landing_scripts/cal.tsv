@@ -1,5 +1,5 @@
 new	Notes	NotesLink	Assignment	AssignmentLink	AssignmentDue
-x	Statistical vs Machine Learning	notes/01Unsupervised/index	Set up your environment	resources/localsetup.html	1 11
+x	Statistical vs Machine Learning	notes/unsupervised	Set up your environment	resources/localsetup.html	1 11
 x	Unsupervised Analysis	notes/01Unsupervised/index			
 x	Lab		Data Exploration with Unsupervised Learning	lab/01Unsupervised/index.html	
 x	Recommendation Systems with Nearest Neighbors	notes/03RecommendNN/			

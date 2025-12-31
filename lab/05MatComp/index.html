@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Matrix Completion</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css"
+                         href="https://usna.edu/Users/cs/taylor/si470/class.css"
+                         />
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+<body>
+<div class="navbar">
+  <b><a href="index.cgi">SD 312: ML and DS</a></b>
+  <a href="https://www.usna.edu/Users/cs/jatho/">CDR Jatho</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/policy/course_policy.pdf">Policy</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/resources.html">Resources</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/datasets/datasets.html">Datasets</a>
+  <a
+    href="https://courses.cs.usna.edu/SD312/resources/localsetup.html">Environment Setup</a>
+</div>
+<div class="main">
+<header id="title-block-header">
+<h1 class="title">Matrix Completion</h1>
+</header>
+<p>The goal of this lab is to apply all that we learned in the lab last
+week on the MIDN dataset to understanding a full ML development
+cycle.</p>
+<h3 id="a-note-about-supervised-learning-model-development">A note about
+supervised learning model development</h3>
+<p>Last week, you developed a method for performing matrix completion.
+The <em>parameters</em> of this method were <span
+class="math inline"><em>P</em></span> and <span
+class="math inline"><em>Q</em></span>, which were trained on the
+training data. In order to do this, you first had to choose
+<em>hyperparameters</em>, like the assumed rank. Creating a good ML
+predictive model consists of choosing the best hyperparameters, and then
+learning the best parameters for those hyperparameters.</p>
+<p>So, how do we choose the best hyperparameters? Well, if you’ve split
+your data into training, validation, and testing data, the best
+hyperparameters are the ones where, once you’ve learned the best
+parameters, the validation error is best. So, in the case of this
+application, you would try a variety of ranks, and for each attempted
+rank, optimize it as best you can on the training data. Whichever rank
+resulted in the best validation error is the model you would deploy.</p>
+<p>So, the overall supervised model construction process looks like
+this:</p>
+<ul>
+<li>Split data into train/validation/test sets.</li>
+<li>For each of many hyperparameter settings,
+<ul>
+<li>train the parameters as best you can on the training data.</li>
+<li>note the validation error</li>
+</ul></li>
+<li>keep the version that resulted in the best validation error</li>
+</ul>
+<p>To illustrate this with a different model, consider linear
+regression. Your <em>parameters</em> are the weights being applied to
+the features. The <em>hyperparameters</em> are the feature set and the
+regularization parameter.</p>
+<h3 id="your-task">Your task</h3>
+<p>Given the <a
+href="https://grouplens.org/datasets/movielens/">ml-latest-small</a>
+movielens dataset, augment your existing notebook (copy it or convert
+and use as a source file for functions, rename to
+05MatrixCompletion_<last_name>.ipynb) you just turned in to perform
+matrix completion on that dataset.</p>
+<p>You will probably want a function that accepts a rank, and performs
+as many epochs of matrix completion as necessary to train the model (how
+will you know? Yes, <strong>number of epochs</strong> can be another
+hyperparameter. You can also run until a goal error is reached or that
+max number of epochs whichever is sooner), and then returns the
+validation error and resulting <span
+class="math inline"><em>P</em></span> and <span
+class="math inline"><em>Q</em></span>. You can then call that function
+on a loop iterating through various ranks to determine the best
+rank.</p>
+<p>After all is said and done, test your best model with the testing set
+and record the results of the final training error, validation error,
+and testing error.</p>
+<p>Add a row to the dataset with several movie rankings of your own. You
+can do this either in your notebook, or just by adding some ratings to
+ratings.csv as a userId that is not present. Recommend some movies to
+yourself based on predicted ratings.</p>
+<p>Questions:</p>
+<ol type="1">
+<li><p>What differences did you observe in model convergence and
+performance across your ks?</p></li>
+<li><p>Did your training error differ from your validation error? Why do
+you think this is or is not?</p></li>
+<li><p>Did your end validation error differ from your testing error? By
+how much? was it more or less? What did you expect and does this conform
+with your expectations?</p></li>
+</ol>
+<p>If you were unable to get your lab 04 to work, <a
+href="05MatComp.ipynb">you can use these functions</a>. Tell me if you
+plan to do this!</p>
+</body>
+</html>
