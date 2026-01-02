@@ -183,8 +183,11 @@ def generate_schedule():
                     continue
 
     # 6. Print the list of active assignments
+    print("# SD312: Machine Learning")
+    print()
     if active_assignments:
         print("## Active Assignments")
+        print()
         for item in active_assignments:
             print(f"* {item}")
         print("\n---")
@@ -192,6 +195,7 @@ def generate_schedule():
 
     # 7. Print the full schedule table (stdout: no links for future dates)
     print("## Full Schedule")
+    print()
     print("| Date | Notes | Assignment |")
     print("|:---|:---|:---|")
     md_rows = []
@@ -214,6 +218,7 @@ def generate_schedule():
     # Write full schedule with links to a file
     output_path = os.path.join(script_dir, "..", "fullCal.md")
     with open(output_path, "w") as f:
+        f.write("# SD312: Machine Learning\n\n")
         f.write("## Full Schedule\n")
         f.write("| Date | Notes | Assignment |\n")
         f.write("|:---|:---|:---|\n")

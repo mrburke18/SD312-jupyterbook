@@ -5,3 +5,4 @@ _build/
 *.pdf
 *.swp
 *.ipynb_checkpoints*
+*.ipynb_checkpoint*

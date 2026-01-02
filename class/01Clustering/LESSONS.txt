@@ -1,2 +1,0 @@
-Have everybody burn down their mamba/conda install and start over, don't work
-off anything previous, it causes problems.

@@ -16,7 +16,8 @@ project:
     - title: Lecture Notes
       children:
         - file: notes/01Unsupervised/index.md
-        - file: notes/02foodCluster.ipynb
+        - file: notes/01Unsupervised/02foodCluster.ipynb
+        - file: notes/01Unsupervised/pcaNoSVD.ipynb
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
@@ -30,7 +31,7 @@ execute:
 site:
   options:
     base_url: /SD312
-    logo: logo.png
+    logo: logo.svg
     favicon: logo.svg
     folders: true
   template: book-theme

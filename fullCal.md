@@ -1,9 +1,11 @@
+# SD312: Machine Learning
+
 ## Full Schedule
 | Date | Notes | Assignment |
 |:---|:---|:---|
-| Tue, Jan 06 | <a href="../notes/unsupervised">Statistical vs Machine Learning</a> | <a href="../resources/localsetup.html">Set up your environment</a> (due Sun 01/11) |
-| Wed, Jan 07 | <a href="../notes/01Unsupervised/index">Unsupervised Analysis</a> |  |
-| Thu, Jan 08 | Lab | <a href="../lab/01Unsupervised/index.html">Data Exploration with Unsupervised Learning</a> |
+| Tue, Jan 06 | <a href="../notes/unsupervised">Statistical vs Machine Learning</a> | <a href="../resources/resources">Set up your environment</a> (due Thu 01/08) |
+| Wed, Jan 07 | <a href="../notes/unsupervised/foodcluster">Unsupervised Analysis</a> |  |
+| Thu, Jan 08 | Lab | <a href="../assignments/unsupervised/unsupervised">Data Exploration with Unsupervised Learning</a> (due Thu 01/15) |
 | Mon, Jan 12 | <a href="../notes/03RecommendNN/">Recommendation Systems with Nearest Neighbors</a> |  |
 | Wed, Jan 14 | Lab | <a href="../lab/02RecommendKNN/index.html">Nearest-Neighbor Movie Recommendations</a> |
 | Thu, Jan 15 | <a href="../notes/04Optimization/">Optimization</a> |  |

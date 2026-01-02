@@ -16,17 +16,31 @@ Clustering reduces complex datasets by grouping observations into  distinct cate
 We assume you recall how K-Means works; if you don't, feel free to refer back
 to the ISL textbook.
 
-It is very important in all of our techniques, that you understand when the
-technique is appropriate, and when it is not. You must also understand that
-when you choose an approach, you have chosen a set of assumptions, which may
-or may not be appropriate.
+In this class, it is important to understand what mathematics are being done,
+but we will generally not implement these algorithms ourselves. Instead, we
+focus on understanding the human side - under what circumstances is this
+algorithm appropriate? What assumptions does it bring? Are those assumptions
+correct? What are the hyperparameters, and how do I choose them?
+:::{margin}
+**Parameter**: a variable or value computed by a machine learning algorithm in
+order to minimize some function.
 
-### Assumptions and Limitations
+**Hyperparameter**: a variable or value chosen by the person setting up the
+machine learning problem.
+:::
 
-* **Assumption of :** The algorithm assumes the number of clusters, , is known.
-* **Validation:** Because the data is unlabeled, there is no ground truth to verify if the clusters are "correct." The results are exploratory and qualitative.
+K-Means is a useful way for us to demonstrate this thought process, though we
+won't always list all these so explicitly.
 
-You can see an [example of analysis through clustering here](./foodCluster.html).
+K-Means takes in a human-chosen value $K$, and uses the K-Means algorithm to
+place all datapoints into one of $K$ clusters, each of which is based around a
+centroid. It minimizes the sum of within-cluster variance over all the
+clusters, so it prefers round clusters. The hyperparameter is $K$, which is
+human-chosen. An illustration of one way to choose $K$ is in our example
+notebook.
+
+You can see an [example of analysis through clustering
+here](./02foodCluster.ipynb).
 
 ## Dimensionality Reduction
 
@@ -37,5 +51,4 @@ This approach serves two main functions:
 1. **Compression:** By representing data with fewer features, we reduce storage requirements and substantially increase the speed of subsequent computational steps (e.g., in Machine Learning pipelines).
 2. **Analysis:** It facilitates the visualization of complex datasets, allowing for the identification of patterns that are not visible in high-dimensional space.
 
-You can [see an example of analysis through PCA here](./PCAExample.html).
-  And a second example, which doesn't have any references to the SVD, [here](./pcaNoSVD.html).
+You can [see an example of analysis through PCA here](./pcaNoSVD.ipynb).

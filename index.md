@@ -1,9 +1,12 @@
+# SD312: Machine Learning
+
 ## Full Schedule
+
 | Date | Notes | Assignment |
 |:---|:---|:---|
-| Tue, Jan 06 | Statistical vs Machine Learning | Set up your environment (due Sun 01/11) |
+| Tue, Jan 06 | Statistical vs Machine Learning | Set up your environment (due Thu 01/08) |
 | Wed, Jan 07 | Unsupervised Analysis |  |
-| Thu, Jan 08 | Lab | Data Exploration with Unsupervised Learning |
+| Thu, Jan 08 | Lab | Data Exploration with Unsupervised Learning (due Thu 01/15) |
 | Mon, Jan 12 | Recommendation Systems with Nearest Neighbors |  |
 | Wed, Jan 14 | Lab | Nearest-Neighbor Movie Recommendations |
 | Thu, Jan 15 | Optimization |  |
