@@ -13,10 +13,6 @@ project:
     - file: index.md
     - file: fullCal.md
       hidden: true
-    - title: Course Information
-      children:
-        - file: calendar.md
-        - file: policy/index.md
     - title: Lecture Notes
       children:
         - file: notes/01Unsupervised/index.md
@@ -26,6 +22,7 @@ project:
         - file: assignments/01Unsupervised/unsupervised.ipynb
     - title: Resources
       children:
+        - file: resources/displayPolicy.md
         - file: resources/resources.md
 execute:
   execute_notebooks: cache
