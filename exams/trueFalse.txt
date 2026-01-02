@@ -1,6 +1,0 @@
-\question[1] Question
-
-\begin{choices}
-\CorrectChoice
-\choice
-\end{choices}
