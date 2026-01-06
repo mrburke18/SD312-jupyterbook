@@ -4,12 +4,12 @@
 
 | Date | Notes | Assignment |
 |:---|:---|:---|
-| Tue, Jan 06 | Statistical vs Machine Learning | Set up your environment (due Thu 01/08) |
+| Tue, Jan 06 | [Statistical vs Machine Learning](notes/unsupervised) | [Set up your environment](resources/resources) (due Thu 01/08) |
 | Wed, Jan 07 | Unsupervised Analysis |  |
 | Thu, Jan 08 | Lab | Data Exploration with Unsupervised Learning (due Thu 01/15) |
 | Mon, Jan 12 | Recommendation Systems with Nearest Neighbors |  |
-| Wed, Jan 14 | Lab | Nearest-Neighbor Movie Recommendations |
-| Thu, Jan 15 | Optimization |  |
+| Wed, Jan 14 | Optimization |  |
+| Thu, Jan 15 | Lab | Nearest-Neighbor Movie Recommendations |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
 | Wed, Jan 21 | Optimization | Read: Remembering the SVD (due Sun 01/25) |
 | Thu, Jan 22 | Lab | Exploring the SVD |

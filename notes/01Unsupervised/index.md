@@ -32,12 +32,19 @@ machine learning problem.
 K-Means is a useful way for us to demonstrate this thought process, though we
 won't always list all these so explicitly.
 
-K-Means takes in a human-chosen value $K$, and uses the K-Means algorithm to
-place all datapoints into one of $K$ clusters, each of which is based around a
-centroid. It minimizes the sum of within-cluster variance over all the
-clusters, so it prefers round clusters. The hyperparameter is $K$, which is
-human-chosen. An illustration of one way to choose $K$ is in our example
-notebook.
+**Hyperparameter**: K-Means takes in a human-chosen value $K$. $K$ is the
+hyperparameter.
+
+**Assumptions**: K-Means uses the K-Means algorithm to place all datapoints
+into one of $K$ clusters, each of which is based around a centroid. It
+minimizes the sum of within-cluster variance over all the clusters, so it
+prefers round clusters. When you choose K-Means, you are assuming that round
+clusters around a centroid are a good answer for your problem.
+
+**How do we tune the hyperparameter**: An illustration of one way to choose
+$K$ is in our example notebook. There is much art in this process - a good
+practice is to try many different values of $K$, and draw conclusions from the
+results from them all, rather than over-trusting the results of a single run.
 
 You can see an [example of analysis through clustering
 here](./02foodCluster.ipynb).

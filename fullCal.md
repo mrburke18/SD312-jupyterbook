@@ -6,9 +6,9 @@
 | Tue, Jan 06 | <a href="../notes/unsupervised">Statistical vs Machine Learning</a> | <a href="../resources/resources">Set up your environment</a> (due Thu 01/08) |
 | Wed, Jan 07 | <a href="../notes/unsupervised/foodcluster">Unsupervised Analysis</a> |  |
 | Thu, Jan 08 | Lab | <a href="../assignments/unsupervised/unsupervised">Data Exploration with Unsupervised Learning</a> (due Thu 01/15) |
-| Mon, Jan 12 | <a href="../notes/03RecommendNN/">Recommendation Systems with Nearest Neighbors</a> |  |
-| Wed, Jan 14 | Lab | <a href="../lab/02RecommendKNN/index.html">Nearest-Neighbor Movie Recommendations</a> |
-| Thu, Jan 15 | <a href="../notes/04Optimization/">Optimization</a> |  |
+| Mon, Jan 12 | <a href="../notes/recommendnn">Recommendation Systems with Nearest Neighbors</a> |  |
+| Wed, Jan 14 | <a href="../notes/optimization">Optimization</a> |  |
+| Thu, Jan 15 | Lab | <a href="../lab/02RecommendKNN/index.html">Nearest-Neighbor Movie Recommendations</a> |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
 | Wed, Jan 21 | <a href="../notes/04Optimization/">Optimization</a> | <a href="../lab/03SVD/reading.html">Read: Remembering the SVD</a> (due Sun 01/25) |
 | Thu, Jan 22 | Lab | <a href="../lab/03SVD/">Exploring the SVD</a> |

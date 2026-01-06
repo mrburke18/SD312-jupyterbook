@@ -2,9 +2,9 @@ new	Notes	NotesLink	Assignment	AssignmentLink	AssignmentDue
 x	Statistical vs Machine Learning	notes/unsupervised	Set up your environment	resources/resources	1 8
 x	Unsupervised Analysis	notes/unsupervised/foodcluster			
 x	Lab		Data Exploration with Unsupervised Learning	assignments/unsupervised/unsupervised	1 15
-x	Recommendation Systems with Nearest Neighbors	notes/03RecommendNN/			
+x	Recommendation Systems with Nearest Neighbors	notes/recommendnn			
+x	Optimization	notes/optimization			
 x	Lab		Nearest-Neighbor Movie Recommendations	lab/02RecommendKNN/index.html	
-x	Optimization	notes/04Optimization/			
 x	Optimization	notes/04Optimization/	Read: Remembering the SVD	lab/03SVD/reading.html	1 25
 x	Lab		Exploring the SVD	lab/03SVD/	
 x	Recommendation Systems with Matrix Completion	notes/06MatComp			

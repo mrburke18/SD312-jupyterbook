@@ -1,6 +1,4 @@
----
-title: Optimization
----
+# Optimization
 
 Nearly everything we do in this class is some form of an optimization problem.  These optimization problems primarily consist of a *loss function* or *objective function* $\mathcal{L}(\mathcal{D},w)$.  This loss function is a mathematical combination of our *data* $\mathcal{D}$ and our *parameters* $w$.  For a given application, we design a loss function which communicates how well our solution is doing.  For example, in K-Means clustering, our loss function was the total within-cluster variance, the data was the data points, and the $w$ was our assignments of points to clusters.
 
@@ -11,6 +9,7 @@ When we write optimization problems, we have to state a couple things aside from
 It can be useful to visualize a loss function as a surface in space.  For example, perhaps your loss function has two parameters.  As you change those parameters, the loss function increases, or decreases, meaning the surface rises or falls.  If minimizing the loss function, the goal is to find the spot on the surface with the smallest value.  The properties of the optimization problem determine if this minimum point is easy or hard to find.
 
 <img src="lossSurface.png" width="500"/>
+
 [*Which would you rather optimize?*](https://arxiv.org/pdf/1712.09913.pdf)
 
 Fully understanding how we can solve these optimization problems is deeper than we can reasonably go in an undergraduate ML class.  But, some context is important in understanding what your solutions might look like, and how long we can expect solutions to take.
@@ -137,3 +136,5 @@ large, you could oscillate, and not converge at all.  You could converge, but
 to a local minimum.  It might take a lot of iterations.  It might take just a
 few.  But, when you have a difficult-to-optimize function, sometimes it's all
 you have, and it tends to work pretty well.
+
+[You can see a demonstration of gradient descent here](./GD_demo.ipynb).

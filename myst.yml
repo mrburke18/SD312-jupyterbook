@@ -18,6 +18,9 @@ project:
         - file: notes/01Unsupervised/index.md
         - file: notes/01Unsupervised/02foodCluster.ipynb
         - file: notes/01Unsupervised/pcaNoSVD.ipynb
+        - file: notes/03RecommendNN/index.md
+        - file: notes/04Optimization/index.md
+        - file: notes/04Optimization/GD_demo.ipynb
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb

@@ -1,4 +1,4 @@
-# Recommender Systems
+# k-NN Recommender Systems
 
 You're familiar with recommender systems already.  In no small part, this is
 because recommender systems are what drive the free internet - based on your
@@ -8,11 +8,11 @@ you likely are, the higher chance you click on the ad, and the advertising
 company can get paid.
 
 These systems exist much more transparently in contexts like Amazon and
-Netflix, where your product ratings and purchase history allow them to
-suggest other products you might want (for example, at the moment, my Amazon
-recommendations are full of Pokemon stuff, because my two 10-year-olds are having 
-a resurgence of interest as they've made new friends at school who are into Pokemon, 
-and that's what they've used my profile to shop for recently).
+Netflix, where your product ratings and purchase history allow them to suggest
+other products you might want (for example, at the moment, my Amazon
+recommendations are full of Pokemon stuff, because my two 10-year-olds are
+having a resurgence of interest as they've made new friends at school who are
+into Pokemon, and that's what they've used my profile to shop for recently).
 
 Recommender systems are a fairly rough field of Machine Learning -
 techniques tend to be tightly bound to the particular kinds of data
@@ -70,16 +70,16 @@ the ratings matrix should be similar.
 
 One problem is that ratings matrices tend to be highly sparse, because most
 people have not interacted with (much less taken the time to rate) most
-products.  Our next approach (future lab) will explicitly attempt to fill these blank
-spaces in with expected ratings; for now, though, we'll have to decide what
-to do with those blank spaces.  Here's the choices: one choice is to only
-keep the dimensions that are non-zero in both.  Another is to keep the
+products.  Our next approach (future lab) will explicitly attempt to fill
+these blank spaces in with expected ratings; for now, though, we'll have to
+decide what to do with those blank spaces.  Here's the choices: one choice is
+to only keep the dimensions that are non-zero in both.  Another is to keep the
 dimensions that are non-zero in at least one of the vectors, and leave the
 information that this movie wasn't watched by one of the users by leaving it
 as a 0, and treating it like any other rating.  This is a little bit
-uncomfortable, perhaps, because a 0 seems like it's "even worse" than a
-1-star rating, and that may be a bad way to think of it.  However, at least
-it allows us to consider whether a movie was watched or not as itself useful
+uncomfortable, perhaps, because a 0 seems like it's "even worse" than a 1-star
+rating, and that may be a bad way to think of it.  However, at least it allows
+us to consider whether a movie was watched or not as itself useful
 information.  Really, this boils down to your data, and what you discover
 works better.
 
