@@ -14,9 +14,9 @@
 | Thu, Jan 08 | Lab | [Data Exploration with Unsupervised Learning](assignments/unsupervised/unsupervised) (due Thu 01/15) |
 | Mon, Jan 12 | [Recommendation Systems with Nearest Neighbors](notes/recommendnn) |  |
 | Wed, Jan 14 | Optimization |  |
-| Thu, Jan 15 | Lab | Nearest-Neighbor Movie Recommendations |
+| Thu, Jan 15 | Lab | Nearest-Neighbor Movie Recommendations (due Thu 01/22) |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
-| Wed, Jan 21 | Optimization | Read: Remembering the SVD (due Sun 01/25) |
+| Wed, Jan 21 | Optimization | Read: Remembering the SVD (due Thu 01/22) |
 | Thu, Jan 22 | Lab | Exploring the SVD |
 | Mon, Jan 26 | Recommendation Systems with Matrix Completion |  |
 | Wed, Jan 28 | Recommendation Systems with Matrix Completion |  |

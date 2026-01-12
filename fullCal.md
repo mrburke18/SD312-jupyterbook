@@ -8,9 +8,9 @@
 | Thu, Jan 08 | Lab | <a href="../assignments/unsupervised/unsupervised">Data Exploration with Unsupervised Learning</a> (due Thu 01/15) |
 | Mon, Jan 12 | <a href="../notes/recommendnn">Recommendation Systems with Nearest Neighbors</a> |  |
 | Wed, Jan 14 | <a href="../notes/optimization">Optimization</a> |  |
-| Thu, Jan 15 | Lab | <a href="../lab/02RecommendKNN/index.html">Nearest-Neighbor Movie Recommendations</a> |
+| Thu, Jan 15 | Lab | <a href="../assignments/recommendknn/knnrecommend">Nearest-Neighbor Movie Recommendations</a> (due Thu 01/22) |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
-| Wed, Jan 21 | <a href="../notes/04Optimization/">Optimization</a> | <a href="../lab/03SVD/reading.html">Read: Remembering the SVD</a> (due Sun 01/25) |
+| Wed, Jan 21 | <a href="../notes/optimization">Optimization</a> | <a href="../notes/matcomp/reading">Read: Remembering the SVD</a> (due Thu 01/22) |
 | Thu, Jan 22 | Lab | <a href="../lab/03SVD/">Exploring the SVD</a> |
 | Mon, Jan 26 | <a href="../notes/06MatComp">Recommendation Systems with Matrix Completion</a> |  |
 | Wed, Jan 28 | <a href="../notes/06MatComp">Recommendation Systems with Matrix Completion</a> |  |

@@ -1,10 +1,10 @@
 # Optimization
 
-Nearly everything we do in this class is some form of an optimization problem.  These optimization problems primarily consist of a *loss function* or *objective function* $\mathcal{L}(\mathcal{D},w)$.  This loss function is a mathematical combination of our *data* $\mathcal{D}$ and our *parameters* $w$.  For a given application, we design a loss function which communicates how well our solution is doing.  For example, in K-Means clustering, our loss function was the total within-cluster variance, the data was the data points, and the $w$ was our assignments of points to clusters.
+Nearly everything we do in this class is some form of an optimization problem.  These optimization problems primarily consist of a *loss function* or *objective function* $\mathcal{L}(\mathcal{D},w)$.  This loss function is a function on our *data* $\mathcal{D}$ and our *parameters* $w$, and which returns a scalar.  For a given application, we design a loss function which communicates how well our solution is doing.  For example, in K-Means clustering, our loss function was the total within-cluster variance, the data was the data points, and the parameters were our assignments of points to clusters.
 
-In ML, we design these loss functions, and then count on mathematical and computational tools to find the $w$ which result in the best possible version we can put together for our problem.  Again revisiting K-Means, the K-Means algorithm resulted in the better and better cluster assignments until the loss function couldn't seem to decrease any more; these assignments were our solution.
+In ML, we design these loss functions, and then count on mathematical and computational tools to find the parameters which result in the best possible version we can put together for our problem.  Again revisiting K-Means, the K-Means algorithm resulted in the better and better cluster assignments until the loss function couldn't seem to decrease any more; these assignments were our solution.
 
-When we write optimization problems, we have to state a couple things aside from the loss function.  First, we state whether we want our loss function to be big or small, by stating whether the goal is to minimize or maximize it.  Second, we state the loss function.  Third, we explicitly state which variables in the loss function we can control to perform this optimization.  Finally, there may be some additional constraints on the solution.
+When we write optimization problems, we have to state a couple things aside from the loss function.  First, we state whether we want our loss function to be big or small, by stating whether the goal is to minimize or maximize it.  Second, we state the loss function.  Third, we explicitly state which variables in the loss function we can control to perform this optimization (our parameters).  Finally, there may be some additional constraints on the solution.
 
 It can be useful to visualize a loss function as a surface in space.  For example, perhaps your loss function has two parameters.  As you change those parameters, the loss function increases, or decreases, meaning the surface rises or falls.  If minimizing the loss function, the goal is to find the spot on the surface with the smallest value.  The properties of the optimization problem determine if this minimum point is easy or hard to find.
 
@@ -21,9 +21,9 @@ From easiest to hardest, we can break these down into:
 - Problems which are *nonconvex*.
 - Problems which are *discrete*.
 
-### Closed Form
+## Closed Form
 
-You have actually seen this before, repeatedly, in Calculus class, where you were asked to minimize or maximize a function.  What did you do?  You symbolically calculated the gradient of the function, set it equal to zero, then algebraically solved for your variables.  This gave you a *closed-form solution* of the form $w=something$, where you could calculate the minimum exactly, without having to do any iterative algorithm.  This is generally very fast!  We like it!  It doesn't happen very often, either because the gradient is not possible to write symbolically, or you cannot algebraically isolate the parameters.  In all the remainder, we have to do some kind of iterative guess-check-improve algorithm instead.
+You have actually seen this before, repeatedly, in Calculus class, where you were asked to minimize or maximize a function.  What did you do?  You symbolically calculated the gradient of the function, set it equal to zero, then algebraically solved for your variables (parameters).  This gave you a *closed-form solution* of the form $w=something$, where you could calculate the minimum exactly, without having to do any iterative algorithm.  This is generally very fast!  We like it!  It doesn't happen very often, either because the gradient is not possible to write symbolically, or you cannot algebraically isolate the parameters.  In all the rest of the problems, we have to do some kind of iterative guess-check-improve algorithm instead.
 
 An example of a closed form problem you have encountered before is Linear Regression.  In (unregularized) linear regression, with a $n\times k$ data matrix $X$ with rows $x_i$ and a $n\times 1$ target vector $y$, we are trying to solve the following optimization problem:
 
@@ -44,7 +44,7 @@ $$
 \nabla_w(w^Tb)=b \\
 $$
 $$
-(A^T * B)^T = B^T * A \\
+(A^T B)^T = B^T A \\
 $$
 
 When we apply those, set it equal to zero, then solve for $w$...
@@ -62,9 +62,9 @@ So, to perform linear regression, we need only calculate $(X^TX)^{-1}X^Ty$, and 
 
 Note that this doesn't change if we do ridge regression, it's just that after going through a similar derivation, we calculate $(X^TX-\lambda I)^{-1}X^Ty$ instead.
 
-### Convex Optimization Problems
+## Convex Optimization Problems
 
-If you cannot solve directly for your solution, you hope your problem is *convex*. First, a definition of the word [*convex*](https://en.wikipedia.org/wiki/Convex_function): a surface is convex if for every pair of points on the surface, you can draw a straight line between them without crossing the surface.  An optimization problem is convex if: (1) The loss function is convex, and (2) the constraints (if there are any) define a convex surface.  Convexity implies a very large number of other properties that we can count on when doing our optimization.  For example, it is impossible for a convex problem to have more than one minimum; if you find a local minimum, you've found the global minimum.
+If you cannot solve directly for your solution, you hope your problem is *convex*. First, a definition of the word [*convex*](https://en.wikipedia.org/wiki/Convex_function): a surface is convex if for every pair of points on the surface, you can draw a straight line between them without crossing the surface.  An optimization problem is convex if: (1) The loss function is convex, and (2) the constraints (if there are any) define a convex surface.  Convexity implies a very large number of other properties that we can count on when doing our optimization.  For example, it is impossible for a convex problem to have more than one minimum; if you find a local minimum, you've found the global minimum. (However, if a problem has only one minimum, that does not necessarily mean it is convex.)
 
 As another example, imagine a one-dimensional convex optimization problem, like finding the bottom of a parabola.  If you were to choose two random points on the parabola, and discover the derivative is negative for one, and positive for the other, the minimum must lie between them (immediately, perhaps you could imagine some fast binary-search-type algorithm to find the minimum).
 
@@ -72,7 +72,7 @@ These nice properties allow us to write optimization algorithms which are not as
 
 Examples of these convex problems include Logistic Regression and Linear Regression with the LASSO.
 
-### Nonconvex Optimization Problems
+## Nonconvex Optimization Problems
 
 These are hairier.  If your problem is not convex, then you do not have any of those nice properties to use as a toehold in building a fast algorithm, and your problem is NP-Hard.  Generally, we have few ideas aside from some variation of stochastic gradient descent, which is our workhorse that will always find you some minimum, eventually.  When we find a minimum, we don't even know for sure that it's a global minimum, rather than some worse local minimum.
 
@@ -80,9 +80,9 @@ The time this iteration takes depends heavily on how well behaved the optimizati
 
 Our neural nets lie here.
 
-### Discrete Optimization Problems
+## Discrete Optimization Problems
 
-If your parameters are discrete, we can't even calculate a gradient, because the problem is *nondifferentiable*.  Here, we're really up a creek, and have to do some approximate algorithm like our KMeans algorithm to find some local minimum.  Discrete optimization is generally NP-Hard.
+If your parameters are discrete, we can't even calculate a gradient, because the problem is *nondifferentiable*.  Here, we're really up a creek, and have to do some approximate algorithm like our KMeans algorithm to find some local minimum.  Discrete optimization is generally NP-Hard, and we have to sacrifice optimality for speed (ie, we accept a pretty good, though maybe not the best, solution, in exchange for finishing our optimization before the sun goes out).
 
 # Stochastic Gradient Descent
 
@@ -91,13 +91,13 @@ Gradient Descent (SGD)**.
 
 Suppose we have a function we'd like to minimize, $\mathcal{L}(\mathcal{D},w)$, where $\mathcal{D}$ is your
 data, and $w$ is some multi-dimensional vector.  You can't change $\mathcal{D}$, because
-your data's your data, but you can change $w$.  We'd like to do the closed form
+your data's your data, but you can change your parameters $w$.  We'd like to do the closed form
 thing above, and it would be great to take the gradient of $\mathcal{L}$ with respect to
 $w$ ($\nabla_w \mathcal{L}$), set it equal to 0, and solve for $w$, to find all minima,
-maxima, and saddle points.  This can be difficult, either because there's a
+maxima, and saddle points.  This can be difficult or impossible, either because there's a
 whole lot of such flat points, or because solving for $w$ is not possible.
 
-What we *can* do is find some optimum iteratively.  The idea here is to start
+In that very common case, what we *can* do is find some optimum iteratively.  The idea here is to start
 with a random $w$.  Now, changing the values of $w$ would result in $\mathcal{L}$ either
 increasing or decreasing.  If you want to know the direction in which $\mathcal{L}$
 increases the quickest, well, that's the gradient.  So, since we're
@@ -119,17 +119,14 @@ our minimum, or start oscillating.  Too small, and it'll take a really long
 time.  /shrugemoji.  Try some different values for your problem, and see how
 they do.
 
-Now, the danger with this algorithm is that we by strictly walking downhill,
-we might end up in some local minimum.  What we'd like is to avoid the
-presumably-smaller wells of the local minima, and end up in the
-presumably-bigger well of the global minimum.  So, we'd like to generally walk
-downhill, but introduce some randomness (or *stochasticity*) to the procedure.
+Wonderful. However, there are two problems:
+- calculating the gradient at each iteration may be very slow because it involves accessing every data point. If we have lots and lots of data, this is a slow thing to do.
+- by strictly walking downhill, we might end up in some local minimum. What we'd like is to avoid the presumably-smaller wells of the local minima, and end up in the presumably-bigger well of the global minimum.
 
-We usually do this by calculating the gradient on only a random subset of the
-data.  This way the calculated gradient is probably close to the gradient of
-all the data, but is wrong in some random way, meaning we're walking in some
-direction that isn't quite downhill, allowing us to hopefully jitter our way
-out of local minima.  This is known as *stochastic gradient descent*.
+Our solution to both of these problems are the same. We assume that the gradient calculated on a small random subset of our data is a little, but not a lot, different from what it would be if we calculated it on the whole dataset. Calculating on a small subset of the data is much faster, solving our first problem. By having our gradient be a little bit wrong, we introduce some random jitter into our iterative path - random jitter gives us a chance to bounce out of small minimal wells and into the bigger minimal wells of global minima. Because this subset of data is random, we call this modification "stochastic gradient descent" (SGD).
+:::{margin}
+**Stochastic**: randomly determined; having a random probability distribution or pattern that may be analyzed statistically but may not be predicted precisely.
+:::
 
 With SGD, we have very few guarantees about the result.  If $\alpha$ is too
 large, you could oscillate, and not converge at all.  You could converge, but
