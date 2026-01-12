@@ -24,6 +24,7 @@ project:
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
+        - file: assignments/02RecommendKNN/knnRecommend.ipynb
     - title: Resources
       children:
         - file: resources/displayPolicy.md
