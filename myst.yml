@@ -23,6 +23,7 @@ project:
         - file: notes/04Optimization/GD_demo.ipynb
         - file: notes/06MatComp/reading.md
           hidden: true
+        - file: notes/06MatComp/index.md
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb

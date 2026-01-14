@@ -13,7 +13,7 @@
 | Wed, Jan 07 | [Unsupervised Analysis](notes/unsupervised/foodcluster) |  |
 | Thu, Jan 08 | Lab | [Data Exploration with Unsupervised Learning](assignments/unsupervised/unsupervised) (due Thu 01/15) |
 | Mon, Jan 12 | [Recommendation Systems with Nearest Neighbors](notes/recommendnn) |  |
-| Wed, Jan 14 | Optimization |  |
+| Wed, Jan 14 | [Optimization](notes/optimization) |  |
 | Thu, Jan 15 | Lab | Nearest-Neighbor Movie Recommendations (due Thu 01/22) |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
 | Wed, Jan 21 | Optimization | Read: Remembering the SVD (due Thu 01/22) |

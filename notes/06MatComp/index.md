@@ -1,118 +1,77 @@
----
-title: Matrix Completion
----
+# Matrix Completion
 
-The next thing we're going to learn about is _matrix completion_, or an approach where we try to predict each individual user's rankings of each individual movie.  To do this, we're going to switch from _unsupervised_ learning to _supervised_ learning, where you know what the right answers are for some of your data (in this case, the nonempty elements of the matrix).  However, it's a little different problem setup than the classification or regression you've seen before.
+**Matrix completion** is a supervised learning approach used to predict individual user rankings for specific items (movies) by filling in the missing elements of a data matrix. This problem assumes the data matrix is low-rank, implying that user preferences are not independent across items.
 
-Suppose rather than coming up with some hacky way of ignoring or justifying
-the empty spaces in our data matrix, we wanted to fill it in with how that
-person would likely rate the movie.  Because our data matrix is likely low
-rank (due to movie-liking not being independent from movie to movie), we can
-do this with some concepts we already have.
+This approach was a key part of the submission which won the [Netflix
+Prize](https://en.wikipedia.org/wiki/Netflix_Prize), in which Netflix shared
+some of their data and then awarded 1 million dollars to the team which could
+dramatically improve upon their recommendation system.
 
-We know that every $n\times m$ matrix $A$ has an SVD decomposition, such that
-$A=U\Sigma V^T$, where $U$ is $n\times n$, $\Sigma$ is a diagonal $n\times m$,
-and $V$ is $m\times m$ (and there are also lots of other constraints, like
-orthonormality and whatnot).  We also know that we can remove the smallest
-elements of $\Sigma$ without losing much accuracy when we remultiply and
-reconstruct $A$.
+## Low-Rank Approximation
 
-Think about what happens when we remove these small values, keeping, say $k$
-singular values.  This means all columns after the $k$-th column and all rows
-after the $k$th row of $\Sigma$ are now entirely zeros.  So, let's imagine
-multiplying this $U\Sigma$.  Because of all the zero-value rows of $\Sigma$,
-do you see how all columns after the $k$th column of $U$ contribute nothing at
-all?  They might as well not be there!
+An $n \times m$ matrix $A$ has a Singular Value Decomposition (SVD) such that $A=U\Sigma V^T$, where $U$ is $n\times n$, $\Sigma$ is a diagonal $n\times m$ matrix, and $V$ is $m\times m$.
 
-Similarly, if we multiply $\Sigma V^T$, because all the final columns of
-$\Sigma$ are zeros, we don't need any rows of $V^T$ after the $k$th one!  So,
-we could discard all those rows and columns that contribute nothing, and
-rewrite the whole reconstruction as: $A\approx U_k\Sigma_k V^T_k$, where $U_k$
-is $n\times k$, $\Sigma_k$ is $k\times k$, and $V^T$ is $k\times m$.  If $k$
-is small, those matrices are a whole lot smaller, and our reconstruction is
-still very close to $A$.
+By retaining only the $k$ largest singular values in $\Sigma$, we can approximate $A$ while discarding columns and rows that contribute negligibly to the reconstruction. This results in the approximation:
 
-Now, we could make a matrix $P$ such that $P=U_k\Sigma_k$.  $P$ wouldn't have
-any of the nice orthonormal properties of $U$, but we can see that if there is
-an acceptable $k$-rank SVD reconstruction of $A$, we can say $A\approx PV^T_k$.
-Alternatively, we could start all this by creating a $Q=\Sigma_PV^T_k$, and
-saying $A\approx U_kQ$.
+$$A\approx U_k \Sigma_k V_k^T$$
 
-OR, we could just say that by melding $\Sigma_k$ into one or the other, two
-matrices $P$ and $Q$ exist such that $A\approx PQ$, where $P$ is $n\times k$,
-and $Q$ is $k\times m$.  Now, the vectors of $P$ and $Q$ would no longer be of
-unit lengths like in the SVD, but the decomposition nonetheless exists.
-Again, all this depends upon our data being able to be represented with just a
-few principal components.
+where $U_k$ is $n\times k$, $\Sigma_k$ is $k\times k$, and $V_k^T$ is $k\times m$.
 
-### Well, that was a lot.  Who cares?
+This decomposition allows us to represent the approximation as the product of two smaller matrices, $P$ and $Q$, such that $A\approx PQ$ (for example, $P=U\Sigma$, and $Q=V^T$, though that's not the only way). Here, $P$ is an $n\times k$ matrix and $Q$ is a $k\times m$ matrix. While $P$ and $Q$ may lack the orthonormal properties of SVD matrices, they provide a valid decomposition for low-rank data.
 
-Well, now we just need to say that we need to find versions of $P$ and $Q$
-such that when we multiply them together, the elements that we DO have in our
-matrix $A$ are correct (or close to correct).  These elements are our training
-set.  If they get all the elements we *do* have right, we can maybe trust
-that they're getting all the other ones right, too, and so we can use those
-approximate rankings to recommend some movies.
+## Optimization Problem
 
-We need to define an optimization problem.  Let $p_i$ represent the $i$th row
-of $P$, and $q_j$ represent the $j$th column of $Q$.  Naturally, for some
-ranking that we do have $A_{ij}$, we can feel comfortable with $P$ and $Q$ if
-$p_i\cdot q_j=A_{ij}$.  Let $T$ be the set of all rankings for which
-we have a ranking in $A$.  What we want is:
+To predict missing rankings, we must determine matrices $P$ and $Q$ such that their product accurately approximates the observed elements of $A$. Let $p_i$ represent the $i$-th row of $P$ and $q_j$ represent the $j$-th column of $Q$. We define $T$ as the set of observed rankings in $A$.
 
-$$
-\argmin_{P,Q} \sum_{A_{ij}\in T}\left(A_{ij}-p_i\cdot q_j\right)^2
-$$
+The objective is to minimize the squared error between the observed values $A_{ij}$ and the predicted values $p_i \cdot q_j$:
 
-Once we have the solution to that, we can say that $\hat A=PQ$, and read off
-everybody's estimated rankings!  So, OK, but how do we solve that?  Stochastic Gradient Descent!
+$$argmin_{P,Q} \sum_{A_{ij}\in T} \left( A_{ij}-p_i\cdot q_j\right) ^2$$
+
+Once solved, the estimate for the full matrix is $\hat A = PQ$.
+
+## Algorithm: Stochastic Gradient Descent (SGD)
+
+We solve the minimization problem using Stochastic Gradient Descent (SGD), optimizing the objective function $\mathcal{L}$ with respect to $P$ and $Q$. SGD updates the parameters by considering one data point $A_{ij}$ at a time.
+
+The partial derivatives of the squared error for a single observation are:
+
+$$\frac{\partial}{\partial p_i}( A_{ij} - p_i \cdot q_j )^2 = -2 q_j( A_{ij}-p_i\cdot q_j)$$
+
+$$\frac{\partial}{\partial q_j}( A_{ij} - p_i \cdot q_j )^2 = -2 p_i ( A_{ij}-p_i\cdot q_j) $$
 
 
-### Applying SGD to low-rank matrix completion
+**The SGD Algorithm:**
 
-So, again:
+1. Randomly initialize matrices $P$ and $Q$.
+2. Iterate until convergence using the following update rules for all known
+rankings $A_{ij}$:
 
-$$
-\argmin_{P,Q} \sum_{A_{ij}\in T}\left(A_{ij}-p_i\cdot q_j\right)^2
-$$
+$$p_i \leftarrow p_i + \alpha q_j^T(A_{ij}-p_i \cdot q_j)$$
 
-Here, $T$ is the data that we have.  $P$ and $Q$ are the $w$ in the general
-purpose algorithm.  That whole function is $\mathcal{L}$.  So, we have $\mathcal{L}(T,P,Q)$, and
-we'd like to find the $P$ and $Q$ that minimize $\mathcal{L}$ given our data $T$.
+$$q_j \leftarrow q_j + \alpha p_i^T(A_{ij}-p_i \cdot q_j)$$
 
-We're going to get our stochasticity by only considering one data point
-$A_{ij}$ at a time.  So, for some $A_{ij}$, let's solve for the gradient with
-respect to $p_i$ and with respect to $q_j$.
+**Note:** The factor of 2 from the derivative is absorbed into the learning
+rate $\alpha$.
 
-$$
-\frac{\partial}{\partial p_i}\left(A_{ij}-p_i\cdot q_j\right)^2
-=-2q_j(A_{ij}-p_i\cdot q_j)
-$$
+Upon convergence, $\hat A = PQ$ provides the estimated rankings for the empty
+cells in the original matrix.
 
-and
+### Assumptions and hyperparameters
 
-$$
-\frac{\partial}{\partial q_j}\left(A_{ij}-p_i\cdot q_j\right)^2
-=-2p_i(A_{ij}-p_i\cdot q_j)
-$$
+If you choose to build a recommendation system this way, you have assumed that
+a linear combination of a small number of features is an appropriate way to
+make these predictions.
 
-Right?  Basic calculus.  So, SGD for this problem just becomes:
+You have assumed that a fully-complete matrix $A$ would be approximately rank
+$k$.
 
-1. Randomly initialize $P$ and $Q$.
-2. Until convergence, for all known rankings $A_{ij}$:
+Your **hyperparameters** are $k$, $\alpha$, and the training time.
 
-$$
-  p_i\leftarrow p_i + \alpha q_j^T(A_{ij}-p_i\cdot q_j)
-$$
+If $k$ is too small, the model will underfit - too large, and it will overfit.
 
-$$
-  q_j\leftarrow q_j + \alpha p_i^T(A_{ij}-p_i\cdot q_j)
-$$
+If $\alpha$ is too small, improvement will be slow. Too large, and the
+values will explode due to overshooting the minimum.
 
-***NOTE:*** You'll notice here that the *2*'s in the partial derivatives disappear. This is not a mistake, 
-we just allow that two to get absorbed up into the learning rate $\alpha$.
-
-And that's it!  Once (if) that converges, you have a $P$ and $Q$ such that
-$\hat A=PQ$ correctly approximates all your known rankings, so presumably the
-rest of them are correct, as well!  You have a speculative full set of
-rankings from which to make recommendations!
+If the training time is too small, the model will underfit. Too large, and the
+model will overfit. It is common to use *early stopping*, where training stops
+when the test error begins to increase.
