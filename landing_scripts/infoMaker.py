@@ -23,7 +23,7 @@ x['other']=(
     (5,8,'Last Day of Finals'),
     )
 x['time']=(
-    (10,30)
+    (7,30)
     )
 
 with open('courseInfo.json','w') as f:

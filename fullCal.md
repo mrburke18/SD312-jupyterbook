@@ -11,10 +11,10 @@
 | Thu, Jan 15 | Lab | <a href="../assignments/recommendknn/knnrecommend">Nearest-Neighbor Movie Recommendations</a> (due Thu 01/22) |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
 | Wed, Jan 21 | <a href="../notes/optimization">Optimization</a> | <a href="../notes/matcomp/reading">Read: Remembering the SVD</a> (due Thu 01/22) |
-| Thu, Jan 22 | Lab | <a href="../lab/03SVD/">Exploring the SVD</a> |
+| Thu, Jan 22 | Lab | <a href="../assignments/svd/svdfaces">Exploring the SVD</a> (due Thu 01/29) |
 | Mon, Jan 26 | <a href="../notes/matcomp/">Recommendation Systems with Matrix Completion</a> |  |
 | Wed, Jan 28 | <a href="../notes/matcomp/">Recommendation Systems with Matrix Completion</a> |  |
-| Thu, Jan 29 | Lab | <a href="../lab/04MatComp">Personalized Recommendations</a> |
+| Thu, Jan 29 | Lab | <a href="../assignments/matcomp/matrixcomp.ipynb">Personalized Recommendations</a> (due Thu 02/05) |
 | Mon, Feb 02 | <a href="../notes/08NonLinear">Feature Manipulation</a> |  |
 | Wed, Feb 04 | <a href="../notes/08NonLinear">Feature Manipulation</a> |  |
 | Thu, Feb 05 | <a href="../lab/05MatComp">Lab - Matrix Completion</a> |  |

@@ -6,10 +6,10 @@ x	Recommendation Systems with Nearest Neighbors	notes/recommendnn
 x	Optimization	notes/optimization			
 x	Lab		Nearest-Neighbor Movie Recommendations	assignments/recommendknn/knnrecommend	1 22
 x	Optimization	notes/optimization	Read: Remembering the SVD	notes/matcomp/reading	1 22
-x	Lab		Exploring the SVD	lab/03SVD/	
+x	Lab		Exploring the SVD	assignments/svd/svdfaces	1 29
 x	Recommendation Systems with Matrix Completion	notes/matcomp/			
 x	Recommendation Systems with Matrix Completion	notes/matcomp/			
-x	Lab		Personalized Recommendations	lab/04MatComp	
+x	Lab		Personalized Recommendations	assignments/matcomp/matrixcomp.ipynb	2 5
 x	Feature Manipulation	notes/08NonLinear			
 x	Feature Manipulation	notes/08NonLinear			
 x	Lab - Matrix Completion	lab/05MatComp			

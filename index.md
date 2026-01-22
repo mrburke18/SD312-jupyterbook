@@ -2,7 +2,7 @@
 
 ## Active Assignments
 
-* [Data Exploration with Unsupervised Learning](assignments/unsupervised/unsupervised) (due Thu 01/15)
+* [Exploring the SVD](assignments/svd/svdfaces) (due Thu 01/29)
 
 ---
 ## Full Schedule
@@ -14,13 +14,13 @@
 | Thu, Jan 08 | Lab | [Data Exploration with Unsupervised Learning](assignments/unsupervised/unsupervised) (due Thu 01/15) |
 | Mon, Jan 12 | [Recommendation Systems with Nearest Neighbors](notes/recommendnn) |  |
 | Wed, Jan 14 | [Optimization](notes/optimization) |  |
-| Thu, Jan 15 | Lab | Nearest-Neighbor Movie Recommendations (due Thu 01/22) |
+| Thu, Jan 15 | Lab | [Nearest-Neighbor Movie Recommendations](assignments/recommendknn/knnrecommend) (due Thu 01/22) |
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
-| Wed, Jan 21 | Optimization | Read: Remembering the SVD (due Thu 01/22) |
-| Thu, Jan 22 | Lab | Exploring the SVD |
+| Wed, Jan 21 | [Optimization](notes/optimization) | [Read: Remembering the SVD](notes/matcomp/reading) (due Thu 01/22) |
+| Thu, Jan 22 | Lab | [Exploring the SVD](assignments/svd/svdfaces) (due Thu 01/29) |
 | Mon, Jan 26 | Recommendation Systems with Matrix Completion |  |
 | Wed, Jan 28 | Recommendation Systems with Matrix Completion |  |
-| Thu, Jan 29 | Lab | Personalized Recommendations |
+| Thu, Jan 29 | Lab | Personalized Recommendations (due Thu 02/05) |
 | Mon, Feb 02 | Feature Manipulation |  |
 | Wed, Feb 04 | Feature Manipulation |  |
 | Thu, Feb 05 | Lab - Matrix Completion |  |

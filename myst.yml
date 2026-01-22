@@ -19,8 +19,7 @@ project:
         - file: notes/01Unsupervised/02foodCluster.ipynb
         - file: notes/01Unsupervised/pcaNoSVD.ipynb
         - file: notes/03RecommendNN/index.md
-        - file: notes/04Optimization/index.md
-        - file: notes/04Optimization/GD_demo.ipynb
+        - file: notes/04Optimization/index.ipynb
         - file: notes/06MatComp/reading.md
           hidden: true
         - file: notes/06MatComp/index.md
@@ -28,6 +27,9 @@ project:
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
         - file: assignments/02RecommendKNN/knnRecommend.ipynb
+        - file: assignments/03SVD/svdfaces.ipynb
+        - file: assignments/04MatComp/04MatrixComp.ipynb
+          hidden: true
     - title: Resources
       children:
         - file: resources/displayPolicy.md
