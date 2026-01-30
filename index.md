@@ -2,7 +2,7 @@
 
 ## Active Assignments
 
-* [Exploring the SVD](assignments/svd/svdfaces) (due Thu 01/29)
+* [Personalized Recommendations](assignments/matcomp/matrixcomp) (due Thu 02/05)
 
 ---
 ## Full Schedule
@@ -18,14 +18,14 @@
 | Mon, Jan 19 | **MLK Jr. Day** - No Class |  |
 | Wed, Jan 21 | [Optimization](notes/optimization) | [Read: Remembering the SVD](notes/matcomp/reading) (due Thu 01/22) |
 | Thu, Jan 22 | Lab | [Exploring the SVD](assignments/svd/svdfaces) (due Thu 01/29) |
-| Mon, Jan 26 | Recommendation Systems with Matrix Completion |  |
-| Wed, Jan 28 | Recommendation Systems with Matrix Completion |  |
-| Thu, Jan 29 | Lab | Personalized Recommendations (due Thu 02/05) |
+| Mon, Jan 26 | [Recommendation Systems with Matrix Completion](notes/matcomp/) |  |
+| Wed, Jan 28 | [Recommendation Systems with Matrix Completion](notes/matcomp/) |  |
+| Thu, Jan 29 | Lab | [Personalized Recommendations](assignments/matcomp/matrixcomp) (due Thu 02/05) |
 | Mon, Feb 02 | Feature Manipulation |  |
-| Wed, Feb 04 | Feature Manipulation |  |
-| Thu, Feb 05 | Lab - Matrix Completion |  |
-| Mon, Feb 09 | Neural Networks |  |
-| Wed, Feb 11 | Exam |  |
+| Wed, Feb 04 | Review Day |  |
+| Thu, Feb 05 | Lab - Matrix Completion | Personalized Recommendations Pt 2 (due Thu 02/12) |
+| Mon, Feb 09 | Exam |  |
+| Wed, Feb 11 | Neural Networks |  |
 | Thu, Feb 12 | Lab | Universal Approximator |
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
 | Wed, Feb 18 | Neural Networks for Regression and Classification |  |

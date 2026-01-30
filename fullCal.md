@@ -14,12 +14,12 @@
 | Thu, Jan 22 | Lab | <a href="../assignments/svd/svdfaces">Exploring the SVD</a> (due Thu 01/29) |
 | Mon, Jan 26 | <a href="../notes/matcomp/">Recommendation Systems with Matrix Completion</a> |  |
 | Wed, Jan 28 | <a href="../notes/matcomp/">Recommendation Systems with Matrix Completion</a> |  |
-| Thu, Jan 29 | Lab | <a href="../assignments/matcomp/matrixcomp.ipynb">Personalized Recommendations</a> (due Thu 02/05) |
-| Mon, Feb 02 | <a href="../notes/08NonLinear">Feature Manipulation</a> |  |
-| Wed, Feb 04 | <a href="../notes/08NonLinear">Feature Manipulation</a> |  |
-| Thu, Feb 05 | <a href="../lab/05MatComp">Lab - Matrix Completion</a> |  |
-| Mon, Feb 09 | <a href="../notes/10NNs">Neural Networks</a> |  |
-| Wed, Feb 11 | Exam |  |
+| Thu, Jan 29 | Lab | <a href="../assignments/matcomp/matrixcomp">Personalized Recommendations</a> (due Thu 02/05) |
+| Mon, Feb 02 | <a href="../notes/nonlinear/">Feature Manipulation</a> |  |
+| Wed, Feb 04 | Review Day |  |
+| Thu, Feb 05 | <a href="../lab/05MatComp">Lab - Matrix Completion</a> | <a href="../assignments/matcompcont/">Personalized Recommendations Pt 2</a> (due Thu 02/12) |
+| Mon, Feb 09 | Exam |  |
+| Wed, Feb 11 | <a href="../notes/10NNs">Neural Networks</a> |  |
 | Thu, Feb 12 | Lab | <a href="../lab/06NN">Universal Approximator</a> |
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
 | Wed, Feb 18 | <a href="../notes/12RegClas">Neural Networks for Regression and Classification</a> |  |

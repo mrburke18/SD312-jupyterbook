@@ -23,13 +23,14 @@ project:
         - file: notes/06MatComp/reading.md
           hidden: true
         - file: notes/06MatComp/index.md
+        - file: notes/08Nonlinear/index.ipynb
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
         - file: assignments/02RecommendKNN/knnRecommend.ipynb
         - file: assignments/03SVD/svdfaces.ipynb
         - file: assignments/04MatComp/04MatrixComp.ipynb
-          hidden: true
+        - file: assignments/05MatCompCont/index.md
     - title: Resources
       children:
         - file: resources/displayPolicy.md

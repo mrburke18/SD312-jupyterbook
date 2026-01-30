@@ -9,12 +9,12 @@ x	Optimization	notes/optimization	Read: Remembering the SVD	notes/matcomp/readin
 x	Lab		Exploring the SVD	assignments/svd/svdfaces	1 29
 x	Recommendation Systems with Matrix Completion	notes/matcomp/			
 x	Recommendation Systems with Matrix Completion	notes/matcomp/			
-x	Lab		Personalized Recommendations	assignments/matcomp/matrixcomp.ipynb	2 5
-x	Feature Manipulation	notes/08NonLinear			
-x	Feature Manipulation	notes/08NonLinear			
-x	Lab - Matrix Completion	lab/05MatComp			
-x	Neural Networks	notes/10NNs			
+x	Lab		Personalized Recommendations	assignments/matcomp/matrixcomp	2 5
+x	Feature Manipulation	notes/nonlinear/			
+x	Review Day				
+x	Lab - Matrix Completion	lab/05MatComp	Personalized Recommendations Pt 2	assignments/matcompcont/	2 12
 x	Exam				
+x	Neural Networks	notes/10NNs			
 x	Lab		Universal Approximator	lab/06NN	
 x	Neural Networks for Regression and Classification	notes/12RegClas			
 x	Lab		Neural Net Classification	lab/07NNClassification	3 7
