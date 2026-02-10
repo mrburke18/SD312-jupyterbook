@@ -44,6 +44,24 @@ Accept everything.
 Restart your terminal. Install useful packages: `mamba install numpy scipy
 pandas scikit-learn plotly matplotlib jupyter`
 
+## Using PyTorch and GPUs
+
+Take note of the hostname of your lab machine. Write it down, take a picture,
+something. When doing neural net things, you'll want to SSH into this machine,
+not `ssh.cs.usna.edu` as you have been. This machine has a GPU.
+`ssh.cs.usna.edu` does not.
+
+Create a new virtual environment (here called `gpu`) for PyTorch:
+
+```
+mamba create -n gpu numpy scipy jupyter pandas scikit-learn plotly matplotlib
+mamba activate gpu
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+```
+
+From now on, whenever doing neural net things, make sure you're ssh-ed into
+the correct machine, and are using this virtual environment.
+
 ## Using Jupyter
 
 Once you have python installed, you can work with Jupyter notebooks either

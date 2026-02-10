@@ -2,7 +2,7 @@
 
 ## Active Assignments
 
-* [Personalized Recommendations](assignments/matcomp/matrixcomp) (due Thu 02/05)
+* [Personalized Recommendations Pt 2](assignments/matcompcont/) (due Thu 02/12)
 
 ---
 ## Full Schedule
@@ -21,9 +21,9 @@
 | Mon, Jan 26 | [Recommendation Systems with Matrix Completion](notes/matcomp/) |  |
 | Wed, Jan 28 | [Recommendation Systems with Matrix Completion](notes/matcomp/) |  |
 | Thu, Jan 29 | Lab | [Personalized Recommendations](assignments/matcomp/matrixcomp) (due Thu 02/05) |
-| Mon, Feb 02 | Feature Manipulation |  |
+| Mon, Feb 02 | [Feature Manipulation](notes/nonlinear/) |  |
 | Wed, Feb 04 | Review Day |  |
-| Thu, Feb 05 | Lab - Matrix Completion | Personalized Recommendations Pt 2 (due Thu 02/12) |
+| Thu, Feb 05 | [Lab - Matrix Completion](lab/05MatComp) | [Personalized Recommendations Pt 2](assignments/matcompcont/) (due Thu 02/12) |
 | Mon, Feb 09 | Exam |  |
 | Wed, Feb 11 | Neural Networks |  |
 | Thu, Feb 12 | Lab | Universal Approximator |

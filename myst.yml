@@ -24,6 +24,7 @@ project:
           hidden: true
         - file: notes/06MatComp/index.md
         - file: notes/08Nonlinear/index.ipynb
+        - file: notes/10NNs/index.ipynb
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
@@ -31,6 +32,7 @@ project:
         - file: assignments/03SVD/svdfaces.ipynb
         - file: assignments/04MatComp/04MatrixComp.ipynb
         - file: assignments/05MatCompCont/index.md
+        - file: assignments/06NN/06UniversalApprox.ipynb
     - title: Resources
       children:
         - file: resources/displayPolicy.md
