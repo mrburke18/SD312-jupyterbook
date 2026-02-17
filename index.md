@@ -1,10 +1,5 @@
 # SD312: Machine Learning
 
-## Active Assignments
-
-* [Personalized Recommendations Pt 2](assignments/matcompcont/) (due Thu 02/12)
-
----
 ## Full Schedule
 
 | Date | Notes | Assignment |
@@ -25,8 +20,8 @@
 | Wed, Feb 04 | Review Day |  |
 | Thu, Feb 05 | [Lab - Matrix Completion](lab/05MatComp) | [Personalized Recommendations Pt 2](assignments/matcompcont/) (due Thu 02/12) |
 | Mon, Feb 09 | Exam |  |
-| Wed, Feb 11 | Neural Networks |  |
-| Thu, Feb 12 | Lab | Universal Approximator |
+| Wed, Feb 11 | [Neural Networks](notes/nns/) |  |
+| Thu, Feb 12 | Lab | [Universal Approximator](assignments/nn/universalapprox) |
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
 | Wed, Feb 18 | Neural Networks for Regression and Classification |  |
 | Thu, Feb 19 | Lab | Neural Net Classification (due Sat 03/07) |

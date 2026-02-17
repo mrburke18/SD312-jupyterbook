@@ -14,10 +14,10 @@ x	Feature Manipulation	notes/nonlinear/
 x	Review Day				
 x	Lab - Matrix Completion	lab/05MatComp	Personalized Recommendations Pt 2	assignments/matcompcont/	2 12
 x	Exam				
-x	Neural Networks	notes/10NNs			
-x	Lab		Universal Approximator	lab/06NN	
-x	Neural Networks for Regression and Classification	notes/12RegClas			
-x	Lab		Neural Net Classification	lab/07NNClassification	3 7
+x	Neural Networks	notes/nns/			
+x	Lab		Universal Approximator	assignments/nn/universalapprox	
+x	Neural Networks for Regression and Classification	notes/regclas/			
+x	Lab		Neural Net Classification	assignments/classification/	3 7
 x	Info Challenge				
 x	Info Challenge				
 x	Lab - Info Challenge				

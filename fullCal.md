@@ -19,11 +19,11 @@
 | Wed, Feb 04 | Review Day |  |
 | Thu, Feb 05 | <a href="../lab/05MatComp">Lab - Matrix Completion</a> | <a href="../assignments/matcompcont/">Personalized Recommendations Pt 2</a> (due Thu 02/12) |
 | Mon, Feb 09 | Exam |  |
-| Wed, Feb 11 | <a href="../notes/10NNs">Neural Networks</a> |  |
-| Thu, Feb 12 | Lab | <a href="../lab/06NN">Universal Approximator</a> |
+| Wed, Feb 11 | <a href="../notes/nns/">Neural Networks</a> |  |
+| Thu, Feb 12 | Lab | <a href="../assignments/nn/universalapprox">Universal Approximator</a> |
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
-| Wed, Feb 18 | <a href="../notes/12RegClas">Neural Networks for Regression and Classification</a> |  |
-| Thu, Feb 19 | Lab | <a href="../lab/07NNClassification">Neural Net Classification</a> (due Sat 03/07) |
+| Wed, Feb 18 | <a href="../notes/regclas/">Neural Networks for Regression and Classification</a> |  |
+| Thu, Feb 19 | Lab | <a href="../assignments/classification/">Neural Net Classification</a> (due Sat 03/07) |
 | Mon, Feb 23 | Info Challenge |  |
 | Wed, Feb 25 | Info Challenge |  |
 | Thu, Feb 26 | Lab - Info Challenge |  |
