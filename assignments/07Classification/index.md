@@ -21,9 +21,14 @@ Instead, we will follow an iterative engineering workflow:
 
 You will work in a scratch notebook, and then assemble a final draft to turn in with answers to asked questions, the best version of your model, and an explanation of your process.
 
+[Here is your
+Gem](https://gemini.google.com/gem/1HH6n0nmnJFeREYjIL35Xpt3P5zLticKd?usp=sharing).
+
 ## Data Exploration
 
-To start, download the data. [Go here](https://unsw-my.sharepoint.com/personal/z5025758_ad_unsw_edu_au/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fz5025758%5Fad%5Funsw%5Fedu%5Fau%2FDocuments%2FUNSW%2DNB15%20dataset%2FCSV%20Files&viewid=f8d1dec5%2Dcd5f%2D42ae%2D8b06%2D2fece580c74a), and download `NUSW-NB15_features.csv`. Then download both files in the `Training and Testing Sets` folder. Put all that within a folder in the `/SD312` directory (note, that's not in your home directory, that's off of root). This folder is on the hard disk of the machine, rather than part of the networked file system - reading from it is faster, so this is a good place for our data.
+To start, [download the data](./lab07_data.tgz). Move it to the `/SD312`
+directory (note, that's not in your home directory, that's off of root), and
+untar it with `tar xzvf lab07_data.tgz`. This folder is on the hard disk of the machine, rather than part of the networked file system - reading from it is faster, so this is a good place for our data.
 
 Load the training and testing sets into pandas dataframes. Your labels are in column `attack_cat`. **What is the percentage of datapoints in each of the `attack_cat` categories, for each of the datasets? If the network was lazy and just predicted the most common class, what percentage accuracy would it get?**
 
