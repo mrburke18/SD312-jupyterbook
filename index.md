@@ -2,7 +2,7 @@
 
 ## Active Assignments
 
-* [Neural Net Classification](assignments/classification/) (due Sat 03/07)
+* [Neural Net Classification](assignments/classification/) (due Thu 02/26)
 
 ---
 ## Full Schedule
@@ -26,10 +26,10 @@
 | Thu, Feb 05 | [Lab - Matrix Completion](lab/05MatComp) | [Personalized Recommendations Pt 2](assignments/matcompcont/) (due Thu 02/12) |
 | Mon, Feb 09 | Exam |  |
 | Wed, Feb 11 | [Neural Networks](notes/nns/) |  |
-| Thu, Feb 12 | Lab | [Universal Approximator](assignments/nn/universalapprox) |
+| Thu, Feb 12 | Lab | [Universal Approximator](assignments/nn/universalapprox) (due Thu 02/19) |
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
 | Wed, Feb 18 | [Neural Networks for Regression and Classification](notes/regclas/) |  |
-| Thu, Feb 19 | Lab | [Neural Net Classification](assignments/classification/) (due Sat 03/07) |
+| Thu, Feb 19 | Lab | [Neural Net Classification](assignments/classification/) (due Thu 02/26) |
 | Mon, Feb 23 | Convolutional Networks |  |
 | Wed, Feb 25 | Convolutional Networks |  |
 | Thu, Feb 26 | Lab | Convolutional Networks (due Sat 03/21) |

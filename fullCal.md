@@ -20,12 +20,12 @@
 | Thu, Feb 05 | <a href="../lab/05MatComp">Lab - Matrix Completion</a> | <a href="../assignments/matcompcont/">Personalized Recommendations Pt 2</a> (due Thu 02/12) |
 | Mon, Feb 09 | Exam |  |
 | Wed, Feb 11 | <a href="../notes/nns/">Neural Networks</a> |  |
-| Thu, Feb 12 | Lab | <a href="../assignments/nn/universalapprox">Universal Approximator</a> |
+| Thu, Feb 12 | Lab | <a href="../assignments/nn/universalapprox">Universal Approximator</a> (due Thu 02/19) |
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
 | Wed, Feb 18 | <a href="../notes/regclas/">Neural Networks for Regression and Classification</a> |  |
-| Thu, Feb 19 | Lab | <a href="../assignments/classification/">Neural Net Classification</a> (due Sat 03/07) |
-| Mon, Feb 23 | <a href="../notes/15ConvNet">Convolutional Networks</a> |  |
-| Wed, Feb 25 | <a href="../notes/15ConvNet">Convolutional Networks</a> |  |
+| Thu, Feb 19 | Lab | <a href="../assignments/classification/">Neural Net Classification</a> (due Thu 02/26) |
+| Mon, Feb 23 | <a href="../notes/convnet">Convolutional Networks</a> |  |
+| Wed, Feb 25 | <a href="../notes/convnet">Convolutional Networks</a> |  |
 | Thu, Feb 26 | Lab | <a href="../lab/08ConvNet">Convolutional Networks</a> (due Sat 03/21) |
 | Mon, Mar 02 | Comp Day for Guest Speaker |  |
 | Wed, Mar 04 | <a href="../notes/17Transfer">Transfer Learning</a> |  |

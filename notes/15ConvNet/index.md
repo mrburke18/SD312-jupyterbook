@@ -4,7 +4,9 @@ title: Convolutional Neural Networks
 
 We have learned about how to structure the *back* of our neural networks to be capable of regression or classification.  In addition, we've become comfortable with what we call *dense layers*, where a layer of linear nodes with nonlinear activation functions all connect to every node on the next layer.
 
-It turns out there are other kinds of layers which are more suitable for specific kinds of data.  This is particularly the case when dealing with *images* and *language*.  In this class, we're going to look at images, and save language for those of you who will take Natural Language Processing.
+It turns out there are other kinds of layers which are more suitable for
+specific kinds of data.  This is particularly the case when dealing with
+*images* and *language*.  In this class, we're going to look at images.
 
 You may recall that we earlier did an in-class demonstration of the classification of MNIST digits.  In doing this, we took this nice 28x28 image, and flattened it into a single row of length 784.  This was kind of crazy!  What matters for image recognition is the relationship of different pixels to each other, and when we just flatten them, we destroy that relationship (ie, the network has to learn which pixels are adjacent to other pixels, and that that is relevant to its task).
 

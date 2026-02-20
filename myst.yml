@@ -26,6 +26,7 @@ project:
         - file: notes/08Nonlinear/index.ipynb
         - file: notes/10NNs/index.ipynb
         - file: notes/12RegClas/index.ipynb
+        - file: notes/15ConvNet/index.ipynb
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb

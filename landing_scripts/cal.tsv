@@ -15,11 +15,11 @@ x	Review Day
 x	Lab - Matrix Completion	lab/05MatComp	Personalized Recommendations Pt 2	assignments/matcompcont/	2 12
 x	Exam				
 x	Neural Networks	notes/nns/			
-x	Lab		Universal Approximator	assignments/nn/universalapprox	
+x	Lab		Universal Approximator	assignments/nn/universalapprox	2 19
 x	Neural Networks for Regression and Classification	notes/regclas/			
-x	Lab		Neural Net Classification	assignments/classification/	3 7
-x	Convolutional Networks	notes/15ConvNet			
-x	Convolutional Networks	notes/15ConvNet			
+x	Lab		Neural Net Classification	assignments/classification/	2 26
+x	Convolutional Networks	notes/convnet			
+x	Convolutional Networks	notes/convnet			
 x	Lab		Convolutional Networks	lab/08ConvNet	3 21
 x	Comp Day for Guest Speaker				
 x	Transfer Learning	notes/17Transfer			
