@@ -2,7 +2,7 @@
 
 ## Active Assignments
 
-* [Neural Net Classification](assignments/classification/) (due Thu 02/26)
+* [Convolutional Networks](assignments/convnet/convnet) (due Thu 03/05)
 
 ---
 ## Full Schedule
@@ -30,12 +30,12 @@
 | Mon, Feb 16 | **Washington's Birthday** - No Class |  |
 | Wed, Feb 18 | [Neural Networks for Regression and Classification](notes/regclas/) |  |
 | Thu, Feb 19 | Lab | [Neural Net Classification](assignments/classification/) (due Thu 02/26) |
-| Mon, Feb 23 | Convolutional Networks |  |
-| Wed, Feb 25 | Convolutional Networks |  |
-| Thu, Feb 26 | Lab | Convolutional Networks (due Sat 03/21) |
-| Mon, Mar 02 | Comp Day for Guest Speaker |  |
-| Wed, Mar 04 | Transfer Learning |  |
-| Thu, Mar 05 | Lab | Transfer Learning |
+| Mon, Feb 23 | [Convolutional Networks](notes/convnet) |  |
+| Wed, Feb 25 | [Convolutional Networks](notes/convnet) |  |
+| Thu, Feb 26 | Lab | [Convolutional Networks](assignments/convnet/convnet) (due Thu 03/05) |
+| Mon, Mar 02 | Transfer Learning |  |
+| Wed, Mar 04 | Adversarial Examples |  |
+| Thu, Mar 05 | Lab | Transfer Learning (due Thu 03/19) |
 | Mon, Mar 09 | **Spring Break** - No Class |  |
 | Tue, Mar 10 | **Spring Break** - No Class |  |
 | Wed, Mar 11 | **Spring Break** - No Class |  |
@@ -44,18 +44,17 @@
 | Mon, Mar 16 | Encoder/Decoder Embeddings |  |
 | Wed, Mar 18 | Embeddings and Contrastive Loss |  |
 | Thu, Mar 19 | Lab | Facial Recongition (due Sat 04/11) |
-| Mon, Mar 23 | Adversarial Examples |  |
-| Wed, Mar 25 | Exam | READ: Surveillance in Kashgar<br>READ: Online trackers<br>READ: Bias in ML |
-| Thu, Mar 26 | Lab |  |
-| Mon, Mar 30 | Ethics | READ: ML and disability<br>READ: ML and disinformation<br>READ: Cultural bias |
-| Wed, Apr 01 | Ethics |  |
-| Thu, Apr 02 | Lab | Ethical Dilemma<br>Optional: Documentary about RL and Go |
-| Mon, Apr 06 | RL Intro |  |
-| Wed, Apr 08 | RL: Tabular Q-Learning |  |
-| Thu, Apr 09 | Lab | Tabular Q-Learning<br>READ: Deep Q-Learning Paper (due Wed 04/22) |
+| Mon, Mar 23 | Exam | READ: Surveillance in Kashgar<br>READ: Online trackers<br>READ: Bias in ML |
+| Wed, Mar 25 | Lab |  |
+| Thu, Mar 26 | Ethics | READ: ML and disability<br>READ: ML and disinformation<br>READ: Cultural bias |
+| Mon, Mar 30 | Ethics |  |
+| Wed, Apr 01 | Lab | Ethical Dilemma<br>Optional: Documentary about RL and Go |
+| Thu, Apr 02 | RL Intro |  |
+| Mon, Apr 06 | RL: Tabular Q-Learning |  |
+| Wed, Apr 08 | Lab | Tabular Q-Learning<br>READ: Deep Q-Learning Paper (due Wed 04/22) |
+| Thu, Apr 09 | RL: Deep Q-Learning |  |
 | Mon, Apr 13 | RL: Deep Q-Learning |  |
-| Wed, Apr 15 | RL: Deep Q-Learning |  |
-| Thu, Apr 16 | Lab | Deep Q-Learning |
-| Mon, Apr 20 | RL: Policy networks |  |
-| Wed, Apr 22 | SOFs/Wrapup |  |
+| Wed, Apr 15 | Lab | Deep Q-Learning |
+| Thu, Apr 16 | RL: Policy networks |  |
+| Mon, Apr 20 | SOFs/Wrapup |  |
 | Fri, May 08 | **Last Day of Finals** |  |

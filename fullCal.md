@@ -26,10 +26,10 @@
 | Thu, Feb 19 | Lab | <a href="../assignments/classification/">Neural Net Classification</a> (due Thu 02/26) |
 | Mon, Feb 23 | <a href="../notes/convnet">Convolutional Networks</a> |  |
 | Wed, Feb 25 | <a href="../notes/convnet">Convolutional Networks</a> |  |
-| Thu, Feb 26 | Lab | <a href="../lab/08ConvNet">Convolutional Networks</a> (due Sat 03/21) |
-| Mon, Mar 02 | Comp Day for Guest Speaker |  |
-| Wed, Mar 04 | <a href="../notes/17Transfer">Transfer Learning</a> |  |
-| Thu, Mar 05 | Lab | <a href="../lab/09Transfer">Transfer Learning</a> |
+| Thu, Feb 26 | Lab | <a href="../assignments/convnet/convnet">Convolutional Networks</a> (due Thu 03/05) |
+| Mon, Mar 02 | <a href="../notes/transfer">Transfer Learning</a> |  |
+| Wed, Mar 04 | <a href="../notes/20Adversarial">Adversarial Examples</a> |  |
+| Thu, Mar 05 | Lab | <a href="../lab/09Transfer">Transfer Learning</a> (due Thu 03/19) |
 | Mon, Mar 09 | **Spring Break** - No Class |  |
 | Tue, Mar 10 | **Spring Break** - No Class |  |
 | Wed, Mar 11 | **Spring Break** - No Class |  |
@@ -38,18 +38,17 @@
 | Mon, Mar 16 | <a href="../notes/18VAE">Encoder/Decoder Embeddings</a> |  |
 | Wed, Mar 18 | <a href="../notes/19Contrastive">Embeddings and Contrastive Loss</a> |  |
 | Thu, Mar 19 | Lab | <a href="../lab/10FacialRecognition">Facial Recongition</a> (due Sat 04/11) |
-| Mon, Mar 23 | <a href="../notes/20Adversarial">Adversarial Examples</a> |  |
-| Wed, Mar 25 | Exam | [READ: Surveillance in Kashgar](https://www.nytimes.com/interactive/2019/04/04/world/asia/xinjiang-china-surveillance-prison.html?action=click&module=Top%20Stories&pgtype=Homepage)<br>[READ: Online trackers](https://www.washingtonpost.com/technology/2023/10/24/google-privacy-police-geofence/)<br>[READ: Bias in ML](https://www.nytimes.com/2020/06/24/technology/facial-recognition-arrest.html?unlocked_article_code=AAAAAAAAAAAAAAAACEIPuomT1JKd6J17Vw1cRCfTTMQmqxCdw_PIxftm3iWma3DLDmweiPgYCIiG_EPKarskadI43j2fAcVMO7ggQv1uz-hZekV3UQSzvt2EhJEBaW0TmL6EY1kXjdjLTKxqtnjjdHW4I-Nyg-zh4k6MajXvRKLb1Hc-IA4z8Y81Jgr9xXQMwK6RFbIk2IQvj-wzRcwvHUd2byaKt_XjCBh9KY_GOkmasl9qLrkfDTLDntec6KYCdRFRCT_FTnB95mU977BMKY9dffa_f1N7Jp2I0fhGAXdoLYypG5Q2W4DX8r1rurfJohaIo9GkKucfkiEcPZJrrAN0bPErzA&smid=url-share) |
-| Thu, Mar 26 | Lab |  |
-| Mon, Mar 30 | Ethics | [READ: ML and disability](https://twitter.com/TODAYshow/status/1230121198647959552)<br>[READ: ML and disinformation](https://www.nytimes.com/2023/02/07/technology/artificial-intelligence-training-deepfake.html)<br>[READ: Cultural bias](https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url) |
-| Wed, Apr 01 | Ethics |  |
-| Thu, Apr 02 | Lab | <a href="../lab/11Ethics">Ethical Dilemma</a><br>[Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) |
-| Mon, Apr 06 | <a href="../notes/22RLintro">RL Intro</a> |  |
-| Wed, Apr 08 | <a href="../notes/22RLintro">RL: Tabular Q-Learning</a> |  |
-| Thu, Apr 09 | Lab | <a href="../lab/12TabularQ">Tabular Q-Learning</a><br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Wed 04/22) |
+| Mon, Mar 23 | Exam | [READ: Surveillance in Kashgar](https://www.nytimes.com/interactive/2019/04/04/world/asia/xinjiang-china-surveillance-prison.html?action=click&module=Top%20Stories&pgtype=Homepage)<br>[READ: Online trackers](https://www.washingtonpost.com/technology/2023/10/24/google-privacy-police-geofence/)<br>[READ: Bias in ML](https://www.nytimes.com/2020/06/24/technology/facial-recognition-arrest.html?unlocked_article_code=AAAAAAAAAAAAAAAACEIPuomT1JKd6J17Vw1cRCfTTMQmqxCdw_PIxftm3iWma3DLDmweiPgYCIiG_EPKarskadI43j2fAcVMO7ggQv1uz-hZekV3UQSzvt2EhJEBaW0TmL6EY1kXjdjLTKxqtnjjdHW4I-Nyg-zh4k6MajXvRKLb1Hc-IA4z8Y81Jgr9xXQMwK6RFbIk2IQvj-wzRcwvHUd2byaKt_XjCBh9KY_GOkmasl9qLrkfDTLDntec6KYCdRFRCT_FTnB95mU977BMKY9dffa_f1N7Jp2I0fhGAXdoLYypG5Q2W4DX8r1rurfJohaIo9GkKucfkiEcPZJrrAN0bPErzA&smid=url-share) |
+| Wed, Mar 25 | Lab |  |
+| Thu, Mar 26 | Ethics | [READ: ML and disability](https://twitter.com/TODAYshow/status/1230121198647959552)<br>[READ: ML and disinformation](https://www.nytimes.com/2023/02/07/technology/artificial-intelligence-training-deepfake.html)<br>[READ: Cultural bias](https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url) |
+| Mon, Mar 30 | Ethics |  |
+| Wed, Apr 01 | Lab | <a href="../lab/11Ethics">Ethical Dilemma</a><br>[Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) |
+| Thu, Apr 02 | <a href="../notes/22RLintro">RL Intro</a> |  |
+| Mon, Apr 06 | <a href="../notes/22RLintro">RL: Tabular Q-Learning</a> |  |
+| Wed, Apr 08 | Lab | <a href="../lab/12TabularQ">Tabular Q-Learning</a><br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Wed 04/22) |
+| Thu, Apr 09 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
 | Mon, Apr 13 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
-| Wed, Apr 15 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
-| Thu, Apr 16 | Lab | <a href="../lab/13DeepQ">Deep Q-Learning</a> |
-| Mon, Apr 20 | RL: Policy networks |  |
-| Wed, Apr 22 | SOFs/Wrapup |  |
+| Wed, Apr 15 | Lab | <a href="../lab/13DeepQ">Deep Q-Learning</a> |
+| Thu, Apr 16 | RL: Policy networks |  |
+| Mon, Apr 20 | SOFs/Wrapup |  |
 | Fri, May 08 | **Last Day of Finals** |  |

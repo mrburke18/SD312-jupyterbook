@@ -20,14 +20,13 @@ x	Neural Networks for Regression and Classification	notes/regclas/
 x	Lab		Neural Net Classification	assignments/classification/	2 26
 x	Convolutional Networks	notes/convnet			
 x	Convolutional Networks	notes/convnet			
-x	Lab		Convolutional Networks	lab/08ConvNet	3 21
-x	Comp Day for Guest Speaker				
-x	Transfer Learning	notes/17Transfer			
-x	Lab		Transfer Learning	lab/09Transfer	
+x	Lab		Convolutional Networks	assignments/convnet/convnet	3 5
+x	Transfer Learning	notes/transfer			
+x	Adversarial Examples	notes/20Adversarial			
+x	Lab		Transfer Learning	lab/09Transfer	3 19
 x	Encoder/Decoder Embeddings	notes/18VAE			
 x	Embeddings and Contrastive Loss	notes/19Contrastive			
 x	Lab		Facial Recongition	lab/10FacialRecognition	4 11
-x	Adversarial Examples	notes/20Adversarial			
 x	Exam		READ: Surveillance in Kashgar	https://www.nytimes.com/interactive/2019/04/04/world/asia/xinjiang-china-surveillance-prison.html?action=click&module=Top%20Stories&pgtype=Homepage	
 			READ: Online trackers	https://www.washingtonpost.com/technology/2023/10/24/google-privacy-police-geofence/	
 			READ: Bias in ML	https://www.nytimes.com/2020/06/24/technology/facial-recognition-arrest.html?unlocked_article_code=AAAAAAAAAAAAAAAACEIPuomT1JKd6J17Vw1cRCfTTMQmqxCdw_PIxftm3iWma3DLDmweiPgYCIiG_EPKarskadI43j2fAcVMO7ggQv1uz-hZekV3UQSzvt2EhJEBaW0TmL6EY1kXjdjLTKxqtnjjdHW4I-Nyg-zh4k6MajXvRKLb1Hc-IA4z8Y81Jgr9xXQMwK6RFbIk2IQvj-wzRcwvHUd2byaKt_XjCBh9KY_GOkmasl9qLrkfDTLDntec6KYCdRFRCT_FTnB95mU977BMKY9dffa_f1N7Jp2I0fhGAXdoLYypG5Q2W4DX8r1rurfJohaIo9GkKucfkiEcPZJrrAN0bPErzA&smid=url-share	
