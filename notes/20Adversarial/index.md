@@ -1,10 +1,15 @@
----
-title: Adversarial Examples
----
+# Adversarial Examples
 
 Our big neural nets have been designed and trained in a very empirical way - in other words, if they work, we have not thought very hard about them.  One question we might ask is, are there inputs we could put into this network that behave very poorly?  What do they look like?  Can we *create* them?
 
-The answer is, it's quite easy to create such *adversarial examples*.  The idea is very simple.  We have a loss function that declares what "right" is.  Normally, we put a datapoint through, calculate the loss, and then perform gradient descent on the parameters of the network to make it smaller, thus training *the network*.  What happens if we leave the parameters of the network alone and instead, after calculating the loss, we *calculate the gradient with respect to the pixels of the image* and **update the pixels of the image** with the goal of reducing the loss to a wrong classification for that image? With a few repeated tiny updates of the pixels, the result is a change to the *predicted label* of our example to a desired "wrong" classification.
+The answer is, it's quite easy to create such *adversarial examples*.  The
+idea is very simple.  We have a loss function that declares what "right" is.
+Normally, we put a datapoint through, calculate the loss, and then perform
+gradient descent on the parameters of the network to make it smaller, thus
+training *the network* to perform better.  What happens if we leave the
+parameters of the network alone and instead, after calculating the loss, we
+*calculate the gradient with respect to the pixels of the image* and **update
+the pixels of the image** with the goal of reducing the loss to a *wrong* classification for that image? With a few repeated tiny updates of the pixels, the result is a change to the *predicted label* of our example to a desired "wrong" classification.
 
 [Here is but one example (among hundreds of attacks) of this kind of adversarial attack](adversarial.html).  In this example, we train a network which classifies goats (class 0) from mules (class 1) from unicorns (class 2).  We then have an image of a goat, meaning normally we optimize the network until it outputs [1, 0, 0].  In this case, we're going to optimize the image until the network outputs [0, 1, 0].  We're going to try to do this without changing the image too much visually.
 
@@ -19,7 +24,7 @@ This sign attack limits the amount of change on any channel on each iteration, a
 
 In this example, we are able to manipulate the picture of our goat from being 95% likely to be a goat to 100% likely to be a mule in only five iterations, with no real visual affect.
 
-### Variations
+## Variations
 
 This idea opens the door to many variations of this attack.
 

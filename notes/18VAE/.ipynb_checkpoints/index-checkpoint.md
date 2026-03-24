@@ -1,58 +1,67 @@
----
-title: Embeddings and Autoencoders
----
+# Reconstructive and Generative Embeddings
 
-An application of neural nets that has been growing in importance is in
-learning useful *embeddings*.  An embedding is a low-dimensional
-representation of a data point, which encodes some useful information.  One example of an embedding is PCA, where we can condense each point down to a point in some lower-dimensional space, without losing much variance.
+## Reconstructive Embeddings
 
-For another example, suppose we'd like to do something neural-netty on text.
-Well, you can't do math on words, so each word needs to map to a numerical
-value before it can be used as an input.  You could do this naively, for
-example, by making `aardvark` map to 1, and `abacus` map to 2, and so on
-through the dictionary.  Each word now has a number, but those numbers are
-meaningless; it would be better for ML purposes if words that were synonyms
-had similar mappings, so that the network they were input into viewed them
-similarly.
+The core principle of reconstructive embeddings is that the quality of a
+learned representation, or embedding, is measured by its ability to
+reconstruct the original input data from it, meaning it somehow encodes all
+the necessary information, in a lower-dimensional latent space $z$, needed to
+describe the data. The goal is not to generate new data but simply to compress
+and describe existing data.
 
-For example, there is a famous result from a technique called Word2Vec, which
-creates embeddings for words, where each word is represented as a point in
-200-(or so)-dimensional space.  They showed that the learned embedding for
-"king" (a point in 200-dimensional space) minus the embedding for "man"
-(another point in 200-dimensional space, so subtraction just works), plus the
-embedding for "woman," got you a new point in 200-dimensional space which was
-very close to the embedding for "queen."  So, `king - man + woman = queen`.
-So, these embeddings seemed to encode actual meaning, not just being a
-computationally-necessary translation from words to numbers.  If two words had
-similar embeddings, that meant those words meant about the same thing.
+The most common model for this task is the Autoencoder (AE). An Autoencoder consists of two primary components: an **Encoder** and a **Decoder**. The Encoder $e(\cdot)$ is a network that maps the high-dimensional input data $X$ to the low-dimensional latent embedding $z$, as described by $z = e(X)$. The Decoder $d(\cdot)$ is a network that attempts to reverse this process, mapping the embedding $z$ back to a reconstruction $\hat{X}$ of the original input, such as $\hat{X} = d(z) = d(e(X))$.
 
-As another example into why these might be so useful, consider if we could
-create an embedding for text and an embedding for an image such that the
-textual description of an image (like "[an inspiring watercolor painting of a
-majestic goat at sunset, standing over a defeated, mangy
-mule](https://chatgpt.com/share/671ac68b-3f24-8009-a082-72827182a957)") and the embedding of the
-image itself would be very similar.  Training embeddings like this is an
-important step in Image Search and in AI that generates images from
-descriptions.
+This architecture forces the network to learn a compressed representation because the dimensionality of $z$ is significantly smaller than that of $X$, creating an "information bottleneck." To learn, the model is trained to minimize a **reconstruction loss**, which is simply the difference between the original input $X$ and its reconstruction $\hat{X}$. For image data, this loss function is often the Mean Squared Error (MSE), $L(X, \hat{X}) = ||X - \hat{X}||^2$, which penalizes differences in pixel values.
 
-Today and Wednesday we are going to learn about two (of many) ways to train embeddings.
-Today is...
+The resulting latent space of a standard Autoencoder is optimized purely for
+this compression-reconstruction task. It is *not* structured for generation.
+The space between learned data points in $z$ is often un-mapped and undefined.
+If one were to sample two embeddings $z_1$ and $z_2$ from two different inputs
+and interpolate between them, the decoded results would likely be non-sensical
+or non-plausible, as the model has no incentive to make the whole of the
+latent space meaningful.
 
-### Autoencoders
+A key variant is the **Denoising Autoencoder**, which is fed a corrupted input $X'$ but is trained to reconstruct the original *clean* data $X$. This forces the embedding $z$ to capture more robust and essential features, learning to discard noise. The most prominent application of reconstructive models is **anomaly detection**. A model trained only on "normal" data will learn to reconstruct it very well (low error). When presented with an anomalous sample, it will fail to reconstruct it accurately, resulting in a high reconstruction error that flags the data as an outlier. This approach is also widely used for dimensionality reduction and non-linear feature extraction.
 
-Autoencoders are a form of unsupervised learning and are best thought of as learned compression and decompression
-algorithms.  Imagine we have some datapoint (it's easy to imagine it as an image, but it doesn't have to be) that is high-dimensional.  We then create a network where each layer of the network contains fewer and fewer nodes (artificial neurons in FCN, or even kernels in a CNN), ultimately condensing down to a much smaller number of nodes and associated outputs.  This small vector is known as the *latent space*, and this first half of the network is known as the *encoder*.
+## Generative Embeddings
 
-We then widen the network again, taking the small sized vector and widening it until it once again reproduces a data point the same size as the original datapoint.  This part of the neural network is called the *decoder*.
+The primary principle of generative embeddings is to learn to produce new
+datapoints that appear as if they could be a member of a dataset.
+Mathematically, we say that they are learning the underlying probability
+distribution $P(X)$ of the training data. For example, if we are working with
+a dataset of images of dogs, we start by thinking about all possible images,
+including static, pictures of people, abstract art, etc. A small portion of
+that space is likely to appear in a dataset of image sof dogs.
 
-We can then train it based on reconstruction error, attempting to minimize the difference between what is input and what is output.  If successful, you've created a compression system; you divorce the encoder from the decoder, and then data can be encoded, then cheaply transfered in the small latent space, then decoded, with little loss.
+Unlike reconstructive models, which aim to compress and decompress known data,
+generative models are designed to **synthesize new, novel data samples**
+$\hat{X}$ that are plausible and appear to be drawn from the same distribution
+as the original data. This requires learning a latent space $z$ that is not
+just a compressed code but a structured, continuous representation from which
+meaningful samples can be drawn.
 
-Now, we can get a little weird.  Suppose we have only the decoder.  Every point in the latent space can be rendered by a decoder into an image.  So, if we could plug in the right point in latent space, we could create an entirely new image that way. However, constraints as they are currently defined give no guarantees that any randomly selected point in latent space will necessarily decode into a meaningful output, or in other words an output that would sensibly belong to the dataset or represent a natural transition within it. For example, given our 28x28 MNIST digits dataset, consider a 28x28 image of a unicorn or Abe Lincoln... these are possible images in that 28x28x1 framework, but do not belong to the manifold representing the MNIST dataset in its input space. A randomly selected latent encoding could, just as likely, instead produce such an off-manifold output when decoded.  Likewise, nothing about this architecture enforces continuity, i.e., the idea that two points which are close in proximity in the latent space should produce outputs which are close in the output space and thus similar to one another.
+### The Variational Autoencoder (VAE)
 
-To produce continuous and meaningful (or *on-manifold*) outputs, we have to add an extra requirement to the autoencoder - the space needs to not only be small-dimensional, but the compressed versions of "real" inputs need to lie somewhere predictable in that latent space, so we can create new points in that place where real images lie and decode them into something sensible for the trained dataset. 
+The **Variational Autoencoder (VAE)** is a probabilistic generative model that directly modifies the Autoencoder architecture to achieve this. It effectively builds a bridge between reconstruction and generation by imposing a specific structure on its latent space.
 
-Now we've arrived at the need for a *Variational Autoencoder (VAE)*. VAEs encode inputs as distributions instead of a fixed m-dimensional point in latent space. Additionally, the latent space in properly tuned VAEs is structured such that it is regularized by constraining the constituent latent-space distributions (in each latent-space dimension) to be well-behaved Gaussian distributions, which have a mean close to zero and a standard deviation close to 1. Our loss in a VAE therefore can be represented as (reconstruction error + distance between standard normal and the latent distribution). With these constraints, the resulting model will encode data close together and encourage some overlapping of distributions. Together these properties combine to result in a latent space structure with the desired continuity and on-manifold dataset representation. These properties can come at the price of a higher decoding error, however, a tradeoff which can be managed by hyper-parameter tuning. 
+The VAE's encoder is **probabilistic**. Instead of mapping an input $X$ to a single, deterministic latent vector $z$, the encoder outputs the parameters—a mean vector $(\mu)$ and a variance vector $(\sigma^2)$—that define a Gaussian probability distribution. The latent vector $z$ is then *sampled* from this distribution, $z \sim \mathcal{N}(\mu, \sigma^2)$. This sampling step is a crucial distinction, as it introduces a controlled stochasticity into the encoding process.
 
-Continuity and completeness in manifold representation tend to result in smooth transitions over the properties or information encoded in the latent space. Thus a point in latent space which is equidistant between the means of two encoded (latent space) distributions should result in a decoded datapoint which is intermediate between the two source inputs for those encoded distributions.  
+The decoder $d(\cdot)$ functions as a "generator." It takes one of these sampled latent vectors $z$ and attempts to reconstruct the original input $\hat{X} = d(z)$.
 
-And so, with the above, we have provided some motivation for and intuition about our first *generative* ML model. [See an example of a VAE for MNIST here](mnist.html).
+The key to the VAE's function lies in its unique loss function, derived from the Evidence Lower Bound (ELBO), which has two components:
+
+1.  **Reconstruction Loss:** This is the same as in a standard Autoencoder, such as Mean Squared Error $L(X, \hat{X})$. This term encourages the model to be a good autoencoder, ensuring that the sampled embedding $z$ contains enough information to faithfully reconstruct the original input $X$.
+2.  **Kullback-Leibler (KL) Divergence:** This term $D_{KL}(\mathcal{N}(\mu, \sigma^2) || \mathcal{N}(0, I))$ acts as a powerful regularizer. It measures the difference between the distribution $\mathcal{N}(\mu, \sigma^2)$ output by the encoder and a standard normal distribution (mean=0, variance=1), which is set as a *prior*.
+
+This KL divergence term forces the latent space to be **organized**. It penalizes the encoder for creating distributions that are far from the origin or have very small variances. This prevents the model from "cheating" by assigning each data point to a separate, non-overlapping region of the latent space. By forcing all encoded distributions toward the central $\mathcal{N}(0, I)$ prior, the VAE ensures the latent space is **continuous** and densely populated. 
+ 
+Because the latent space is continuous and centered, the VAE is generative. We can now discard the encoder, sample a random vector $z$ directly from the prior distribution $\mathcal{N}(0, I)$, and pass it to the decoder. The decoder, trained on this structured space, will generate a new, plausible data sample $\hat{X}$ that is not a copy of any single item in the training set. 
+ 
+### Generative Adversarial Networks (GANs) 
+ 
+A different generative philosophy is used by **Generative Adversarial Networks (GANs)**. GANs do not use reconstruction. Instead, they model the generation process as a zero-sum game between two competing networks: 
+ 
+1.  A **Generator $G(\cdot)$** takes a random noise vector $z$ (sampled from $\mathcal{N}(0, I)$) and attempts to create a fake data sample $\hat{X} = G(z)$. 
+2.  A **Discriminator $D(\cdot)$** acts as a classifier, trained to distinguish real data $X$ from the generator's fake data $\hat{X}$. 
+ 
+The Generator is trained to produce fakes that *fool* the Discriminator, while the Discriminator is trained to *not be fooled*. This adversarial process forces the Generator to produce increasingly realistic samples. The latent space $z$ of a GAN learns a complex mapping from simple noise to the data manifold, often resulting in sharper, more realistic images than VAEs, though their training is known to be less stable.

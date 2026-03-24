@@ -20,6 +20,7 @@ x['weird']=(
     (1,6,'M'),
     )
 x['other']=(
+    (4,17,'Guest Speaker, T-Period, Hopper 513'),
     (5,8,'Last Day of Finals'),
     )
 x['time']=(
