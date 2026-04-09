@@ -33,6 +33,8 @@ project:
         - file: notes/18VAE/index.ipynb
         - file: notes/21LLMs/index.ipynb
         - file: notes/21LLMs/llm.ipynb
+        - file: notes/22RLIntro/index.md
+        - file: notes/22RLIntro/tabular.ipynb
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
@@ -46,6 +48,7 @@ project:
         - file: assignments/09Transfer/index.ipynb
         - file: assignments/10FacialRecognition/index.ipynb
         - file: assignments/11LLM_RAG/index.ipynb
+        - file: assignments/12Ethics/index.md
     - title: Resources
       children:
         - file: resources/displayPolicy.md

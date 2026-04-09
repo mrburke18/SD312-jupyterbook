@@ -15,11 +15,13 @@ x['holidays']=(
     (3,11,'Spring Break'),
     (3,12,'Spring Break'),
     (3,13,'Spring Break'),
+    (4,1,'Comp Day'),
     )
 x['weird']=(
     (1,6,'M'),
     )
 x['other']=(
+    (4,14,'Guest Speaker, T-Period, Mahan Auditorium'),
     (4,17,'Guest Speaker, T-Period, Hopper 513'),
     (5,8,'Last Day of Finals'),
     )

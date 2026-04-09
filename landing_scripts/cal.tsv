@@ -29,24 +29,21 @@ x	Encoder/Decoder Embeddings	notes/vae
 x	Lab		Facial Recongition	assignments/facialrecognition	3 26
 x	LLMs	notes/llms			
 x	LLMs	notes/llms/llm			
-x	Lab		RAG		4 9
-x	Exam		READ: Surveillance in Kashgar	https://www.nytimes.com/interactive/2019/04/04/world/asia/xinjiang-china-surveillance-prison.html?action=click&module=Top%20Stories&pgtype=Homepage	
-			READ: Online trackers	https://www.washingtonpost.com/technology/2023/10/24/google-privacy-police-geofence/	
-			READ: Bias in ML	https://www.nytimes.com/2020/06/24/technology/facial-recognition-arrest.html?unlocked_article_code=AAAAAAAAAAAAAAAACEIPuomT1JKd6J17Vw1cRCfTTMQmqxCdw_PIxftm3iWma3DLDmweiPgYCIiG_EPKarskadI43j2fAcVMO7ggQv1uz-hZekV3UQSzvt2EhJEBaW0TmL6EY1kXjdjLTKxqtnjjdHW4I-Nyg-zh4k6MajXvRKLb1Hc-IA4z8Y81Jgr9xXQMwK6RFbIk2IQvj-wzRcwvHUd2byaKt_XjCBh9KY_GOkmasl9qLrkfDTLDntec6KYCdRFRCT_FTnB95mU977BMKY9dffa_f1N7Jp2I0fhGAXdoLYypG5Q2W4DX8r1rurfJohaIo9GkKucfkiEcPZJrrAN0bPErzA&smid=url-share	
-x	Lecture				
-x	Lab				
-x	Ethics		READ: ML and disability	https://twitter.com/TODAYshow/status/1230121198647959552	
-			READ: ML and disinformation	https://www.nytimes.com/2023/02/07/technology/artificial-intelligence-training-deepfake.html	
-			READ: Cultural bias	https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url	
+x	Lab		RAG	assignments/llm-rag	4 9
+x	Exam				
+x	Lab		READ: AI Sycophancy	https://www.nytimes.com/2026/03/26/well/mind/ai-chatbots-relationships.html?unlocked_article_code=1.XlA._zIL.5SSkoW1DfZG_&smid=url-share	4 6
+			READ: Internal Safety Policies	https://www.edtechinnovationhub.com/news/anthropic-updates-responsible-scaling-policy-as-ai-risk-debate-shifts	4 6
+x	Ethics		READ: ML and disability	https://twitter.com/TODAYshow/status/1230121198647959552	4 8
+			READ: Griefbots	https://www.scientificamerican.com/article/can-ai-griefbots-help-us-heal/	4 8
+			READ: Cultural bias	https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url	4 8
 x	Ethics				
-x	Lab		Ethical Dilemma	lab/11Ethics	4 16
-			Optional: Documentary about RL and Go	https://www.youtube.com/watch?v=WXuK6gekU1Y	
-x	RL Intro	notes/22RLintro			
-x	RL: Tabular Q-Learning	notes/22RLintro			
-x	Lab		Tabular Q-Learning	lab/12TabularQ	
-			READ: Deep Q-Learning Paper	https://arxiv.org/pdf/1312.5602.pdf	4 22
+x	Lab		Ethical Dilemma	assignments/ethics	4 16
+			Optional: Documentary about RL and Go	https://www.youtube.com/watch?v=WXuK6gekU1Y	4 16
+x	RL Intro	notes/rlintro			
+x	RL: Tabular Q-Learning	notes/rlintro/tabular/			
+x	Lab		Tabular Q-Learning	lab/12TabularQ	4 23
+			READ: Deep Q-Learning Paper	https://arxiv.org/pdf/1312.5602.pdf	4 20
 x	RL: Deep Q-Learning	notes/24DeepQ			
 x	RL: Deep Q-Learning	notes/24DeepQ			
-x	Lab		Deep Q-Learning	lab/13DeepQ	
-x	RL: Policy networks				
+x	Lab		Deep Q-Learning	lab/13DeepQ	4 29
 x	SOFs/Wrapup				

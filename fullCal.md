@@ -40,20 +40,20 @@
 | Thu, Mar 19 | Lab | <a href="../assignments/facialrecognition">Facial Recongition</a> (due Thu 03/26) |
 | Mon, Mar 23 | <a href="../notes/llms">LLMs</a> |  |
 | Wed, Mar 25 | <a href="../notes/llms/llm">LLMs</a> |  |
-| Thu, Mar 26 | Lab | RAG (due Thu 04/09) |
-| Mon, Mar 30 | Exam | [READ: Surveillance in Kashgar](https://www.nytimes.com/interactive/2019/04/04/world/asia/xinjiang-china-surveillance-prison.html?action=click&module=Top%20Stories&pgtype=Homepage)<br>[READ: Online trackers](https://www.washingtonpost.com/technology/2023/10/24/google-privacy-police-geofence/)<br>[READ: Bias in ML](https://www.nytimes.com/2020/06/24/technology/facial-recognition-arrest.html?unlocked_article_code=AAAAAAAAAAAAAAAACEIPuomT1JKd6J17Vw1cRCfTTMQmqxCdw_PIxftm3iWma3DLDmweiPgYCIiG_EPKarskadI43j2fAcVMO7ggQv1uz-hZekV3UQSzvt2EhJEBaW0TmL6EY1kXjdjLTKxqtnjjdHW4I-Nyg-zh4k6MajXvRKLb1Hc-IA4z8Y81Jgr9xXQMwK6RFbIk2IQvj-wzRcwvHUd2byaKt_XjCBh9KY_GOkmasl9qLrkfDTLDntec6KYCdRFRCT_FTnB95mU977BMKY9dffa_f1N7Jp2I0fhGAXdoLYypG5Q2W4DX8r1rurfJohaIo9GkKucfkiEcPZJrrAN0bPErzA&smid=url-share) |
-| Wed, Apr 01 | Lecture |  |
-| Thu, Apr 02 | Lab |  |
-| Mon, Apr 06 | Ethics | [READ: ML and disability](https://twitter.com/TODAYshow/status/1230121198647959552)<br>[READ: ML and disinformation](https://www.nytimes.com/2023/02/07/technology/artificial-intelligence-training-deepfake.html)<br>[READ: Cultural bias](https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url) |
+| Thu, Mar 26 | Lab | <a href="../assignments/llm-rag">RAG</a> (due Thu 04/09) |
+| Mon, Mar 30 | Exam |  |
+| Wed, Apr 01 | **Comp Day** - No Class |  |
+| Thu, Apr 02 | Lab | [READ: AI Sycophancy](https://www.nytimes.com/2026/03/26/well/mind/ai-chatbots-relationships.html?unlocked_article_code=1.XlA._zIL.5SSkoW1DfZG_&smid=url-share) (due Mon 04/06)<br>[READ: Internal Safety Policies](https://www.edtechinnovationhub.com/news/anthropic-updates-responsible-scaling-policy-as-ai-risk-debate-shifts) (due Mon 04/06) |
+| Mon, Apr 06 | Ethics | [READ: ML and disability](https://twitter.com/TODAYshow/status/1230121198647959552) (due Wed 04/08)<br>[READ: Griefbots](https://www.scientificamerican.com/article/can-ai-griefbots-help-us-heal/) (due Wed 04/08)<br>[READ: Cultural bias](https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url) (due Wed 04/08) |
 | Wed, Apr 08 | Ethics |  |
-| Thu, Apr 09 | Lab | <a href="../lab/11Ethics">Ethical Dilemma</a> (due Thu 04/16)<br>[Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) |
-| Mon, Apr 13 | <a href="../notes/22RLintro">RL Intro</a> |  |
-| Wed, Apr 15 | <a href="../notes/22RLintro">RL: Tabular Q-Learning</a> |  |
-| Thu, Apr 16 | Lab | <a href="../lab/12TabularQ">Tabular Q-Learning</a><br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Wed 04/22) |
+| Thu, Apr 09 | Lab | <a href="../assignments/ethics">Ethical Dilemma</a> (due Thu 04/16)<br>[Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) (due Thu 04/16) |
+| Mon, Apr 13 | <a href="../notes/rlintro">RL Intro</a> |  |
+| Tue, Apr 14 | **Guest Speaker, T-Period, Mahan Auditorium** |  |
+| Wed, Apr 15 | <a href="../notes/rlintro/tabular/">RL: Tabular Q-Learning</a> |  |
+| Thu, Apr 16 | Lab | <a href="../lab/12TabularQ">Tabular Q-Learning</a> (due Thu 04/23)<br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Mon 04/20) |
 | Fri, Apr 17 | **Guest Speaker, T-Period, Hopper 513** |  |
 | Mon, Apr 20 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
 | Wed, Apr 22 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
-| Thu, Apr 23 | Lab | <a href="../lab/13DeepQ">Deep Q-Learning</a> |
-| Mon, Apr 27 | RL: Policy networks |  |
-| Wed, Apr 29 | SOFs/Wrapup |  |
+| Thu, Apr 23 | Lab | <a href="../lab/13DeepQ">Deep Q-Learning</a> (due Wed 04/29) |
+| Mon, Apr 27 | SOFs/Wrapup |  |
 | Fri, May 08 | **Last Day of Finals** |  |

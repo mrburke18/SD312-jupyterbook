@@ -2,7 +2,8 @@
 
 ## Active Assignments
 
-* [Facial Recongition](assignments/facialrecognition) (due Thu 03/26)
+* [Ethical Dilemma](assignments/ethics) (due Thu 04/16)
+* [Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) (due Thu 04/16)
 
 ---
 ## Full Schedule
@@ -45,21 +46,21 @@
 | Wed, Mar 18 | [Encoder/Decoder Embeddings](notes/vae) |  |
 | Thu, Mar 19 | Lab | [Facial Recongition](assignments/facialrecognition) (due Thu 03/26) |
 | Mon, Mar 23 | [LLMs](notes/llms) |  |
-| Wed, Mar 25 | LLMs |  |
-| Thu, Mar 26 | Lab | RAG (due Thu 04/09) |
-| Mon, Mar 30 | Exam | READ: Surveillance in Kashgar<br>READ: Online trackers<br>READ: Bias in ML |
-| Wed, Apr 01 | Lecture |  |
-| Thu, Apr 02 | Lab |  |
-| Mon, Apr 06 | Ethics | READ: ML and disability<br>READ: ML and disinformation<br>READ: Cultural bias |
+| Wed, Mar 25 | [LLMs](notes/llms/llm) |  |
+| Thu, Mar 26 | Lab | [RAG](assignments/llm-rag) (due Thu 04/09) |
+| Mon, Mar 30 | Exam |  |
+| Wed, Apr 01 | **Comp Day** - No Class |  |
+| Thu, Apr 02 | Lab | [READ: AI Sycophancy](https://www.nytimes.com/2026/03/26/well/mind/ai-chatbots-relationships.html?unlocked_article_code=1.XlA._zIL.5SSkoW1DfZG_&smid=url-share) (due Mon 04/06)<br>[READ: Internal Safety Policies](https://www.edtechinnovationhub.com/news/anthropic-updates-responsible-scaling-policy-as-ai-risk-debate-shifts) (due Mon 04/06) |
+| Mon, Apr 06 | Ethics | [READ: ML and disability](https://twitter.com/TODAYshow/status/1230121198647959552) (due Wed 04/08)<br>[READ: Griefbots](https://www.scientificamerican.com/article/can-ai-griefbots-help-us-heal/) (due Wed 04/08)<br>[READ: Cultural bias](https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url) (due Wed 04/08) |
 | Wed, Apr 08 | Ethics |  |
-| Thu, Apr 09 | Lab | Ethical Dilemma (due Thu 04/16)<br>Optional: Documentary about RL and Go |
+| Thu, Apr 09 | Lab | [Ethical Dilemma](assignments/ethics) (due Thu 04/16)<br>[Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) (due Thu 04/16) |
 | Mon, Apr 13 | RL Intro |  |
+| Tue, Apr 14 | **Guest Speaker, T-Period, Mahan Auditorium** |  |
 | Wed, Apr 15 | RL: Tabular Q-Learning |  |
-| Thu, Apr 16 | Lab | Tabular Q-Learning<br>READ: Deep Q-Learning Paper (due Wed 04/22) |
+| Thu, Apr 16 | Lab | Tabular Q-Learning (due Thu 04/23)<br>READ: Deep Q-Learning Paper (due Mon 04/20) |
 | Fri, Apr 17 | **Guest Speaker, T-Period, Hopper 513** |  |
 | Mon, Apr 20 | RL: Deep Q-Learning |  |
 | Wed, Apr 22 | RL: Deep Q-Learning |  |
-| Thu, Apr 23 | Lab | Deep Q-Learning |
-| Mon, Apr 27 | RL: Policy networks |  |
-| Wed, Apr 29 | SOFs/Wrapup |  |
+| Thu, Apr 23 | Lab | Deep Q-Learning (due Wed 04/29) |
+| Mon, Apr 27 | SOFs/Wrapup |  |
 | Fri, May 08 | **Last Day of Finals** |  |
