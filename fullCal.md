@@ -28,7 +28,7 @@
 | Wed, Feb 25 | <a href="../notes/convnet">Convolutional Networks</a> |  |
 | Thu, Feb 26 | Lab | <a href="../assignments/convnet/convnet">Convolutional Networks</a> (due Thu 03/05) |
 | Mon, Mar 02 | <a href="../notes/transfer">Transfer Learning</a> |  |
-| Wed, Mar 04 | <a href="../notes/20Adversarial">Adversarial Examples</a> |  |
+| Wed, Mar 04 | <a href="../notes/adversarial">Adversarial Examples</a> |  |
 | Thu, Mar 05 | Lab | <a href="../assignments/transfer">Transfer Learning</a> (due Thu 03/19) |
 | Mon, Mar 09 | **Spring Break** - No Class |  |
 | Tue, Mar 10 | **Spring Break** - No Class |  |
@@ -50,10 +50,10 @@
 | Mon, Apr 13 | <a href="../notes/rlintro">RL Intro</a> |  |
 | Tue, Apr 14 | **Guest Speaker, T-Period, Mahan Auditorium** |  |
 | Wed, Apr 15 | <a href="../notes/rlintro/tabular/">RL: Tabular Q-Learning</a> |  |
-| Thu, Apr 16 | Lab | <a href="../lab/12TabularQ">Tabular Q-Learning</a> (due Thu 04/23)<br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Mon 04/20) |
+| Thu, Apr 16 | Lab | <a href="../assignments/qlearn">Tabular Q-Learning</a> (due Thu 04/23)<br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Mon 04/20) |
 | Fri, Apr 17 | **Guest Speaker, T-Period, Hopper 513** |  |
-| Mon, Apr 20 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
-| Wed, Apr 22 | <a href="../notes/24DeepQ">RL: Deep Q-Learning</a> |  |
-| Thu, Apr 23 | Lab | <a href="../lab/13DeepQ">Deep Q-Learning</a> (due Wed 04/29) |
+| Mon, Apr 20 | <a href="../notes/deepq">RL: Deep Q-Learning</a> |  |
+| Wed, Apr 22 | <a href="../notes/policy">RL: Policy Networks</a> |  |
+| Thu, Apr 23 | Lab | <a href="../assignments/deepqlearn">Deep Q-Learning</a> (due Wed 04/29) |
 | Mon, Apr 27 | SOFs/Wrapup |  |
 | Fri, May 08 | **Last Day of Finals** |  |

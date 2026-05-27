@@ -1,6 +1,4 @@
----
-title: Deep Q-Learning
----
+# Deep Q-Learning
 
 Tabular Q-Learning is a great algorithm for understanding Bellman error and how Q-values can adjust themselves until accurate given sufficient experience.  However, it's not realistic for real problems.  It has a few issues:
 
@@ -12,7 +10,7 @@ In many ways, this is similar to performing regression under a scenario where we
 
 Instead in regression, what we did was write a generalizing function that could take in any of our possible datapoints, perform some math on its elements, and then output a prediction.  This might be linear, for example: we take in a datapoint, calculate some interesting features, and then calculate weights which, when applied to the features, result in an accurate prediction.  When we adjust the weights to make a datapoint more accurate, we're adjusting the predictions of *all* datapoints, allowing us to learn generalizable things.  Alternatively, we might learn a neural network instead, which learns features for us - again, however, we can put in datapoints we've never experienced, and hope to get out an accurate prediction.
 
-In RL, we can do similar things, where we write a function that takes in a state and an action, and spits out a predicted value.  Again, this could be linear, where the state-action pair are converted into some interesting features, then a linear combination is computed which results in accurate value predictions. [Our own Professor Taylor focused some of his dissertation on this kind of work, thinking about what such features should be](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=21d38a3f57821e4343301d8cee1d81d660145806).  Updating the common weights to make the Bellman error more accurate on our samples may result in accurate value predictions even for state-action pairs that have never been experienced.
+In RL, we can do similar things, where we write a function that takes in a state and an action, and spits out a predicted value.  Again, this could be linear, where the state-action pair are converted into some interesting features, then a linear combination is computed which results in accurate value predictions. Updating the common weights to make the Bellman error more accurate on our samples may result in accurate value predictions even for state-action pairs that have never been experienced.
 
 Alternatively, we could create a neural network, where a state is fed in, and the network has a output layer with a node for each action, producing the expected value of taking each action from that state.  Again, if adequately trained, any state could be fed in, and reasonable Q values produced.
 
@@ -23,8 +21,8 @@ We're going to learn about the neural net approach, called Deep Q-Learning, whic
 Important elements of this paper that are applicable to all deep q-learning implementations:
 
 - The network takes in a datapoint, and has an output node for each possible action.
-- The network is trained to minimize Bellman error, using the network as the source of $\hat Q(s,a)$ for both sides of the Bellman equation.
-- Rather than training only on the most recent transitions, which are heavily correlated and may cause overtraining on that weird thing that happened recently, transitions are stored in an *experience replay*, which is a queue of the $N$ most recent transitions, where $N$ is fairly large. Samples for training are then randomly chosen from those $N$ transitions.  This keeps training batches varied and uncorrelated, but still recent enough to be relevant (choosing $N$ is a hyperparameter that trades off between these concerns).
+- The network is trained to minimize Bellman error, using the network as the source of $\hat Q(s,a)$ for both sides of the Bellman equation (ie, both $\hat Q(s,a)$ and $\max_{a'}Q(s',a')$). Given a single trajectory $(s,a,r,s')$, the loss function is $(r+\gamma \hat Q(s',a')-\hat Q(s,a))^2$.
+- Rather than training only on the most recent transitions, which are heavily correlated and may cause overtraining on a weird thing that happened recently, transitions are stored in an *experience replay*, which is a queue of the $N$ most recent transitions, where $N$ is fairly large. Samples for training are then randomly chosen from those $N$ transitions.  This keeps training batches varied and uncorrelated, but still recent enough to be relevant (choosing $N$ is a hyperparameter that trades off between these concerns).
 
 There are several more interesting elements that had to be engineered to make this work on Atari games in particular.
 

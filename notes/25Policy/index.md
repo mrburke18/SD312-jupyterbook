@@ -1,6 +1,4 @@
----
-title: Policy Networks
----
+# Policy Networks
 
 So far, we've gone from small numbers of states and small numbers of actions (Tabular Q-learning), to large numbers of states, and small numbers of actions (Deep Q-Learning).  Today, in the brief time we have left, we'll have a very quick introduction to how we can fix some of the problems that come from Deep Q-Learning, while handling large numbers of states *and* large numbers of actions.
 
@@ -24,4 +22,12 @@ This makes our total loss function for a given $(s,a,r,s')$ to have two portions
 
 This procedure already greatly outperformed Deep Q Learning, even as it still only works on finite action spaces.
 
-To make this work on infinite action spaces, (here's where Taylor stopped, because we're not going to teach it anyway)
+When working on infinite action spaces, we cannot have an output node for each action. Instead, we output the parameters of a distribution over actions. The most common choice is a Gaussian (normal) distribution. Our policy network would thus output: a value $\hat V(s)$ (as before), a mean vector $\mu(s)$ representing the center of the action distribution, and a standard deviation vector $\sigma(s)$ representing the spread of that distribution.
+
+During exploration, we sample an action from the distribution $a \sim \mathcal{N}(\mu(s), \sigma(s)^2)$. This gives us a diverse set of actions to explore from, and the distribution naturally concentrates around good actions as training progresses.
+
+The advantage computation remains the same: $A(s,a) = r+\gamma \hat V(s') - \hat V(s)$.
+
+The value loss remains: minimize $(r+\gamma \hat V(s')-\hat V(s))^2$.
+
+This approach handles infinite (or very large continuous) action spaces elegantly by parameterizing them through a compact, learnable distribution. It's the foundation of modern policy gradient methods like Proximal Policy Optimization (PPO) and Actor-Critic algorithms.

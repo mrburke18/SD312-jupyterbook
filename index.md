@@ -1,11 +1,5 @@
 # SD312: Machine Learning
 
-## Active Assignments
-
-* [Ethical Dilemma](assignments/ethics) (due Thu 04/16)
-* [Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) (due Thu 04/16)
-
----
 ## Full Schedule
 
 | Date | Notes | Assignment |
@@ -35,7 +29,7 @@
 | Wed, Feb 25 | [Convolutional Networks](notes/convnet) |  |
 | Thu, Feb 26 | Lab | [Convolutional Networks](assignments/convnet/convnet) (due Thu 03/05) |
 | Mon, Mar 02 | [Transfer Learning](notes/transfer) |  |
-| Wed, Mar 04 | [Adversarial Examples](notes/20Adversarial) |  |
+| Wed, Mar 04 | [Adversarial Examples](notes/adversarial) |  |
 | Thu, Mar 05 | Lab | [Transfer Learning](assignments/transfer) (due Thu 03/19) |
 | Mon, Mar 09 | **Spring Break** - No Class |  |
 | Tue, Mar 10 | **Spring Break** - No Class |  |
@@ -54,13 +48,13 @@
 | Mon, Apr 06 | Ethics | [READ: ML and disability](https://twitter.com/TODAYshow/status/1230121198647959552) (due Wed 04/08)<br>[READ: Griefbots](https://www.scientificamerican.com/article/can-ai-griefbots-help-us-heal/) (due Wed 04/08)<br>[READ: Cultural bias](https://www.nytimes.com/2022/03/22/technology/ai-data-indigenous-ivow.html?unlocked_article_code=uo_Ga0yplP-RQNUZ-W3QAUAxxu1LyGdSHngmU73VMEr-FBrjILo655y6oQL8tPXBBVTFKrWMclSNEqIzy1bSQwCHFFEZHDPbX26gYHZUl0BeqDO3tH8Ivz9EX3I2xh60IpZ1yhvdOLcl27tjBH46h1x1XVkgc8poeZjsoFjwd1foWk7hTiPY0s8qb--pOCExVJQ1IYN5EGLckAnqP0VlXedxUPCMSLMw9R368vRqGzd-6QSwBjhqHI9CRDj4K6-4B089gFM45c-aYzLkqiKALWXXhJEeK3jb-zPATwlbgAc5wq-8LYMY6FXTrS_yKbHWYiOzRDac3dM58CGJBsXNwO8IMG0&smid=share-url) (due Wed 04/08) |
 | Wed, Apr 08 | Ethics |  |
 | Thu, Apr 09 | Lab | [Ethical Dilemma](assignments/ethics) (due Thu 04/16)<br>[Optional: Documentary about RL and Go](https://www.youtube.com/watch?v=WXuK6gekU1Y) (due Thu 04/16) |
-| Mon, Apr 13 | RL Intro |  |
+| Mon, Apr 13 | [RL Intro](notes/rlintro) |  |
 | Tue, Apr 14 | **Guest Speaker, T-Period, Mahan Auditorium** |  |
-| Wed, Apr 15 | RL: Tabular Q-Learning |  |
-| Thu, Apr 16 | Lab | Tabular Q-Learning (due Thu 04/23)<br>READ: Deep Q-Learning Paper (due Mon 04/20) |
+| Wed, Apr 15 | [RL: Tabular Q-Learning](notes/rlintro/tabular/) |  |
+| Thu, Apr 16 | Lab | [Tabular Q-Learning](assignments/qlearn) (due Thu 04/23)<br>[READ: Deep Q-Learning Paper](https://arxiv.org/pdf/1312.5602.pdf) (due Mon 04/20) |
 | Fri, Apr 17 | **Guest Speaker, T-Period, Hopper 513** |  |
-| Mon, Apr 20 | RL: Deep Q-Learning |  |
-| Wed, Apr 22 | RL: Deep Q-Learning |  |
-| Thu, Apr 23 | Lab | Deep Q-Learning (due Wed 04/29) |
+| Mon, Apr 20 | [RL: Deep Q-Learning](notes/deepq) |  |
+| Wed, Apr 22 | [RL: Policy Networks](notes/policy) |  |
+| Thu, Apr 23 | Lab | [Deep Q-Learning](assignments/deepqlearn) (due Wed 04/29) |
 | Mon, Apr 27 | SOFs/Wrapup |  |
 | Fri, May 08 | **Last Day of Finals** |  |

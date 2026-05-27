@@ -9,6 +9,10 @@ project:
     - format: pdf
       template: plain_latex_book
       output: exports/book.pdf
+      id: book-pdf
+  downloads:
+    - id: book-pdf
+      title: Download PDF
   toc:
     - file: index.md
     - file: fullCal.md
@@ -35,6 +39,8 @@ project:
         - file: notes/21LLMs/llm.ipynb
         - file: notes/22RLIntro/index.md
         - file: notes/22RLIntro/tabular.ipynb
+        - file: notes/24DeepQ/index.md
+        - file: notes/25Policy/index.md
     - title: Assignments
       children:
         - file: assignments/01Unsupervised/unsupervised.ipynb
@@ -49,6 +55,8 @@ project:
         - file: assignments/10FacialRecognition/index.ipynb
         - file: assignments/11LLM_RAG/index.ipynb
         - file: assignments/12Ethics/index.md
+        - file: assignments/13QLearn/index.ipynb
+        - file: assignments/14DeepQLearn/index.ipynb
     - title: Resources
       children:
         - file: resources/displayPolicy.md

@@ -22,7 +22,7 @@ x	Convolutional Networks	notes/convnet
 x	Convolutional Networks	notes/convnet			
 x	Lab		Convolutional Networks	assignments/convnet/convnet	3 5
 x	Transfer Learning	notes/transfer			
-x	Adversarial Examples	notes/20Adversarial			
+x	Adversarial Examples	notes/adversarial			
 x	Lab		Transfer Learning	assignments/transfer	3 19
 x	Embeddings and Contrastive Loss	notes/contrastive			
 x	Encoder/Decoder Embeddings	notes/vae			
@@ -41,9 +41,9 @@ x	Lab		Ethical Dilemma	assignments/ethics	4 16
 			Optional: Documentary about RL and Go	https://www.youtube.com/watch?v=WXuK6gekU1Y	4 16
 x	RL Intro	notes/rlintro			
 x	RL: Tabular Q-Learning	notes/rlintro/tabular/			
-x	Lab		Tabular Q-Learning	lab/12TabularQ	4 23
+x	Lab		Tabular Q-Learning	assignments/qlearn	4 23
 			READ: Deep Q-Learning Paper	https://arxiv.org/pdf/1312.5602.pdf	4 20
-x	RL: Deep Q-Learning	notes/24DeepQ			
-x	RL: Deep Q-Learning	notes/24DeepQ			
-x	Lab		Deep Q-Learning	lab/13DeepQ	4 29
+x	RL: Deep Q-Learning	notes/deepq			
+x	RL: Policy Networks	notes/policy			
+x	Lab		Deep Q-Learning	assignments/deepqlearn	4 29
 x	SOFs/Wrapup				

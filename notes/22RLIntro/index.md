@@ -82,13 +82,14 @@ from then on. We can complete the table:
 | State | $Q_{\pi_R}(s,L)$ | $Q_{\pi_R}(s,R)$ |
 |-------|------------------|------------------|
 | s0    | 0.81             | 0.9              |
-| s1    | 11.81            | 1.811            |
+| s1    | 1.81             | 1                |
 | s2    | 0.9              | 0                |
 | s3    | 0                | 0                |
 
 ## Comparing Policies
 
-The value of a state under a given policy, denoted $V_\pi(s)$, is equal to the Q-value of taking policy $\pi$'s prescribed action at that state. We use these state values to directly compare policies. A policy is considered optimal or strictly superior to another if its expected return is greater than or equal to the alternative for all possible states in the MDP.
+The value of a state under a given policy, denoted $V_\pi(s) = Q_\pi(s,
+\pi(s))$, is equal to the Q-value of taking policy $\pi$'s prescribed action at that state. We use these state values to directly compare policies. A policy is considered optimal or strictly superior to another if its expected return is greater than or equal to the alternative for all possible states in the MDP.
 
 Comparing the values of $\pi_L$ (using $Q_{\pi_L}(s, L)$) and $\pi_R$ (using $Q_{\pi_R}(s, R)$):
 
